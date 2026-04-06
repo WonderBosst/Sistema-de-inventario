@@ -1,0 +1,73 @@
+/* Color café principal */
+:root {
+    --main-brown: #693015;
+}
+
+body {
+    background: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.card-custom {
+    border-radius: 18px;
+    box-shadow: 0 2px 8px 0 #0001;
+    margin-bottom: 20px;
+    transition: box-shadow 0.2s;
+}
+.card-custom:hover {
+    box-shadow: 0 6px 20px 0 #0002;
+}
+
+.btn-primary, .bg-primary {
+    background-color: var(--main-brown) !important;
+    border-color: var(--main-brown) !important;
+}
+
+.navbar, .footer {
+    background-color: var(--main-brown) !important;
+}
+
+/* Responsive dashboard cards */
+.dashboard-icons {
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+}
+
+.card-stat {
+    color: #FFF;
+    font-weight: bold;
+    border-radius: 18px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px 0 #0001;
+}
+.card-stat .card-body {
+    padding: 20px 8px;
+}
+
+.card-stat.bg-success {
+    background-color: #258E37 !important;
+}
+.card-stat.bg-danger {
+    background-color: #E53935 !important;
+}
+.card-stat.bg-info {
+    background-color: #2575C8 !important;
+}
+.card-stat.bg-warning {
+    background-color: #FFA300 !important;
+}
+.card-stat.bg-personal {
+    background-color: #FF9696 !important;
+}
+
+/* Footer siempre al pie */
+.footer {
+    margin-top: auto;
+    width: 100%;
+}
+
+container.py-3 {
+    flex-grow: 1;
+}

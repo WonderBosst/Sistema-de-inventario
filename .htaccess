@@ -1,0 +1,19 @@
+# ==========================================
+# Forzar codificación UTF-8
+# EcoFriendlySolutions
+# ==========================================
+
+AddDefaultCharset UTF-8
+
+<IfModule mod_headers.c>
+    Header set Content-Type "text/html; charset=UTF-8"
+</IfModule>
+
+<IfModule mod_php.c>
+    php_value default_charset "UTF-8"
+</IfModule>
+
+<IfModule mod_mime.c>
+    AddCharset UTF-8 .php .html .css .js
+</IfModule>
+
