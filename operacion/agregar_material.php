@@ -3,6 +3,8 @@ include '../includes/conexion.php';
 include '../includes/auth.php';
 include '../includes/header.php';
 
+$conn->report_mode = MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT;
+
 requireRole(['1']);
 
 if (!isset($_GET['id']) || !isset($_GET['id_grupo_materiales'])) {
@@ -19,30 +21,37 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
     $id_grupo_materiales = trim($_POST['id_grupo_materiales']);
     $id_material = intval($_POST['id_material']);
-	$cantidad = intval($_POST['cantidad']);	
 
-	$stmt = $conn->prepare("
+    $cantidad = intval($_POST['cantidad']);    
+
+    $stmt = $conn->prepare("
+
         INSERT INTO grupo_materiales (id_grupo_materiales, id_material, cantidad)
         VALUES (?,?,?)
     ");
 
     $stmt->bind_param("sii", $id_grupo_materiales, $id_material, $cantidad);
 
-    if($stmt->execute()){
-        $mensaje = "Material agregado a la operación";
-    } else {
-        $mensaje = "Error al agregar material";
-    }
 
-    header("Location: agregar_material.php?id=".$id."&id_grupo_materiales=".$id_grupo_materiales."&msg=1");
-    exit;
+    try {
+        $stmt->execute();
+        // Solo asignar mensaje, no redirigir todavía
+        $mensaje = "Material agregado a la operación";
+    } catch (mysqli_sql_exception $e) {
+        // Captura específicamente el error del trigger
+        if (strpos($e->getMessage(), 'No hay suficiente stock') !== false) {
+            $mensaje = "No hay suficiente stock para este material";
+        } else {
+            $mensaje = "Ocurrió un error al agregar el material: " . $e->getMessage();
+        }
+    }
 }
 
 if(isset($_GET['msg'])){
     $mensaje = "Material agregado a la operación";
 }
 
-$result_trabajadores = $conn->query("
+$result_materiales = $conn->query("
     SELECT M.id_material,
 	   M.nombre, 
        M.cantidad,
@@ -61,9 +70,10 @@ $result_trabajadores = $conn->query("
 <h4 class="col-12">Lista de materiales disponibles</h4>
 
 <?php if($mensaje): ?>
-<div class="alert alert-success">
-    <?= $mensaje; ?>
-</div>
+    <div class="alert <?= strpos($mensaje,'stock') !== false ? 'alert-danger' : 'alert-success' ?>">
+        <?= $mensaje; ?>
+    </div>
+
 <?php endif; ?>
 
 <div class="card shadow rounded-4">
@@ -83,7 +93,7 @@ $result_trabajadores = $conn->query("
 <tbody>
 
 <?php $contador = 1; ?>
-<?php while($row = $result_trabajadores->fetch_assoc()): ?>
+<?php while($row = $result_materiales->fetch_assoc()): ?>
 
 <tr>
 <td><strong><?= $contador; ?></strong></td>
