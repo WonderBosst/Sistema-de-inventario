@@ -59,7 +59,7 @@ $rol_usuario = $_SESSION['rol'] ?? '1';
 <!-- NUEVO MODULO NOTAS -->
 <?php if($rol_usuario == '1'): ?>
 <div class="col-6 col-md-3">
-<a href="notas_venta/listar.php" class="text-decoration-none">
+<a href="notas/listar.php" class="text-decoration-none">
 <div class="card shadow rounded-4 p-4 text-center h-100 hover-scale">
 <i class="bi bi-journal-check fs-1 text-info"></i>
 <h6 class="mt-3">Notas</h6>
