@@ -1,0 +1,523 @@
+CREATE TABLE CRM (
+    id_cliente INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    apellidos varchar(150),
+    direccion varchar(150),
+    entre_calles varchar(200),
+    correo VARCHAR(100),
+    numero_telefonico BIGINT,
+    activo BOOLEAN DEFAULT TRUE NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id_cliente)
+);
+
+CREATE TABLE RH (
+    id_trabajador INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    apellidos varchar(150),
+    rol BOOLEAN DEFAULT FALSE NOT NULL,
+    password VARCHAR(150) NULL,
+    edad integer,
+    direccion varchar(150),
+    entre_calles varchar(200),
+    correo VARCHAR(100),
+    numero_telefonico BIGINT,
+    activo BOOLEAN DEFAULT TRUE NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id_trabajador)
+);
+
+CREATE TABLE productos (
+    id_producto INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    cantidad double,
+    conservado varchar(120),
+    tipo varchar(120),
+    marca varchar(120),
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id_producto)
+);
+
+CREATE TABLE material (
+    id_material INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    cantidad double,
+    marca varchar(120),
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id_material)
+);
+
+CREATE TABLE grupos_trabajadores (
+    id_grupo_trabajadores VARCHAR(120) PRIMARY KEY,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE grupos_productos (
+    id_grupo_productos VARCHAR(120) PRIMARY KEY,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE grupos_materiales (
+    id_grupo_materiales VARCHAR(120) PRIMARY KEY,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE grupo_trabajadores (
+    id_grupo_trabajadores VARCHAR(120),
+    id_trabajador INT,
+
+    PRIMARY KEY (id_grupo_trabajadores, id_trabajador),
+
+    CONSTRAINT fk_grupotrabajadores_grupostrabajadores
+    FOREIGN KEY (id_grupo_trabajadores)
+    REFERENCES grupos_trabajadores(id_grupo_trabajadores),
+
+    CONSTRAINT fk_RH_grupotrabajadores
+    FOREIGN KEY (id_trabajador)
+    REFERENCES rh(id_trabajador)
+);
+
+CREATE TABLE grupo_productos (
+    id_grupo_productos VARCHAR(120),
+    id_producto INT,
+    cantidad double,
+    
+    PRIMARY KEY (id_grupo_productos, id_producto),
+
+    CONSTRAINT fk_grupoproductos_gruposproductos
+    FOREIGN KEY (id_grupo_productos)
+    REFERENCES grupos_productos(id_grupo_productos),
+
+    CONSTRAINT fk_productos_grupoproductos
+    FOREIGN KEY (id_producto)
+    REFERENCES productos(id_producto)
+);
+
+CREATE TABLE grupo_materiales (
+    id_grupo_materiales VARCHAR(120),
+    id_material INT,
+    cantidad INTEGER,
+    
+    PRIMARY KEY (id_grupo_materiales, id_material),
+
+    CONSTRAINT fk_grupomateriales_gruposmateriales
+    FOREIGN KEY (id_grupo_materiales)
+    REFERENCES grupos_materiales(id_grupo_materiales),
+
+    CONSTRAINT fk_materiales_grupomateriales
+    FOREIGN KEY (id_material)
+    REFERENCES material(id_material)
+);
+
+CREATE TABLE operacion (
+    id_operacion INT NOT NULL AUTO_INCREMENT,
+    trabajo_realizado varchar(200),
+    id_grupo_trabajadores VARCHAR(120) NOT NULL,
+    id_grupo_productos VARCHAR(120) NOT NULL,
+    id_grupo_materiales VARCHAR(120) NOT NULL,
+    id_cliente INT NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id_operacion),
+    
+    CONSTRAINT fk_grupostrabajadores_operacion
+    FOREIGN KEY (id_grupo_trabajadores)
+    REFERENCES grupos_trabajadores(id_grupo_trabajadores),
+    
+    CONSTRAINT fk_gruposproductos_operacion
+    FOREIGN KEY (id_grupo_productos)
+    REFERENCES grupos_productos(id_grupo_productos),
+    
+    CONSTRAINT fk_gruposmateriales_operacion
+    FOREIGN KEY (id_grupo_materiales)
+    REFERENCES grupos_materiales(id_grupo_materiales),
+    
+    CONSTRAINT fk_cliente_operacion
+    FOREIGN KEY (id_cliente)
+    REFERENCES CRM(id_cliente)
+);
+
+CREATE TABLE notas (
+    id_notas INT NOT NULL AUTO_INCREMENT,
+    escrito VARCHAR(500),
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id_notas)
+);
+
+INSERT INTO productos (nombre, cantidad, tipo, marca) values 
+('Lava trastes', 30, 'Botellas', 'Liquido', 'Salvo'),
+('Limpiador multiusos', 27, 'Botellas', 'Liquido', 'Fabuloso'),
+('Blanqueador concentrado', 12, 'Botellas', 'Liquido', 'Clorox'),
+('Limpiador multiusos', 34, 'Latas', 'Spray', 'Lysol'),
+('Limpiador de vidrios', 20, 'Frascos', 'Espuma', 'Unline'),
+('Gel desmaquillador', 4, 'Frascos', 'Geles', 'Stain Cleaner'),
+('Limpiador de pisos', 10, 'Bolsas', 'Pastillas', 'Wow! Clean'),
+('Toallas desinfectantes', 4, 'Frascos', 'Toallitas humedas', 'Lysol');
+
+INSERT INTO rh (nombre, apellidos, rol, password, edad, direccion, entre_calles, correo, numero_telefonico) values 
+('Juan Pedro','Lagunillas Romero', false, null, 29, 'Colonia: Juan Escutia, Calle: Salamanca #33', 'Parque Sovietico y Rio Suchiate','jupe@gmail.com',3117885890),
+('Ricardo Canaya','Riquin Canallin', false, null, 32, 'Colonia: Vistas de la cantera, Calle: Villa de Luevano #89', 'Villa de Cordoba y Villa de León','rica@hotmail.com',3117764533),
+('Esmeralda Luna','Soto Camayo', true, '12345', 45, 'Colonia: Agustín Iturbide, Calle: Bolivia #112', 'Parque Argentina y África ','eslu@gmail.com',3118909907),
+('Violeta Laura','Lomeli Palomas', false, null, 23, 'Colonia: Vistas de la cantera, Calle: Real del Monte #43', 'Real de Plata y Real de Huasca','vila@hotmail.com',3111215543),
+('Paloma','Veridiana Camillas', false, null, 25, 'Colonia: Villas de la cantera, Calle: Rubi #117', 'Agua Marina y Blvd Granate','pave@gmail.com',3119900766),
+('Manuel Fernando','Coronel Figueroa', false, null, 28, 'Colonia: Jacarandas, Calle: Villa del Este #342', 'Topacio y Villa del Niño','mafe@gmail.com',3115564034),
+('José Maximiliano','Cantabrana Esquivel', true, 'max12345', 27, 'Colonia: Real Montecarlo, Calle: Mona #14', 'Furina y Arlecchino','joma@gmail.com',3113221999),
+('Liliana Karla','Hidalgo Goméz', false, null, 34, 'Colonia: Cd. Del Valle, Calle: Lomas del Valle #77', 'Parque San Pedro y Loma Verde','lika@outlook.com',3118909976),
+('techdomoti01','Sauces', true, '12345', 38, 'Colonia: Los Sauces, Calle: Girasol #54', 'Rosa y Cardo','techdomotic@gmail.com',3117786423);
+
+INSERT INTO material (nombre, cantidad, marca) values 
+('Trapiadores', 30, 'Generico'),
+('Escobas', 27, 'Generico'),
+('Aspiradoras', 12, 'Kymberly-Clark'),
+('Cubetas', 34, 'Fapsa'),
+('Recojedores', 20, 'Solprac'),
+('Cepillo para inodoro', 4, 'Tork'),
+('Espátulas', 10, 'Tork'),
+('Plumero extensible', 65, 'Biozone'),
+('Plumero corto', 23, 'Biozone'),
+('Paños de limpieza de microfibra', 12, 'Glade'),
+('Jalador de pisos', 22, 'Oval'),
+('Jalador de vidrios', 54,  'Oval'),
+('Destapacaños', 11, 'Jofel'),
+('Cinta destapacaños', 32, 'Gojo'),
+('Cepillo de limpieza de esquinas', 19, 'Wiese');
+
+
+INSERT INTO crm (nombre, apellidos, direccion, entre_calles, correo, numero_telefonico) values 
+('José Ramón', 'Vazquéz Mendéz','Colonia: Alameda, Calle: Figueroa #65','Bella vista y Bella loma','jrvm@gmail.com',3112328876),
+('María Fernanda','López García','Colonia Centro, Calle Hidalgo #120','Morelos y Juárez','mflg@gmail.com',3114567789),
+('Carlos Alberto','Sánchez Ruiz','Colonia San Juan, Calle Zaragoza #45','Victoria y Mina','casr@gmail.com',3119871234),
+('Ana Sofía','Martínez Torres','Colonia Valle Verde, Calle Roble #22','Pino y Cedro','asmt@gmail.com',3112345567),
+('Luis Enrique','Gómez Herrera','Colonia Los Fresnos, Calle Olivo #18','Primavera y Verano','legh@gmail.com',3116543321),
+('Daniela','Castillo Ramírez','Colonia Jardines, Calle Tulipán #50','Rosas y Margaritas','dcrc@gmail.com',3117788990),
+('Miguel Ángel','Ortega Salazar','Colonia Santa María, Calle Guerrero #77','Allende y Bravo','maos@gmail.com',3114455667),
+('Paola Andrea','Navarro Delgado','Colonia Puerta del Sol, Calle Luna #10','Sol y Estrella','pand@gmail.com',3115566778),
+('Jorge Luis','Ríos Mendoza','Colonia Independencia, Calle Libertad #90','Patria y Nación','jlrm@gmail.com',3118899001),
+('Fernanda','Cruz Aguilar','Colonia Las Palmas, Calle Palma Real #33','Coco y Mango','fca@gmail.com',3116677889);
+
+INSERT INTO grupos_trabajadores (id_grupo_trabajadores) VALUES
+('2XXTFT78'),('3XXTFT98'),('4XXTFT91');
+INSERT INTO grupos_materiales (id_grupo_materiales) VALUES
+('2XXTFT78'),('3XXTFT98'),('4XXTFT91');
+INSERT INTO grupos_productos (id_grupo_productos) VALUES
+('2XXTFT78'),('3XXTFT98'),('4XXTFT91');
+
+INSERT INTO operacion (trabajo_realizado, id_grupo_trabajadores, id_grupo_productos, id_grupo_materiales, id_cliente) VALUES
+('Trabajo de jardineria', '2XXTFT78', '2XXTFT78', '2XXTFT78', 1),
+('Trabajo de limpieza de patio', '3XXTFT98', '3XXTFT98', '3XXTFT98', 2),
+('Trabajo de limpieza de vidrios', '4XXTFT91', '4XXTFT91', '4XXTFT91', 4);
+
+INSERT INTO grupo_trabajadores (id_grupo_trabajadores, id_trabajador) VALUES
+('2XXTFT78', 1), ('2XXTFT78', 3), ('2XXTFT78', 5), ('2XXTFT78', 6),
+('3XXTFT98', 2), ('3XXTFT98', 4), ('3XXTFT98', 3),
+('4XXTFT91', 3), ('4XXTFT91', 4), ('4XXTFT91', 5), ('4XXTFT91', 6), ('4XXTFT91', 8);
+
+INSERT INTO grupo_productos (id_grupo_productos, id_producto, cantidad) VALUES
+('2XXTFT78', 3,4), ('2XXTFT78', 8,2), ('2XXTFT78', 13,3), ('2XXTFT78', 10,4),
+('3XXTFT98', 6,8), ('3XXTFT98', 9,6),
+('4XXTFT91', 7,2), ('4XXTFT91', 11,2), ('4XXTFT91', 14,1);
+
+INSERT INTO grupo_materiales (id_grupo_materiales, id_material, cantidad) VALUES
+('2XXTFT78', 1,4), ('2XXTFT78', 3,2), ('2XXTFT78', 5,3), ('2XXTFT78', 11,2),
+('3XXTFT98', 7,2), ('3XXTFT98', 5,1), ('3XXTFT98', 3,7), ('3XXTFT98', 8,3),
+('4XXTFT91', 3,8), ('4XXTFT91', 9,7), ('4XXTFT91', 2,9);
+
+SELECT O.trabajo_realizado, C.nombre, C.direccion, O.fecha_creacion FROM operacion AS O INNER JOIN crm AS C ON C.id_cliente = O.id_cliente;
+
+ALTER TABLE `operacion` DROP INDEX `fk_grupotrabajadores_operacion`;
+
+INSERT INTO grupo_trabajadores (id_grupo_trabajadores,id_trabajador) VALUES
+('3XXTFT98',5),('3XXTFT98',2),('3XXTFT98',6),('3XXTFT98',7),('3XXTFT98',9);
+
+SELECT R.nombre, R.apellidos, R.correo, R.numero_telefonico FROM rh AS R INNER JOIN grupo_trabajadores AS GT ON GT.id_trabajador = R.id_trabajador INNER JOIN grupos_trabajadores AS GTR ON GTR.id_grupo_trabajadores = GT.id_grupo_trabajadores INNER JOIN operacion AS O ON O.id_grupo_trabajadores = GTR.id_grupo_trabajadores WHERE O.id_operacion = 4;
+
+SELECT R.nombre, R.apellidos, R.correo, R.numero_telefonico FROM grupo_trabajadores AS GT INNER JOIN rh AS R ON GT.id_trabajador = R.id_trabajador WHERE R.activo = '1' GROUP BY R.nombre;
+
+UPDATE operacion AS O
+INNER JOIN grupos_trabajadores AS GRP ON t1.id = t2.t1_id
+SET t1.columna = 'nuevo_valor',
+    t2.columna = 'nuevo_valor'
+WHERE t1.condicion = 'valor';
+
+ALTER TABLE RH ADD COLUMN `rol` BOOLEAN DEFAULT TRUE NOT NULL AFTER `apellidos`;
+ALTER TABLE RH DROP COLUMN `rol`;
+ALTER TABLE RH ADD COLUMN `password` VARCHAR(150) NULL AFTER `rol`;
+
+UPDATE usuarios SET email = 'nuevoemail@ejemplo.com' WHERE id = 5;
+INSERT INTO rh (numero_telefonico) VALUES ('valor');
+
+SELECT P.id_producto,
+	   P.nombre, 
+	   P.cantidad, 
+	   P.conservado, 
+	   P.tipo,
+	   P.marca FROM productos AS P INNER JOIN 
+	   grupo_productos AS GP ON GP.id_producto = P.id_producto INNER JOIN 
+	   grupos_productos AS GSP ON GSP.id_grupo_productos = GP.id_grupo_productos INNER JOIN 
+	   operacion AS O ON O.id_grupo_productos = GSP.id_grupo_productos WHERE O.id_operacion = 4;
+
+INSERT INTO grupo_trabajadores (id_grupo_trabajadores, id_trabajador) VALUES ('2XXTFT78', 6), ('2XXTFT78', 9) WHERE id_opercion = (SELECT)
+
+SELECT * FROM grupo_trabajadores 
+        WHERE id_trabajador=? AND id_grupo_trabajadores = (
+            SELECT id_grupo_trabajadores FROM operacion WHERE id_operacion=?
+
+SELECT R.nombre, 
+	   R.apellidos,
+	   R.correo, 
+	   R.numero_telefonico FROM rh AS R INNER JOIN grupo_trabajadores AS GT ON GT.id_trabajador = R.id_trabajador INNER JOIN grupos_trabajadores AS GTR ON GTR.id_grupo_trabajadores = GT.id_grupo_trabajadores INNER JOIN operacion AS O ON O.id_grupo_trabajadores = GTR.id_grupo_trabajadores WHERE R.activo = 1 AND NOT O.id_grupo_trabajadores = '2XXTFT78' AND O.id_grupo_trabajadores GROUP BY R.nombre;
+
+SELECT R.nombre, 
+	   R.apellidos,
+	   R.correo, 
+	   R.numero_telefonico FROM rh AS R INNER JOIN grupo_trabajadores AS GT ON GT.id_trabajador = R.id_trabajador WHERE R.activo = 1 AND NOT GT.id_grupo_trabajadores = '2XXTFT78' AND O.id_grupo_trabajadores = GROUP BY R.nombre;
+
+SELECT R.nombre, 
+	   R.apellidos,
+	   R.correo, 
+	   R.numero_telefonico FROM rh AS R INNER JOIN grupo_trabajadores AS GT ON GT.id_trabajador = R.id_trabajador WHERE R.id_trabajador NOT IN (SELECT id_trabajador FROM grupo_trabajadores) AND R.activo = 1 AND NOT GT.id_grupo_trabajadores = '2XXTFT78' GROUP BY R.nombre;
+
+SELECT R.nombre, 
+	   R.apellidos,
+	   R.correo, 
+	   R.numero_telefonico FROM rh AS R WHERE R.id_trabajador NOT IN (SELECT id_trabajador FROM grupo_trabajadores) AND R.activo = 1;
+
+SELECT M.id_material,
+	   M.nombre, 
+       GM.cantidad,
+       M.marca FROM material AS M INNER JOIN grupo_materiales AS GM ON GM.id_material = M.id_material INNER JOIN grupos_materiales AS GSM ON GSM.id_grupo_materiales = GM.id_grupo_materiales INNER JOIN operacion AS O ON O.id_grupo_materiales = GM.id_grupo_materiales WHERE M.id_material NOT IN (SELECT id_material FROM grupo_materiales WHERE id_grupo_materiales = '2XXTFT78') AND NOT IN (SELECT * FROM grupo_materiales);
+
+SELECT P.id_producto,
+	   P.nombre,
+	   GP.cantidad,
+	   P.marca,
+       P.conservado,
+       P.tipo FROM productos AS P INNER JOIN grupo_productos AS GP ON GP.id_producto = P.id_producto WHERE P.id_producto NOT IN (SELECT id_producto FROM grupo_productos WHERE id_grupo_productos = '2XXTFT78') AND p.id_producto NOT IN (SELECT id_producto FROM grupo_productos) AND GP.cantidad = NULL;
+
+
+SELECT P.nombre, 
+       P.cantidad,
+       P.conservado, 
+       P.tipo,
+       P.marca,
+       P.fecha_creacion
+    FROM productos AS P 
+    WHERE P.id_producto NOT IN (
+        SELECT id_producto 
+        FROM grupo_productos
+        WHERE id_grupo_productos = '2XXTFT78'
+    );
+
+DELIMITER $$
+
+CREATE TRIGGER before_insert_grupo_productos
+BEFORE INSERT ON grupo_productos
+FOR EACH ROW
+BEGIN
+    DECLARE stock_actual DOUBLE;
+
+    SELECT cantidad INTO stock_actual
+    FROM productos
+    WHERE id_producto = NEW.id_producto;
+
+    IF stock_actual < NEW.cantidad THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No hay suficiente stock';
+    ELSE
+        UPDATE productos
+        SET cantidad = cantidad - NEW.cantidad
+        WHERE id_producto = NEW.id_producto;
+    END IF;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER before_update_grupo_productos
+BEFORE UPDATE ON grupo_productos
+FOR EACH ROW
+BEGIN
+    DECLARE diferencia DOUBLE;
+    DECLARE stock_actual DOUBLE;
+
+    SET diferencia = NEW.cantidad - OLD.cantidad;
+
+    IF diferencia > 0 THEN
+        -- Solo validar si está aumentando
+        SELECT cantidad INTO stock_actual
+        FROM productos
+        WHERE id_producto = NEW.id_producto;
+
+        IF stock_actual < diferencia THEN
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'No hay suficiente stock para actualizar';
+        END IF;
+
+        UPDATE productos
+        SET cantidad = cantidad - diferencia
+        WHERE id_producto = NEW.id_producto;
+
+    ELSE
+        -- Si reduces cantidad → devolver stock
+        UPDATE productos
+        SET cantidad = cantidad + ABS(diferencia)
+        WHERE id_producto = NEW.id_producto;
+    END IF;
+
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER after_delete_grupo_productos
+AFTER DELETE ON grupo_productos
+FOR EACH ROW
+BEGIN
+    UPDATE productos
+    SET cantidad = cantidad + OLD.cantidad
+    WHERE id_producto = OLD.id_producto;
+END$$
+
+DELIMITER ;
+
+
+
+
+
+
+DELIMITER $$
+
+CREATE TRIGGER before_insert_material
+BEFORE INSERT ON grupo_materiales
+FOR EACH ROW
+BEGIN
+
+    SELECT cantidad INTO stock_actual
+    FROM material
+    WHERE id_material = NEW.id_material;
+
+    IF stock_actual < NEW.cantidad THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No hay suficiente stock';
+    ELSE
+        UPDATE material
+        SET cantidad = cantidad - NEW.cantidad
+        WHERE id_material = NEW.id_material;
+    END IF;
+END$$
+
+DELIMITER ;
+
+INSERT INTO notas (titulo, escrito) VALUES ('Cliente criticon', ' El señor antonio es un cliente que constantemente tiene desacuerdos en la limpieza, se sugiere mantener mucha limpieza y evitar conflictos con el cliente'),('Cuidado con el perro', ' La señora Fernanda tiene un pitbull muy bravo se sugiere que se comuniquen primero con la dueña para pedir que lo amarre');
+
+
+
+
+
+
+
+
+
+UPDATE nombre_tabla
+SET columna1 = nuevo_valor1, columna2 = nuevo_valor2
+WHERE condicion;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+echo "# Consultorio" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/WonderBosst/Consultorio.git
+git push -u origin main
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://www.dhmex.com/marketplace/Marcas.aspx
+https://software.dahuasecurity.com/la/dmss
+https://www.hikvision.com/es-la/products/software/hik-connect/
+https://www.epcom.net/
+https://www.grupocva.com/
+https://ctonline.mx/
+https://tvc.mx/
+https://freshtomato.org/
+
