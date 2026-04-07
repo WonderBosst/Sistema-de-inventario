@@ -99,7 +99,7 @@ try {
 </select>
 </div>
 
-<label class="form-label">Cliente a selecionar</label>
+<label class="form-label">Cliente a seleccionar</label>
 
 <div id="mensaje-cliente" class="alert alert-info" style="display:none;"></div>
 

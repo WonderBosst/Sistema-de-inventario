@@ -20,7 +20,7 @@ SELECT O.id_operacion, O.trabajo_realizado, O.estatus, C.nombre, C.direccion, O.
 <div class="card shadow rounded-4">
 <div class="card-body table-responsive" style="max-height: 600px; overflow-y: auto;">
 
-<table class="table table-hover align-middle">
+<table class="table table-hover align-middle small">
 <thead class="table-light">
 <tr>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">#</th>
