@@ -6,7 +6,7 @@ include '../includes/header.php';
 requireRole(['1']);
 
 $result = $conn->query("
-SELECT O.id_operacion, O.trabajo_realizado, O.estatus, C.nombre, C.direccion, O.fecha_creacion, O.id_grupo_trabajadores FROM operacion AS O INNER JOIN crm AS C ON C.id_cliente = O.id_cliente
+SELECT O.id_operacion, O.trabajo_realizado, O.estatus, C.nombre, C.direccion, O.fecha_creacion, O.fecha_finalizacion, O.id_grupo_trabajadores FROM operacion AS O INNER JOIN crm AS C ON C.id_cliente = O.id_cliente
 ");
 
 ?>
@@ -28,7 +28,8 @@ SELECT O.id_operacion, O.trabajo_realizado, O.estatus, C.nombre, C.direccion, O.
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Cliente</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Direcci&oacute;n</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Estatus</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Fecha</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Fecha inicio</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Fecha finalizaci&oacute;n</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Accciones</th>
 </tr>
 </thead>
@@ -55,6 +56,8 @@ SELECT O.id_operacion, O.trabajo_realizado, O.estatus, C.nombre, C.direccion, O.
 </td>
 
 <td><?= htmlspecialchars($row['fecha_creacion']); ?></td>
+
+<td><?= htmlspecialchars($row['fecha_finalizacion']); ?></td>
 
 <td>
 <a href="editar.php?id=<?= $row['id_operacion']; ?>&id_grupo_trabajadores=<?= $row['id_grupo_trabajadores']; ?>" 

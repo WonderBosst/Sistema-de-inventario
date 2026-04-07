@@ -80,6 +80,17 @@ $rol_usuario = $_SESSION['rol'] ?? '1';
 </div>
 <?php endif; ?>
 
+<?php if($rol_usuario == '1'): ?>
+<div class="col-6 col-md-3">
+<a href="reportes/vista.php" class="text-decoration-none">
+<div class="card shadow rounded-4 p-4 text-center h-100 hover-scale">
+<i class="bi bi-card-checklist fs-1 text-info"></i>
+<h6 class="mt-3">Reportes</h6>
+</div>
+</a>
+</div>
+<?php endif; ?>
+
 </div>
 
 <!-- ===== GR�FICO ===== -->
