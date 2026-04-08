@@ -418,45 +418,6 @@ INSERT INTO notas (titulo, escrito) VALUES ('Cliente criticon', ' El señor anto
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 echo "# Consultorio" >> README.md
 git init
 git add README.md

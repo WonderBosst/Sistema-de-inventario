@@ -110,6 +110,7 @@ try {
 <table class="table table-hover align-middle">
 <thead class="table-light">
 <tr>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">#</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Nombre</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Apellidos</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Direcci&oacute;n</th>
@@ -120,9 +121,12 @@ try {
 </tr>
 </thead>
 <tbody>
-
+<?php $contador = 1; ?>
 <?php while($row = $result_clientes->fetch_assoc()): ?>
 <tr>
+
+<td><strong><?= $contador; ?></strong></td>
+
 <td id="cliente-nombre"><?= htmlspecialchars($row['nombre']); ?></td>
 
 <td id="cliente-apellidos"><?= htmlspecialchars($row['apellidos']); ?></td>
@@ -145,6 +149,7 @@ try {
 </td>
 </tr>
 
+<?php $contador++; ?>
 <?php endwhile; ?>
 
 </tbody>
