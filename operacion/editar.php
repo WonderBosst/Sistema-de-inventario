@@ -115,19 +115,27 @@ if(!$operacion){
 if($_SERVER["REQUEST_METHOD"]=="POST"){
 
     $trabajo_realizado = trim($_POST['trabajo_realizado']);
-	$estatus = isset($_POST['estatus']) ? trim($_POST['estatus']) : '';
+    $estatus = isset($_POST['estatus']) ? trim($_POST['estatus']) : '';
     $id_cliente = isset($_POST['id_cliente']) ? intval($_POST['id_cliente']) : 0;
-	
+    
+    $fecha_finalizacion = !empty($_POST['fecha_finalizacion']) ? $_POST['fecha_finalizacion'] : null;
+
     $stmt = $conn->prepare("
         UPDATE operacion 
-        SET trabajo_realizado=?, estatus=?, id_cliente=?
-        WHERE id_operacion=?
+        SET trabajo_realizado = ?, 
+            estatus = ?, 
+            id_cliente = ?, 
+            fecha_finalizacion = ? 
+        WHERE id_operacion = ?
     ");
 
-    $stmt->bind_param("ssii",$trabajo_realizado,$estatus,$id_cliente,$id);
-    $stmt->execute();
-
-    header("Location: editar.php?id=".$id."&id_grupo_trabajadores=".$id_grupo_trabajadores);
+    $stmt->bind_param("ssisi", $trabajo_realizado, $estatus, $id_cliente, $fecha_finalizacion, $id);
+    
+    if($stmt->execute()){
+        header("Location: editar.php?id=".$id."&exito=1");
+    } else {
+        echo "Error: " . $conn->error;
+    }
     exit;
 }
 ?>
@@ -141,21 +149,31 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
 <input type="hidden" name="id_cliente" value="<?= $id_cliente; ?>">
 
-<div class="col-12">
-<label>Trabajo_realizado</label>
+<div class="col-12 mb-3">
+<label>Trabajo realizado</label>
 <input type="text" name="trabajo_realizado"
 class="form-control"
 value="<?= htmlspecialchars($operacion['trabajo_realizado']); ?>"
 required>
 </div>
 
-<div class="col-md-6">
-<label>Estatus</label>
-<select name="estatus" class="form-select">
-<option value="Terminado" <?= $operacion['estatus']=='Terminado'?'selected':'' ?>>Terminado</option>
-<option value="En proceso" <?= $operacion['estatus']=='En proceso'?'selected':'' ?>>En proceso</option>
-<option value="Cancelado" <?= $operacion['estatus']=='Cancelado'?'selected':'' ?>>Cancelado</option>
-</select>
+<div class="row">
+    <div class="col-md-6">
+        <label class="form-label">Estatus</label>
+        <select name="estatus" class="form-select">
+            <option value="Terminado" <?= $operacion['estatus']=='Terminado'?'selected':'' ?>>Terminado</option>
+            <option value="En proceso" <?= $operacion['estatus']=='En proceso'?'selected':'' ?>>En proceso</option>
+            <option value="Cancelado" <?= $operacion['estatus']=='Cancelado'?'selected':'' ?>>Cancelado</option>
+        </select>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Fecha de Finalización</label>
+        <input type="datetime-local" 
+               name="fecha_finalizacion" 
+               class="form-control" 
+               value="<?= $operacion['fecha_finalizacion'] ? date('Y-m-d\TH:i', strtotime($operacion['fecha_finalizacion'])) : ''; ?>">
+    </div>
 </div>
 
 <div class="col-12 mt-3">
@@ -176,15 +194,15 @@ required>
 <div class="card shadow rounded-4">
 <div class="card-body table-responsive" style="max-height: 300px; overflow-y: auto;" id="tabla-trabajadores-participantes">
 
-<table class="table table-hover align-middle" id="tabla-trabajadores">
+<table class="table table-hover align-middle small">
 <thead class="table-light">
 <tr>
-<th>#</th>
-<th>Nombre</th>
-<th>Apellidos</th>
-<th>Correo</th>
-<th>Numero Tel&eacute;fonico</th>
-<th>Acciones</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">#</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Nombre</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Apellidos</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Correo</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Numero Tel&eacute;fonico</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Acciones</th>
 </tr>
 </thead>
 <tbody>
@@ -221,16 +239,16 @@ class="btn btn-sm btn-danger">
 
 <h4 class="col-12">Datos de cliente</h4>
 
-<table class="table table-hover align-middle">
+<table class="table table-hover align-middle small">
 <thead class="table-light">
 <tr>
-<th>Nombre</th>
-<th>Apellidos</th>
-<th>Direcci&oacute;n</th>
-<th>Entre calles</th>
-<th>Correo</th>
-<th>Numero Tel&eacute;fonico</th>
-<th>Acciones</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Nombre</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Apellidos</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Direcci&oacute;n</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Entre calles</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Correo</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Numero Tel&eacute;fonico</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Acciones</th>
 </tr>
 </thead>
 <tbody>
@@ -268,16 +286,16 @@ class="btn btn-sm btn-danger">
 
 <div class="collapse mt-3" id="collapseCliente">
   <div class="card card-body" style="max-height: 400px; overflow-y: auto;">
-	<table class="table table-hover align-middle">
+	<table class="table table-hover align-middle small">
 	<thead class="table-light">
 	<tr>
-	<th>Nombre</th>
-	<th>Apellidos</th>
-	<th>Direcci&oacute;n</th>
-	<th>Entre calles</th>
-	<th>Correo</th>
-	<th>Numero Tel&eacute;fonico</th>
-	<th>Acciones</th>
+	<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Nombre</th>
+	<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Apellidos</th>
+	<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Direcci&oacute;n</th>
+	<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Entre calles</th>
+	<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Correo</th>
+	<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Numero Tel&eacute;fonico</th>
+	<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Acciones</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -296,11 +314,13 @@ class="btn btn-sm btn-danger">
 
 	<td><?= htmlspecialchars($row['numero_telefonico']); ?></td>
 	
-	<td>
+	<td class="text-center">
+    <div class="d-flex flex-column flex-sm-row justify-content-center gap-1">
 	<a href="javascript:void(0);" class="btn btn-sm btn-secondary"
 	   onclick="selectCliente(<?= $id; ?>, <?= $row['id_cliente']; ?>, '<?= $id_grupo_trabajadores; ?>')">
 	<i class="bi bi-arrow-counterclockwise"></i> Seleccionar
 	</a>
+    </div>
 	</td>
 
 	</tr>
@@ -322,16 +342,16 @@ class="btn btn-sm btn-danger">
 <div class="card shadow rounded-4">
 <div class="card-body table-responsive" style="max-height: 300px; overflow-y: auto;">
 
-<table class="table table-hover align-middle">
+<table class="table table-hover align-middle small">
 <thead class="table-light">
 <tr>
-<th>#</th>
-<th>Nombre</th>
-<th>Cantidad usada:</th>
-<th>Consevado en:</th>
-<th>Tipo</th>
-<th>Marca</th>
-<th>Acciones</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">#</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Nombre</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Cantidad usada:</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Consevado en:</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Tipo</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Marca</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Acciones</th>
 </tr>
 </thead>
 <tbody>
@@ -393,14 +413,14 @@ class="btn btn-sm btn-danger">
 <div class="card shadow rounded-4">
 <div class="card-body table-responsive" style="max-height: 300px; overflow-y: auto;" id="tabla-trabajadores-participantes">
 
-<table class="table table-hover align-middle">
+<table class="table table-hover align-middle small">
 <thead class="table-light">
 <tr>
-<th>#</th>
-<th>Nombre</th>
-<th>Cantidad usada:</th>
-<th>Marca</th>
-<th>Acciones</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">#</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Nombre</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Cantidad usada:</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Marca</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Acciones</th>
 </tr>
 </thead>
 <tbody>

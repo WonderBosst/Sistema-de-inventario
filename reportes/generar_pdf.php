@@ -39,11 +39,30 @@ if (intval($id_operacion) > 0) { // Usa id_operacion para buscar
         $correo            = $datos_cliente['correo'];
         $numero_telefonico = $datos_cliente['numero_telefonico'];
         
+    }
+} 
+
+if (intval($id_operacion) > 0) { // Usa id_operacion para buscar
+    $query = "SELECT N.titulo, 
+                N.escrito
+              FROM notas AS N 
+              INNER JOIN operacion AS O ON O.id_operacion = N.id_operacion
+              WHERE O.id_operacion = " . intval($id_operacion);
+
+    $result_notas = $conn->query($query);
+
+    if ($result_notas && $result_notas->num_rows > 0) {
+       
+        $result_notas = $result_notas->fetch_assoc();
+        
+        $titulo            = $result_notas['titulo'];
+        $escrito         = $result_notas['escrito'];
+        
     } else {
-        $cliente_error_html = "<p style='color:red;'>No se encontró cliente para la operación ID: $id_operacion</p>";
+        $notas_error_html = "<p style='color:red;'>No se encontraron notas para la operación </p>";
     }
 } else {
-    $cliente_error_html = "<p>ID de operación no válido.</p>";
+    $notas_error_html = "<p>ID de operación no válido.</p>";
 }
 
 if (intval($id_operacion) > 0) {
@@ -66,7 +85,7 @@ if (intval($id_operacion) > 0) {
         }
         $trabajadores_html .= "</ul>";
     } else {
-        $trabajadores_html = "<p style='color:red;'>No se encontraron trabajadores para la operación ID: $id_operacion</p>";
+        $trabajadores_html = "<p style='color:red;'>No se encontraron trabajadores para la operación</p>";
     }
 } else {
     $trabajadores_html = "<p>ID de operación no válido (Valor: $id_operacion).</p>";
@@ -162,7 +181,11 @@ $html = "
 <html>
 <head>
     <style>
-        body { font-family: sans-serif; }
+        body { font-family: sans-serif; 
+            font-size: 12px; 
+            line-height: 1.4; 
+            color: #333;
+            }
         h1 { color: #333; text-align: center; }
         .tabla-productos {
         width: 100%;
@@ -199,8 +222,14 @@ $html = "
     </div>
     <hr>
     <div class='seccion'>
-        <p class='label'>Descripción:</p>
+        <h4 class='label'>Descrición:</h4>
         <p>$trabajo</p>
+    </div>
+    <hr>
+    <div class='seccion'>
+        <h4 class='label' style='margin-bottom: 2px;'>Nota: $titulo</h4>
+        <span class='label'>Descripción:</span> $escrito<br>
+        </p>
     </div>
     <hr>
     <div class='seccion'>

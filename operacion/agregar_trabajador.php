@@ -71,15 +71,15 @@ $result_trabajadores = $conn->query("
 <div class="card shadow rounded-4">
 <div class="card-body table-responsive" style="max-height: 700px; overflow-y: auto;">
 
-<table class="table table-hover align-middle">
+<table class="table table-hover align-middle small">
 <thead class="table-light">
 <tr>
-<th>#</th>
-<th>Nombre</th>
-<th>Apellidos</th>
-<th>Correo</th>
-<th>Numero Teléfono</th>
-<th>Acciones</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">#</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Nombre</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Apellidos</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Correo</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Numero Teléfono</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Acciones</th>
 </tr>
 </thead>
 <tbody>

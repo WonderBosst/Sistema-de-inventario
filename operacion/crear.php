@@ -32,6 +32,11 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $trabajo_realizado = trim($_POST['trabajo_realizado']);
     $estatus = trim($_POST['estatus']);
     $id_cliente = intval($_POST['id_cliente']);
+
+    $titulo = trim($_POST['titulo']);
+    $escrito = trim($_POST['escrito']);
+    $id_operacion = intval($_POST['id_operacion']);
+
     $id_grupo_trabajadores = $codigo_operacion;
     $id_grupo_productos = $codigo_operacion;
     $id_grupo_materiales = $codigo_operacion;
@@ -64,6 +69,14 @@ try {
     $stmt->bind_param("sssssi",$trabajo_realizado,$estatus,$id_grupo_trabajadores,$id_grupo_productos,$id_grupo_materiales,$id_cliente);
     $stmt->execute();
 
+    $nuevo_id_operacion = $conn->insert_id;
+
+    if (!empty($titulo) && !empty($escrito)) {
+        $stmt_nota = $conn->prepare("INSERT INTO notas (titulo, escrito, id_operacion) VALUES (?, ?, ?)");
+        $stmt_nota->bind_param("ssi", $titulo, $escrito, $nuevo_id_operacion);
+        $stmt_nota->execute();
+    }
+
     $conn->commit();
     header("Location: listar.php?exito=Se creo la nueva operaci&oacute;n");
     exit;
@@ -90,14 +103,27 @@ try {
 <input type="text" name="trabajo_realizado" class="form-control" required>
 </div>
 
-<div class="col-md-3">
-<label class="form-label">Estatus</label>
-<select name="estatus" class="form-select" required>
-<option value="En proceso">En proceso</option>
-<option value="Terminado">Terminado</option>
-<option value="Cancelado">Cancelado</option>
-</select>
+<input type="hidden" name="estatus" value="En proceso">
+
+<p class="d-inline-flex gap-1">
+  <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Agregar nota?
+  </a>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="col-md-6 mb-3">
+    <label class="form-label">T&iacute;tulo de la nota</label>
+    <input type="text" name="titulo" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Descripci&oacute;n</label>
+    <div class="form-floating">
+      <textarea class="form-control" name="escrito" placeholder="Agrega una descripci&oacute;n" id="floatingTextarea2" style="height: 100px"></textarea>
+    </div>
+  </div>
 </div>
+
 
 <label class="form-label">Cliente a seleccionar</label>
 
@@ -161,7 +187,7 @@ try {
 
 <div class="col-12">
 <button class="btn btn-success">
-💾 Guardar Producto
+💾 Guardar datos
 </button>
 <a href="listar.php" class="btn btn-secondary">Cancelar</a>
 </div>

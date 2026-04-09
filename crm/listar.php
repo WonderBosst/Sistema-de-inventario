@@ -25,7 +25,7 @@ SELECT * FROM crm
 <div class="card shadow rounded-4">
 <div class="card-body table-responsive" style="max-height: 600px; overflow-y: auto;">
 
-<table class="table table-hover align-middle">
+<table class="table table-hover align-middle small">
 <thead class="table-light">
 <tr>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">#</th>
@@ -66,10 +66,15 @@ SELECT * FROM crm
 <?php endif; ?>
 </td>
 
-<td>
+<td class="text-center">
+<div class="d-flex flex-column flex-sm-row justify-content-center gap-1">
+
 <a href="editar.php?id=<?= $row['id_cliente'] ?>" 
 class="btn btn-sm btn-warning">✏️</a>
+
+</div>
 </td>
+
 </tr>
 <?php $contador++; ?>
 <?php endwhile; ?>

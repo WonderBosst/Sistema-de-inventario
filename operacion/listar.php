@@ -61,8 +61,8 @@ SELECT O.id_operacion, O.trabajo_realizado, O.estatus, C.nombre, C.direccion, O.
 
 <td>
 <a href="editar.php?id=<?= $row['id_operacion']; ?>&id_grupo_trabajadores=<?= $row['id_grupo_trabajadores']; ?>" 
-class="btn btn-sm btn-info">
-<i class="bi bi-info-circle"></i> Informaci&oacute;n
+class="btn btn-sm btn-warning">
+<i class="bi bi-info-circle"></i> Editar
 </a>
 </td>
 

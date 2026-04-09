@@ -79,15 +79,15 @@ $result_materiales = $conn->query("
 <div class="card shadow rounded-4">
 <div class="card-body table-responsive" style="max-height: 700px; overflow-y: auto;">
 
-<table class="table table-hover align-middle">
+<table class="table table-hover align-middle small">
 <thead class="table-light">
 <tr>
-<th>#</th>
-<th>Nombre</th>
-<th>Cantidad</th>
-<th>Marca</th>
-<th>Fecha_creacion</th>
-<th>Acciones</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">#</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Nombre</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Cantidad</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Marca</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Fecha_creacion</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Acciones</th>
 </tr>
 </thead>
 <tbody>
