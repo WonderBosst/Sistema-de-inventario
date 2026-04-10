@@ -107,36 +107,67 @@ $result_clientes = $conn->query("
 SELECT * FROM crm;
 ");
 
+$nota = $conn->query("
+SELECT * FROM notas WHERE id_operacion=$id
+")->fetch_assoc();
+
 if(!$operacion){
     header("Location: listar.php");
     exit;
 }
 
-if($_SERVER["REQUEST_METHOD"]=="POST"){
-
-    $trabajo_realizado = trim($_POST['trabajo_realizado']);
-    $estatus = isset($_POST['estatus']) ? trim($_POST['estatus']) : '';
-    $id_cliente = isset($_POST['id_cliente']) ? intval($_POST['id_cliente']) : 0;
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    $fecha_finalizacion = !empty($_POST['fecha_finalizacion']) ? $_POST['fecha_finalizacion'] : null;
+    // CASO A: Actualizar datos principales de la operación
+    if (isset($_POST['btn_actualizar_operacion'])) {
+        $trabajo_realizado = trim($_POST['trabajo_realizado']);
+        $estatus = isset($_POST['estatus']) ? trim($_POST['estatus']) : '';
+        $id_cliente = isset($_POST['id_cliente']) ? intval($_POST['id_cliente']) : 0;
+        $fecha_finalizacion = !empty($_POST['fecha_finalizacion']) ? $_POST['fecha_finalizacion'] : null;
 
-    $stmt = $conn->prepare("
-        UPDATE operacion 
-        SET trabajo_realizado = ?, 
-            estatus = ?, 
-            id_cliente = ?, 
-            fecha_finalizacion = ? 
-        WHERE id_operacion = ?
-    ");
-
-    $stmt->bind_param("ssisi", $trabajo_realizado, $estatus, $id_cliente, $fecha_finalizacion, $id);
-    
-    if($stmt->execute()){
-        header("Location: editar.php?id=".$id."&exito=1");
-    } else {
-        echo "Error: " . $conn->error;
+        $stmt = $conn->prepare("UPDATE operacion SET trabajo_realizado = ?, estatus = ?, id_cliente = ?, fecha_finalizacion = ? WHERE id_operacion = ?");
+        $stmt->bind_param("ssisi", $trabajo_realizado, $estatus, $id_cliente, $fecha_finalizacion, $id);
+        
+        if ($stmt->execute()) {
+            header("Location: editar.php?id=".$id."&id_grupo_trabajadores=".$id_grupo_trabajadores);
+        } else {
+            echo "Error: " . $conn->error;
+        }
+        exit;
     }
-    exit;
+
+    // CASO B: Actualizar o Crear Nota
+    if (isset($_POST['btn_actualizar_nota'])) {
+        $titulo = trim($_POST['titulo']);
+        $escrito = trim($_POST['escrito']);
+
+        if (!empty($titulo) && !empty($escrito)) {
+            // Verificamos si ya existe una nota para esta operación
+            $checkNota = $conn->prepare("SELECT id_notas FROM notas WHERE id_operacion = ?");
+            $checkNota->bind_param("i", $id);
+            $checkNota->execute();
+            $res = $checkNota->get_result();
+
+            if ($res->num_rows > 0) {
+                // Si existe, actualizamos
+                $stmt = $conn->prepare("UPDATE notas SET titulo = ?, escrito = ? WHERE id_operacion = ?");
+                $stmt->bind_param("ssi", $titulo, $escrito, $id);
+            } else {
+                // Si no existe, creamos
+                $stmt = $conn->prepare("INSERT INTO notas (titulo, escrito, id_operacion) VALUES (?, ?, ?)");
+                $stmt->bind_param("ssi", $titulo, $escrito, $id);
+            }
+
+            if ($stmt->execute()) {
+                header("Location: editar.php?id=".$id."&id_grupo_trabajadores=".$id_grupo_trabajadores);
+            } else {
+                echo "Error en nota: " . $conn->error;
+            }
+        } else {
+            header("Location: editar.php?id=".$id."&id_grupo_trabajadores=".$id_grupo_trabajadores);
+        }
+        exit;
+    }
 }
 ?>
 
@@ -177,10 +208,38 @@ required>
 </div>
 
 <div class="col-12 mt-3">
-<button type="submit" class="btn btn-sm btn-warning">
+<button type="submit" name="btn_actualizar_operacion" class="btn btn-sm btn-warning">
     <i class="bi bi-arrow-repeat"></i> Actualizar trabajo realizado y estatus
 </button>
 </div>
+
+<p class="d-inline-flex gap-1 mt-4">
+  <a class="btn btn-info" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Agregar o editar nota?
+  </a>
+</p>
+<div class="collapse" id="collapseExample">
+<div class="card card-body border-info">
+  <div class="col-md-6 mb-3">
+    <label class="form-label">T&iacute;tulo de la nota</label>
+    <input type="text" name="titulo" class="form-control" 
+                   value="<?= isset($nota['titulo']) ? htmlspecialchars($nota['titulo']) : ''; ?>">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Descripci&oacute;n</label>
+    <textarea class="form-control" name="escrito" style="height: 100px"><?= isset($nota['escrito']) ? htmlspecialchars($nota['escrito']) : ''; ?></textarea>
+  </div>
+
+  <div class="col-12 mt-3">
+    <button type="submit" name="btn_actualizar_nota" class="btn btn-sm btn-success">
+        <i class="bi bi-journal-check"></i> Guardar nota
+    </button>
+  </div>
+</div>
+</div>
+
+</form>
 
 <h4 class="col-12">Lista de trabajadores en la operaci&oacute;n</h4>
 
@@ -362,7 +421,7 @@ class="btn btn-sm btn-danger">
 
 <td><?= htmlspecialchars($row['nombre']); ?></td>
 
-<td><?= htmlspecialchars($row['cantidad']); ?></td>
+<td><span id="cantidad-<?= $row['id_producto']; ?>"><?= htmlspecialchars($row['cantidad']); ?></span></td>
 
 <td><?= htmlspecialchars($row['conservado']); ?></td>
 
@@ -455,8 +514,6 @@ class="btn btn-sm btn-danger">
 </div>
 </div>
 
-</form>
-
 </div>
 </div>
 
@@ -476,10 +533,11 @@ function quitarTrabajador(id, grupo_trabajadores) {
 
     if (!confirm("¿Seguro que quieres quitar este trabajador?")) return;
 
-    sessionStorage.setItem('scrollPos', window.scrollY);
-
     fetch(`eliminar_trabajador.php?id=${id}&grupo=${grupo_trabajadores}`)
     .then(res => res.text())
+    .then(() => {
+        location.reload();
+    });
 }
 
 function quitarProducto(id, grupo_productos, id_operacion) {
@@ -514,11 +572,13 @@ function actualizarCantidad(id, accion, grupo_productos){
     .then(cantidad => {
         if(cantidad.startsWith("ERROR")){
             alert(cantidad); 
-			location.reload();
             return;
         }
-		location.reload();
-        document.getElementById("cantidad-" + id).innerText = cantidad;
+        // ACTUALIZACIÓN LOCAL: Buscamos el ID que creamos arriba y cambiamos su texto
+        const spanCantidad = document.getElementById("cantidad-" + id);
+        if(spanCantidad) {
+            spanCantidad.innerText = cantidad;
+        }
     })
     .catch(error => console.error('Error:', error));
 }

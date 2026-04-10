@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-04-2026 a las 23:03:36
+-- Tiempo de generación: 10-04-2026 a las 20:53:06
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -76,10 +76,14 @@ INSERT INTO `grupos_materiales` (`id_grupo_materiales`, `fecha_creacion`) VALUES
 ('2XXTFT78', '2026-03-17 20:59:36'),
 ('3XXTFT98', '2026-03-17 20:59:36'),
 ('4XXTFT91', '2026-03-17 20:59:36'),
+('DiOYBT5q', '2026-04-10 18:02:44'),
 ('kykAnKNc', '2026-04-06 19:13:35'),
 ('Lfw9sHXp', '2026-04-06 19:12:48'),
+('m1AuZFlD', '2026-04-09 21:22:10'),
+('MkAPdm0o', '2026-04-09 20:58:52'),
 ('MRT0lai7', '2026-04-06 21:52:13'),
 ('ne5VIHWP', '2026-04-06 19:20:30'),
+('Qz74N14I', '2026-04-10 18:37:03'),
 ('zhK5PNqo', '2026-04-06 19:14:44');
 
 -- --------------------------------------------------------
@@ -102,10 +106,14 @@ INSERT INTO `grupos_productos` (`id_grupo_productos`, `fecha_creacion`) VALUES
 ('2XXTFT78', '2026-03-17 20:59:36'),
 ('3XXTFT98', '2026-03-17 20:59:36'),
 ('4XXTFT91', '2026-03-17 20:59:36'),
+('DiOYBT5q', '2026-04-10 18:02:44'),
 ('kykAnKNc', '2026-04-06 19:13:35'),
 ('Lfw9sHXp', '2026-04-06 19:12:48'),
+('m1AuZFlD', '2026-04-09 21:22:10'),
+('MkAPdm0o', '2026-04-09 20:58:52'),
 ('MRT0lai7', '2026-04-06 21:52:13'),
 ('ne5VIHWP', '2026-04-06 19:20:30'),
+('Qz74N14I', '2026-04-10 18:37:03'),
 ('zhK5PNqo', '2026-04-06 19:14:44');
 
 -- --------------------------------------------------------
@@ -128,10 +136,14 @@ INSERT INTO `grupos_trabajadores` (`id_grupo_trabajadores`, `fecha_creacion`) VA
 ('2XXTFT78', '2026-03-17 20:58:11'),
 ('3XXTFT98', '2026-03-17 20:58:11'),
 ('4XXTFT91', '2026-03-17 20:58:11'),
+('DiOYBT5q', '2026-04-10 18:02:44'),
 ('kykAnKNc', '2026-04-06 19:13:35'),
 ('Lfw9sHXp', '2026-04-06 19:12:48'),
+('m1AuZFlD', '2026-04-09 21:22:10'),
+('MkAPdm0o', '2026-04-09 20:58:52'),
 ('MRT0lai7', '2026-04-06 21:52:13'),
 ('ne5VIHWP', '2026-04-06 19:20:30'),
+('Qz74N14I', '2026-04-10 18:37:03'),
 ('zhK5PNqo', '2026-04-06 19:14:44');
 
 -- --------------------------------------------------------
@@ -160,10 +172,22 @@ INSERT INTO `grupo_materiales` (`id_grupo_materiales`, `id_material`, `cantidad`
 ('3XXTFT98', 5, 1),
 ('3XXTFT98', 7, 2),
 ('3XXTFT98', 8, 3),
+('3XXTFT98', 9, 20),
+('3XXTFT98', 11, 20),
+('3XXTFT98', 12, 22),
+('3XXTFT98', 13, 10),
 ('4XXTFT91', 2, 9),
 ('4XXTFT91', 3, 8),
 ('4XXTFT91', 9, 7),
-('ne5VIHWP', 5, 11);
+('Lfw9sHXp', 3, 1),
+('Lfw9sHXp', 18, 1),
+('MkAPdm0o', 2, 4),
+('MkAPdm0o', 6, 20),
+('ne5VIHWP', 5, 11),
+('Qz74N14I', 1, 11),
+('Qz74N14I', 2, 2),
+('Qz74N14I', 4, 9),
+('Qz74N14I', 11, 3);
 
 --
 -- Disparadores `grupo_materiales`
@@ -249,16 +273,37 @@ INSERT INTO `grupo_productos` (`id_grupo_productos`, `id_producto`, `cantidad`) 
 ('2XXTFT78', 7, 26),
 ('2XXTFT78', 8, 6),
 ('2XXTFT78', 9, 6),
+('3XXTFT98', 3, 0),
 ('3XXTFT98', 6, 8),
+('3XXTFT98', 7, 0),
+('3XXTFT98', 8, 0),
 ('3XXTFT98', 9, 4),
+('3XXTFT98', 10, 0),
+('3XXTFT98', 11, 0),
+('3XXTFT98', 12, 0),
+('3XXTFT98', 13, 0),
 ('4XXTFT91', 7, 1),
 ('4XXTFT91', 11, 2),
 ('4XXTFT91', 14, 1),
+('Lfw9sHXp', 7, 2),
+('Lfw9sHXp', 8, 1),
+('Lfw9sHXp', 9, 1),
+('Lfw9sHXp', 10, 0),
+('Lfw9sHXp', 18, 2),
+('MkAPdm0o', 6, 0),
+('MkAPdm0o', 7, 0),
+('MkAPdm0o', 8, 0),
+('MkAPdm0o', 9, 0),
+('MkAPdm0o', 10, 0),
 ('ne5VIHWP', 6, 9),
 ('ne5VIHWP', 8, 2),
 ('ne5VIHWP', 9, 3),
 ('ne5VIHWP', 10, 1),
-('ne5VIHWP', 11, 2);
+('ne5VIHWP', 11, 2),
+('Qz74N14I', 7, 6),
+('Qz74N14I', 8, 4),
+('Qz74N14I', 9, 3),
+('Qz74N14I', 10, 3);
 
 --
 -- Disparadores `grupo_productos`
@@ -351,9 +396,22 @@ INSERT INTO `grupo_trabajadores` (`id_grupo_trabajadores`, `id_trabajador`) VALU
 ('3XXTFT98', 3),
 ('3XXTFT98', 4),
 ('3XXTFT98', 9),
+('3XXTFT98', 12),
+('3XXTFT98', 14),
+('3XXTFT98', 16),
+('3XXTFT98', 19),
+('3XXTFT98', 20),
+('3XXTFT98', 21),
 ('4XXTFT91', 1),
 ('4XXTFT91', 3),
 ('4XXTFT91', 4),
+('Lfw9sHXp', 20),
+('Lfw9sHXp', 21),
+('Lfw9sHXp', 22),
+('MkAPdm0o', 1),
+('MkAPdm0o', 3),
+('MkAPdm0o', 12),
+('MkAPdm0o', 13),
 ('ne5VIHWP', 3),
 ('ne5VIHWP', 4),
 ('ne5VIHWP', 5),
@@ -363,7 +421,10 @@ INSERT INTO `grupo_trabajadores` (`id_grupo_trabajadores`, `id_trabajador`) VALU
 ('ne5VIHWP', 19),
 ('ne5VIHWP', 21),
 ('ne5VIHWP', 23),
-('ne5VIHWP', 26);
+('ne5VIHWP', 26),
+('Qz74N14I', 1),
+('Qz74N14I', 3),
+('Qz74N14I', 10);
 
 -- --------------------------------------------------------
 
@@ -384,22 +445,22 @@ CREATE TABLE `material` (
 --
 
 INSERT INTO `material` (`id_material`, `nombre`, `cantidad`, `marca`, `fecha_creacion`) VALUES
-(1, 'Trapiadores largos', 23, 'Generico', '2026-03-10 18:55:11'),
-(2, 'Escobas', 7, 'Generico', '2026-03-10 18:55:11'),
-(3, 'Aspiradoras', 1, 'Kymberly-Clark', '2026-03-10 18:55:11'),
-(4, 'Cubetas', 11, 'Fapsa', '2026-03-10 18:55:11'),
+(1, 'Trapiadores largos', 12, 'Generico', '2026-03-10 18:55:11'),
+(2, 'Escobas', 1, 'Generico', '2026-03-10 18:55:11'),
+(3, 'Aspiradoras', 0, 'Kymberly-Clark', '2026-03-10 18:55:11'),
+(4, 'Cubetas', 2, 'Fapsa', '2026-03-10 18:55:11'),
 (5, 'Recojedores', 0, 'Solprac', '2026-03-10 18:55:11'),
-(6, 'Cepillo para inodoro', 23, 'Tork', '2026-03-10 18:55:11'),
+(6, 'Cepillo para inodoro', 3, 'Tork', '2026-03-10 18:55:11'),
 (7, 'Espátulas', 21, 'Tork', '2026-03-10 18:55:11'),
 (8, 'Plumero extensible', 18, 'Biozone', '2026-03-10 18:55:11'),
-(9, 'Plumero corto', 23, 'Biozone', '2026-03-10 18:55:11'),
+(9, 'Plumero corto', 3, 'Biozone', '2026-03-10 18:55:11'),
 (10, 'Paños de limpieza de microfibra', 33, 'Glade', '2026-03-10 18:55:11'),
-(11, 'Jalador de pisos', 24, 'Oval', '2026-03-10 18:55:11'),
-(12, 'Jalador de vidrios', 54, 'Oval', '2026-03-10 18:55:11'),
-(13, 'Destapacaños', 11, 'Jofel', '2026-03-10 18:55:11'),
+(11, 'Jalador de pisos', 1, 'Oval', '2026-03-10 18:55:11'),
+(12, 'Jalador de vidrios', 32, 'Oval', '2026-03-10 18:55:11'),
+(13, 'Destapacaños', 1, 'Jofel', '2026-03-10 18:55:11'),
 (14, 'Cinta destapacaños', 32, 'Gojo', '2026-03-10 18:55:11'),
 (15, 'Cepillo de limpieza de esquinas', 19, 'Wiese', '2026-03-10 18:55:11'),
-(18, 'Pañuelos de limpieza de algodón', 12, 'TABS', '2026-03-30 21:44:07');
+(18, 'Pañuelos de limpieza de algodón', 11, 'TABS', '2026-03-30 21:44:07');
 
 -- --------------------------------------------------------
 
@@ -409,6 +470,7 @@ INSERT INTO `material` (`id_material`, `nombre`, `cantidad`, `marca`, `fecha_cre
 
 CREATE TABLE `notas` (
   `id_notas` int(11) NOT NULL,
+  `id_operacion` int(11) DEFAULT NULL,
   `titulo` varchar(150) NOT NULL,
   `escrito` varchar(500) DEFAULT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
@@ -418,9 +480,13 @@ CREATE TABLE `notas` (
 -- Volcado de datos para la tabla `notas`
 --
 
-INSERT INTO `notas` (`id_notas`, `titulo`, `escrito`, `fecha_creacion`) VALUES
-(1, 'Cliente criticon', 'El señor antonio es un cliente distinguido que constantemente tiene desacuerdos en la limpieza, se sugiere mantener mucha limpieza y evitar conflictos con el cliente', '2026-04-06 21:15:08'),
-(2, 'Cuidado con el perro', ' La señora Fernanda tiene un pitbull muy bravo se sugiere que se comuniquen primero con la dueña para pedir que lo amarre', '2026-04-06 21:15:08');
+INSERT INTO `notas` (`id_notas`, `id_operacion`, `titulo`, `escrito`, `fecha_creacion`) VALUES
+(1, 4, 'Cliente criticon', 'El señor antonio es un cliente distinguido que constantemente tiene desacuerdos en la limpieza, se sugiere mantener mucha limpieza y evitar conflictos con el cliente', '2026-04-06 21:15:08'),
+(2, 5, 'Cuidado con el perro', ' La señora Fernanda tiene un pitbull muy bravo se sugiere que se comuniquen primero con la dueña para pedir que lo amarre', '2026-04-06 21:15:08'),
+(4, 19, 'Cliente con perro', 'El cliente tiene un pitbull se sugiere ir por la tarde por que en esos tiempos no esta el perro en casa', '2026-04-09 21:22:10'),
+(5, 21, 'Patío con reclamos', 'El patío del cliente esta normalmente siendo muy reclamado por el vecino debido a que dice que se sobrepaso en la construcción del hogar del cliente, se sugiere ignorar y continuar con la limpieza.', '2026-04-10 18:26:55'),
+(6, 18, 'Cliente criticon', 'sadsasdasdsadas', '2026-04-10 18:29:40'),
+(7, 22, 'Casa con techo resbaladizo', 'Se sugiere llevar zapatos especiales para no resbalarse del techo.', '2026-04-10 18:37:44');
 
 -- --------------------------------------------------------
 
@@ -437,7 +503,7 @@ CREATE TABLE `operacion` (
   `id_grupo_materiales` varchar(120) NOT NULL,
   `id_cliente` int(11) NOT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
-  `fecha_finalizacion` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `fecha_finalizacion` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -445,15 +511,19 @@ CREATE TABLE `operacion` (
 --
 
 INSERT INTO `operacion` (`id_operacion`, `trabajo_realizado`, `estatus`, `id_grupo_trabajadores`, `id_grupo_productos`, `id_grupo_materiales`, `id_cliente`, `fecha_creacion`, `fecha_finalizacion`) VALUES
-(4, 'Trabajo de jardineria', 'Terminado', '2XXTFT78', '2XXTFT78', '2XXTFT78', 7, '2026-01-14 21:00:12', '0000-00-00 00:00:00'),
-(5, 'Trabajo de limpieza de patio', 'En proceso', '3XXTFT98', '3XXTFT98', '3XXTFT98', 2, '2026-02-03 21:00:12', '0000-00-00 00:00:00'),
-(6, 'Trabajo de limpieza de vidrios', 'Cancelado', '4XXTFT91', '4XXTFT91', '4XXTFT91', 4, '2026-02-07 15:00:00', '0000-00-00 00:00:00'),
-(10, 'Trabajo de limpieza de auto', 'En proceso', 'Lfw9sHXp', 'Lfw9sHXp', 'Lfw9sHXp', 7, '2026-04-06 19:12:48', '0000-00-00 00:00:00'),
-(11, 'Trabajo de limpieza de baño', 'En proceso', 'kykAnKNc', 'kykAnKNc', 'kykAnKNc', 10, '2026-04-06 19:13:35', '0000-00-00 00:00:00'),
-(12, 'Trabajo de limpieza de baño', 'En proceso', 'zhK5PNqo', 'zhK5PNqo', 'zhK5PNqo', 4, '2026-04-06 19:14:44', '0000-00-00 00:00:00'),
-(13, 'Trabajo de limpieza de baño', 'En proceso', 'ne5VIHWP', 'ne5VIHWP', 'ne5VIHWP', 11, '2026-04-06 19:20:30', '0000-00-00 00:00:00'),
-(14, 'Trabajo de limpieza de patio', 'Cancelado', '0kjPQDSi', '0kjPQDSi', '0kjPQDSi', 7, '2026-04-06 21:00:38', '0000-00-00 00:00:00'),
-(15, 'Trabajo de limpieza de autolavado con toallas', 'En proceso', 'MRT0lai7', 'MRT0lai7', 'MRT0lai7', 1, '2026-04-06 21:52:13', '0000-00-00 00:00:00');
+(4, 'Trabajo de jardineria', 'Terminado', '2XXTFT78', '2XXTFT78', '2XXTFT78', 7, '2026-01-14 21:00:12', '2026-04-09 12:27:00'),
+(5, 'Trabajo de limpieza de patio', 'En proceso', '3XXTFT98', '3XXTFT98', '3XXTFT98', 2, '2026-02-03 21:00:12', '2026-04-01 12:28:00'),
+(6, 'Trabajo de limpieza de vidrios', 'Cancelado', '4XXTFT91', '4XXTFT91', '4XXTFT91', 4, '2026-02-07 15:00:00', '2026-04-05 12:28:24'),
+(10, 'Trabajo de limpieza de auto', 'En proceso', 'Lfw9sHXp', 'Lfw9sHXp', 'Lfw9sHXp', 7, '2026-04-06 19:12:48', '2026-04-07 12:28:37'),
+(11, 'Trabajo de limpieza de baño', 'Terminado', 'kykAnKNc', 'kykAnKNc', 'kykAnKNc', 10, '2026-04-06 19:13:35', '2026-04-07 12:29:07'),
+(12, 'Trabajo de limpieza de baño', 'En proceso', 'zhK5PNqo', 'zhK5PNqo', 'zhK5PNqo', 10, '2026-04-06 19:14:44', '2026-04-07 12:29:16'),
+(13, 'Trabajo de limpieza de baño', 'En proceso', 'ne5VIHWP', 'ne5VIHWP', 'ne5VIHWP', 11, '2026-04-06 19:20:30', '2026-04-07 12:29:24'),
+(14, 'Trabajo de limpieza de patio', 'Cancelado', '0kjPQDSi', '0kjPQDSi', '0kjPQDSi', 7, '2026-04-06 21:00:38', '2026-04-07 12:29:30'),
+(15, 'Trabajo de limpieza de autolavado con toallas', 'En proceso', 'MRT0lai7', 'MRT0lai7', 'MRT0lai7', 1, '2026-04-06 21:52:13', '2026-04-07 12:29:38'),
+(18, 'Trabajo de limpieza de baño', 'Terminado', 'MkAPdm0o', 'MkAPdm0o', 'MkAPdm0o', 1, '2026-04-09 20:58:52', '2026-04-09 14:37:23'),
+(19, 'Limpieza de cochera', 'Terminado', 'm1AuZFlD', 'm1AuZFlD', 'm1AuZFlD', 2, '2026-04-09 21:22:10', '2026-04-09 14:37:32'),
+(21, 'Trabajo de limpieza de almacén de autos viejos', 'En proceso', 'DiOYBT5q', 'DiOYBT5q', 'DiOYBT5q', 3, '2026-04-10 18:02:44', '2026-04-13 11:04:00'),
+(22, 'Trabajo de limpieza de techo', 'En proceso', 'Qz74N14I', 'Qz74N14I', 'Qz74N14I', 10, '2026-04-10 18:37:03', NULL);
 
 -- --------------------------------------------------------
 
@@ -476,19 +546,19 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id_producto`, `nombre`, `cantidad`, `conservado`, `tipo`, `marca`, `fecha_creacion`) VALUES
-(3, 'Blanqueador concentrado', 0, 'Botellas', 'Liquido', 'Clorox', '2026-03-27 18:23:19'),
+(3, 'Blanqueador concentrado', 12, 'Botellas', 'Liquido', 'Clorox', '2026-03-27 18:23:19'),
 (6, 'Gel desmaquillador', 12, 'Frascos', 'Geles', 'Stain Cleaner', '2026-03-27 18:23:19'),
-(7, 'Limpiador de pisos', 0, 'Bolsas', 'Pastillas', 'Wow! Clean', '2026-03-27 18:23:19'),
-(8, 'Toallas desinfectantes', 6, 'Frascos', 'Toallitas humedas', 'Lysol', '2026-03-27 18:23:19'),
-(9, 'Pastillas activas para retrete', 67, 'Tubos', 'Pastillas', 'Harpic', '2026-03-27 18:23:19'),
-(10, 'Limpiador quita sarro de retrete', 18, 'Bolsas', 'Pastillas', 'BeoClean', '2026-03-27 18:23:19'),
+(7, 'Limpiador de pisos', 2, 'Bolsas', 'Pastillas', 'Wow! Clean', '2026-03-27 18:23:19'),
+(8, 'Toallas desinfectantes', 1, 'Frascos', 'Toallitas humedas', 'Lysol', '2026-03-27 18:23:19'),
+(9, 'Pastillas activas para retrete', 63, 'Tubos', 'Pastillas', 'Harpic', '2026-03-27 18:23:19'),
+(10, 'Limpiador quita sarro de retrete', 15, 'Bolsas', 'Pastillas', 'BeoClean', '2026-03-27 18:23:19'),
 (11, 'Discos activos de aromatizante de retrete', 54, 'Tubos', 'Pastillas', 'Pato', '2026-03-27 18:23:19'),
 (12, 'Limpiador de teclados y arranca polvo de aparatos de electrónica', 16, 'Cajas', 'Geles', 'TABS', '2026-03-27 18:23:19'),
 (13, 'Pastillas de tratamiento con cloro para agua', 35, 'Botellas', 'Sprays', 'TABS', '2026-03-27 18:23:19'),
 (14, 'Liquido en cloro', 21, 'Botellas', 'Liquido', 'Cloralex', '2026-03-27 18:23:19'),
 (15, 'Gel de inodoro, 60 sellos de gel para inodoro, 5 tipos de aroma, kit de sellos de gel para limpiador de inodoro', 67, 'Tubos', 'Pastillas', 'KILOSTEP', '2026-03-27 18:23:19'),
 (16, 'Toilet Spray para Antes de IR al baño - Aromatizante para WC - Bloquea Malos olores en el baño no los disimula - Ideal para baños de casa y Oficina', 14, 'Botellas', 'Sprays', 'Scent Colors', '2026-03-27 18:23:19'),
-(18, 'Gel antibacterial Blumen sin fragancia 100 ml, con glicerina y aloe vera, elimina hasta el 99.9% de las bacterias. Limpia y desinfecta tus manos. 70% de alcohol. Sin aroma.', 12, 'Botellas', 'Geles', 'Blumen', '2026-03-27 18:23:19'),
+(18, 'Gel antibacterial Blumen sin fragancia 100 ml, con glicerina y aloe vera, elimina hasta el 99.9% de las bacterias. Limpia y desinfecta tus manos. 70% de alcohol. Sin aroma.', 10, 'Botellas', 'Geles', 'Blumen', '2026-03-27 18:23:19'),
 (19, 'Gel Antibacterial Walfort de 60 mililitros, elimina al instante la suciedad, gérmenes y bacterias con las que se tiene contacto.', 14, 'Botellas', 'Geles', 'Walfort', '2026-03-27 18:23:19'),
 (21, 'Jabón para Trastes, duro contra la grasa, suave con su bolsillo. Deje ollas y sartenes impecables.', 14, 'Botellas', 'Liquido', 'Uline', '2026-03-30 19:37:40');
 
@@ -604,7 +674,8 @@ ALTER TABLE `material`
 -- Indices de la tabla `notas`
 --
 ALTER TABLE `notas`
-  ADD PRIMARY KEY (`id_notas`);
+  ADD PRIMARY KEY (`id_notas`),
+  ADD KEY `fk_operacion_nota` (`id_operacion`);
 
 --
 -- Indices de la tabla `operacion`
@@ -648,13 +719,13 @@ ALTER TABLE `material`
 -- AUTO_INCREMENT de la tabla `notas`
 --
 ALTER TABLE `notas`
-  MODIFY `id_notas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_notas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `operacion`
 --
 ALTER TABLE `operacion`
-  MODIFY `id_operacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_operacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
@@ -692,6 +763,12 @@ ALTER TABLE `grupo_productos`
 ALTER TABLE `grupo_trabajadores`
   ADD CONSTRAINT `fk_RH_grupotrabajadores` FOREIGN KEY (`id_trabajador`) REFERENCES `rh` (`id_trabajador`),
   ADD CONSTRAINT `fk_grupotrabajadores_grupostrabajadores` FOREIGN KEY (`id_grupo_trabajadores`) REFERENCES `grupos_trabajadores` (`id_grupo_trabajadores`);
+
+--
+-- Filtros para la tabla `notas`
+--
+ALTER TABLE `notas`
+  ADD CONSTRAINT `fk_operacion_nota` FOREIGN KEY (`id_operacion`) REFERENCES `operacion` (`id_operacion`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `operacion`

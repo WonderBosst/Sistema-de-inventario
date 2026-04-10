@@ -118,6 +118,7 @@ CREATE TABLE operacion (
     id_grupo_materiales VARCHAR(120) NOT NULL,
     id_cliente INT NOT NULL,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha_finalizacion TIMESTAMP,
     PRIMARY KEY (id_operacion),
     
     CONSTRAINT fk_grupostrabajadores_operacion
@@ -425,14 +426,6 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/WonderBosst/Consultorio.git
 git push -u origin main
-
-
-
-
-
-
-
-
 
 
 

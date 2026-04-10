@@ -95,7 +95,7 @@ try {
 <div class="card shadow rounded-4">
 <div class="card-body">
 
-<form method="POST" class="row g-3">
+<form id="formOperacion" method="POST" class="row g-3">
 
 <div class="col-12">
 
@@ -199,19 +199,41 @@ try {
 
 <script>
 function seleccionarCliente(id, nombre) {
-    // Asigna el id al input hidden
     document.getElementById('id_cliente').value = id;
 
-    // Muestra el mensaje
+   // Muestra el mensaje con estilo de éxito
     const mensaje = document.getElementById('mensaje-cliente');
     mensaje.style.display = 'block';
-    mensaje.textContent = `El cliente: ${nombre} fue seleccionado`;
+    mensaje.classList.remove('alert-info', 'alert-danger');
+    mensaje.classList.add('alert-success');
+    mensaje.innerHTML = `✅ <strong>Cliente seleccionado:</strong> ${nombre}`;
 
-    // Opcional: resalta la fila seleccionada
+    // Resalta la fila seleccionada
     document.querySelectorAll('table tbody tr').forEach(tr => tr.classList.remove('table-primary'));
     const fila = event.target.closest('tr');
     if(fila) fila.classList.add('table-primary');
 }
+
+document.getElementById('formOperacion').addEventListener('submit', function(event) {
+    const idCliente = document.getElementById('id_cliente').value;
+
+    if (!idCliente || idCliente === "" || idCliente === "0") {
+        // DETENEMOS EL ENVÍO
+        event.preventDefault();
+
+        // 1. Alerta nativa del navegador (puedes cambiarla por SweetAlert después)
+        alert("⚠️ ¡Falta información!\n\nPor favor, selecciona un cliente de la lista antes de guardar la operación.");
+
+        // 2. Cambiamos el diseño del mensaje para que resalte en rojo
+        const mensaje = document.getElementById('mensaje-cliente');
+        mensaje.style.display = 'block';
+        mensaje.className = 'alert alert-danger animate__animated animate__shakeX'; // Clase shake si usas animate.css
+        mensaje.innerHTML = "❌ <strong>Error:</strong> No has seleccionado ningún cliente.";
+
+        // 3. Movemos el foco a la tabla de clientes
+        mensaje.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+});
 </script>
 
 <?php include '../includes/footer.php'; ?>
