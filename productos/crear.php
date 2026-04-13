@@ -8,6 +8,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
     $nombre = trim($_POST['nombre']);
 	$cantidad = intval($_POST['cantidad']);
+    $reserva = intval($_POST['reserva']);
+    $medida = $_POST['medida'];
     $conservado = $_POST['conservado'];
 	$tipo = $_POST['tipo'];
 	$marca = $_POST['marca'];
@@ -18,11 +20,11 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     }
 
     $stmt = $conn->prepare("
-        INSERT INTO productos (nombre, cantidad, conservado, tipo, marca)
+        INSERT INTO productos (nombre, cantidad, reserva, medida, conservado, tipo, marca)
         VALUES (?,?,?,?,?)
     ");
 
-    $stmt->bind_param("sisss",$nombre,$cantidad,$conservado,$tipo,$marca);
+    $stmt->bind_param("siissss",$nombre,$cantidad,$reserva,$medida,$conservado,$tipo,$marca);
     $stmt->execute();
 
     header("Location: listar.php?exito=Producto creado correctamente");
@@ -45,12 +47,27 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 <form method="POST" class="row g-3">
 
 <div class="col-12">
-<label class="form-label">Aplicaci&oacute;n</label>
-<input type="text" name="nombre" class="form-control" required>
+  <label class="form-label">
+  Aplicaci&oacute;n 
+  <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Describa para qué sirve el producto. Ejemplo: Limpieza de superficies.">
+  </i>
+</label>
+  <input type="text" name="nombre" class="form-control" required>
 </div>
 
 <div class="col-md-3">
-<label class="form-label">Cantidad</label>
+<label class="form-label">Cantidad
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba en unidades cuantos producto tiene.">
+  </i>
+</label>
 <input type="number" step="0"
 name="cantidad"
 class="form-control"
@@ -58,7 +75,47 @@ required>
 </div>
 
 <div class="col-md-3">
-<label class="form-label">Conservado en:</label>
+<label class="form-label">Reserva por unidad?
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba cuanto pesa por producto en cantidad númerica. Ejemplo: 1 botella igual a 900 ML">
+  </i>
+</label>
+<input type="number" step="0"
+name="reserva"
+class="form-control"
+required>
+</div>
+
+<div class="col-md-3">
+<label class="form-label">Unidad de medida: 
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Seleccione la unidad de medida del producto">
+  </i>
+</label>
+<select name="medida" class="form-select" required>
+<option value="kg">Kilogramos</option>
+<option value="g">Gramos</option>
+<option value="L">Litros</option>
+<option value="ml">Mililitros</option>
+<option value="unidades">Unidades</option>
+</select>
+</div>
+
+<div class="col-md-3">
+<label class="form-label">Conservado en: 
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Seleccione como se conserva el producto">
+  </i>
+</label>
 <select name="conservado" class="form-select" required>
 <option value="Botellas">Botellas</option>
 <option value="Frascos">Frascos</option>
@@ -69,7 +126,14 @@ required>
 </div>
 
 <div class="col-md-3">
-<label class="form-label">Tipo</label>
+<label class="form-label">Tipo
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Seleccione como esta hecho el producto.">
+  </i>
+</label>
 <select name="tipo" class="form-select" required>
 <option value="Sprays">Sprays</option>
 <option value="Geles">Geles</option>
@@ -82,7 +146,14 @@ required>
 </div>
 
 <div class="col-md-3">
-<label class="form-label">Marca</label>
+<label class="form-label">Marca
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba que distribuidor representa el producto.">
+  </i>
+</label>
 <input type="text" name="marca" class="form-control" required>
 </div>
 

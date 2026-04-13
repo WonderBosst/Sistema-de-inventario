@@ -53,6 +53,8 @@ SELECT * FROM productos
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">#</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Aplicaci&oacute;n</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Cantidad</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Reserva</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Medida</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Conservado en:</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Tipo</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Marca</th>
@@ -70,6 +72,10 @@ SELECT * FROM productos
 <td><span id="cantidad-<?= $row['id_producto']; ?>">
     <?= $row['cantidad']; ?>
 </span></td>
+
+<td><?= htmlspecialchars($row['reserva']); ?></td>
+
+<td><?= htmlspecialchars($row['medida']); ?></td>
 
 <td><?= htmlspecialchars($row['conservado']); ?></td>
 
@@ -98,6 +104,10 @@ class="btn btn-warning btn-sm">
 <a href="eliminar.php?id=<?= $row['id_producto'] ?>" 
 class="btn btn-danger btn-sm"
 onclick="return confirm('¿Eliminar producto?')">🗑️</a>
+
+<button class="btn btn-info d-inline-flex align-items-center">
+  <i class="bi bi-info-circle me-2"></i> Informaci&oacute;n
+</button>
 
 </div>
 </td>
