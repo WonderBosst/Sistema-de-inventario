@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-04-2026 a las 20:53:06
+-- Tiempo de generación: 13-04-2026 a las 23:46:02
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -166,8 +166,6 @@ INSERT INTO `grupo_materiales` (`id_grupo_materiales`, `id_material`, `cantidad`
 ('2XXTFT78', 1, 4),
 ('2XXTFT78', 2, 20),
 ('2XXTFT78', 3, 11),
-('2XXTFT78', 4, 23),
-('2XXTFT78', 5, 1),
 ('3XXTFT98', 3, 7),
 ('3XXTFT98', 5, 1),
 ('3XXTFT98', 7, 2),
@@ -269,10 +267,13 @@ CREATE TABLE `grupo_productos` (
 --
 
 INSERT INTO `grupo_productos` (`id_grupo_productos`, `id_producto`, `cantidad`) VALUES
-('2XXTFT78', 3, 10),
-('2XXTFT78', 7, 26),
-('2XXTFT78', 8, 6),
-('2XXTFT78', 9, 6),
+('2XXTFT78', 3, 22),
+('2XXTFT78', 6, 8),
+('2XXTFT78', 7, 12),
+('2XXTFT78', 8, 7),
+('2XXTFT78', 10, 0),
+('2XXTFT78', 11, 0),
+('2XXTFT78', 12, 0),
 ('3XXTFT98', 3, 0),
 ('3XXTFT98', 6, 8),
 ('3XXTFT98', 7, 0),
@@ -387,10 +388,12 @@ INSERT INTO `grupo_trabajadores` (`id_grupo_trabajadores`, `id_trabajador`) VALU
 ('2XXTFT78', 1),
 ('2XXTFT78', 4),
 ('2XXTFT78', 5),
-('2XXTFT78', 12),
+('2XXTFT78', 11),
+('2XXTFT78', 13),
 ('2XXTFT78', 14),
+('2XXTFT78', 16),
 ('2XXTFT78', 17),
-('2XXTFT78', 18),
+('2XXTFT78', 19),
 ('3XXTFT98', 1),
 ('3XXTFT98', 2),
 ('3XXTFT98', 3),
@@ -448,8 +451,8 @@ INSERT INTO `material` (`id_material`, `nombre`, `cantidad`, `marca`, `fecha_cre
 (1, 'Trapiadores largos', 12, 'Generico', '2026-03-10 18:55:11'),
 (2, 'Escobas', 1, 'Generico', '2026-03-10 18:55:11'),
 (3, 'Aspiradoras', 0, 'Kymberly-Clark', '2026-03-10 18:55:11'),
-(4, 'Cubetas', 2, 'Fapsa', '2026-03-10 18:55:11'),
-(5, 'Recojedores', 0, 'Solprac', '2026-03-10 18:55:11'),
+(4, 'Cubetas', 25, 'Fapsa', '2026-03-10 18:55:11'),
+(5, 'Recojedores', 1, 'Solprac', '2026-03-10 18:55:11'),
 (6, 'Cepillo para inodoro', 3, 'Tork', '2026-03-10 18:55:11'),
 (7, 'Espátulas', 21, 'Tork', '2026-03-10 18:55:11'),
 (8, 'Plumero extensible', 18, 'Biozone', '2026-03-10 18:55:11'),
@@ -535,6 +538,8 @@ CREATE TABLE `productos` (
   `id_producto` int(11) NOT NULL,
   `nombre` varchar(250) NOT NULL,
   `cantidad` double DEFAULT NULL,
+  `reserva` double DEFAULT NULL,
+  `medida` varchar(120) DEFAULT NULL,
   `conservado` varchar(120) DEFAULT NULL,
   `tipo` varchar(120) DEFAULT NULL,
   `marca` varchar(120) DEFAULT NULL,
@@ -545,22 +550,22 @@ CREATE TABLE `productos` (
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`id_producto`, `nombre`, `cantidad`, `conservado`, `tipo`, `marca`, `fecha_creacion`) VALUES
-(3, 'Blanqueador concentrado', 12, 'Botellas', 'Liquido', 'Clorox', '2026-03-27 18:23:19'),
-(6, 'Gel desmaquillador', 12, 'Frascos', 'Geles', 'Stain Cleaner', '2026-03-27 18:23:19'),
-(7, 'Limpiador de pisos', 2, 'Bolsas', 'Pastillas', 'Wow! Clean', '2026-03-27 18:23:19'),
-(8, 'Toallas desinfectantes', 1, 'Frascos', 'Toallitas humedas', 'Lysol', '2026-03-27 18:23:19'),
-(9, 'Pastillas activas para retrete', 63, 'Tubos', 'Pastillas', 'Harpic', '2026-03-27 18:23:19'),
-(10, 'Limpiador quita sarro de retrete', 15, 'Bolsas', 'Pastillas', 'BeoClean', '2026-03-27 18:23:19'),
-(11, 'Discos activos de aromatizante de retrete', 54, 'Tubos', 'Pastillas', 'Pato', '2026-03-27 18:23:19'),
-(12, 'Limpiador de teclados y arranca polvo de aparatos de electrónica', 16, 'Cajas', 'Geles', 'TABS', '2026-03-27 18:23:19'),
-(13, 'Pastillas de tratamiento con cloro para agua', 35, 'Botellas', 'Sprays', 'TABS', '2026-03-27 18:23:19'),
-(14, 'Liquido en cloro', 21, 'Botellas', 'Liquido', 'Cloralex', '2026-03-27 18:23:19'),
-(15, 'Gel de inodoro, 60 sellos de gel para inodoro, 5 tipos de aroma, kit de sellos de gel para limpiador de inodoro', 67, 'Tubos', 'Pastillas', 'KILOSTEP', '2026-03-27 18:23:19'),
-(16, 'Toilet Spray para Antes de IR al baño - Aromatizante para WC - Bloquea Malos olores en el baño no los disimula - Ideal para baños de casa y Oficina', 14, 'Botellas', 'Sprays', 'Scent Colors', '2026-03-27 18:23:19'),
-(18, 'Gel antibacterial Blumen sin fragancia 100 ml, con glicerina y aloe vera, elimina hasta el 99.9% de las bacterias. Limpia y desinfecta tus manos. 70% de alcohol. Sin aroma.', 10, 'Botellas', 'Geles', 'Blumen', '2026-03-27 18:23:19'),
-(19, 'Gel Antibacterial Walfort de 60 mililitros, elimina al instante la suciedad, gérmenes y bacterias con las que se tiene contacto.', 14, 'Botellas', 'Geles', 'Walfort', '2026-03-27 18:23:19'),
-(21, 'Jabón para Trastes, duro contra la grasa, suave con su bolsillo. Deje ollas y sartenes impecables.', 14, 'Botellas', 'Liquido', 'Uline', '2026-03-30 19:37:40');
+INSERT INTO `productos` (`id_producto`, `nombre`, `cantidad`, `reserva`, `medida`, `conservado`, `tipo`, `marca`, `fecha_creacion`) VALUES
+(3, 'Blanqueador concentrado', 10, 900, 'ml', 'Botellas', 'Liquido', 'Clorox', '2026-03-27 18:23:19'),
+(6, 'Gel desmaquillador', 4, 600, 'g', 'Frascos', 'Geles', 'Stain Cleaner', '2026-03-27 18:23:19'),
+(7, 'Limpiador de pisos', 16, 7, 'Unidades', 'Bolsas', 'Pastillas', 'Wow! Clean', '2026-03-27 18:23:19'),
+(8, 'Toallas desinfectantes', 6, 8, 'Unidades', 'Frascos', 'Toallitas humedas', 'Lysol', '2026-03-27 18:23:19'),
+(9, 'Pastillas activas para retrete', 69, 7, 'Unidades', 'Tubos', 'Pastillas', 'Harpic', '2026-03-27 18:23:19'),
+(10, 'Limpiador quita sarro de retrete', 15, 7, 'Unidades', 'Bolsas', 'Pastillas', 'BeoClean', '2026-03-27 18:23:19'),
+(11, 'Discos activos de aromatizante de retrete', 54, 7, 'Unidades', 'Tubos', 'Pastillas', 'Pato', '2026-03-27 18:23:19'),
+(12, 'Limpiador de teclados y arranca polvo de aparatos de electrónica', 16, 4, 'Unidades', 'Cajas', 'Geles', 'TABS', '2026-03-27 18:23:19'),
+(13, 'Pastillas de tratamiento con cloro para agua', 35, 12, 'Unidades', 'Bolsas', 'Pastillas', 'TABS', '2026-03-27 18:23:19'),
+(14, 'Liquido en cloro', 21, 1, 'L', 'Botellas', 'Liquido', 'Cloralex', '2026-03-27 18:23:19'),
+(15, 'Gel de inodoro, 60 sellos de gel para inodoro, 5 tipos de aroma, kit de sellos de gel para limpiador de inodoro', 67, 7, 'Unidades', 'Tubos', 'Pastillas', 'KILOSTEP', '2026-03-27 18:23:19'),
+(16, 'Toilet Spray para Antes de IR al baño - Aromatizante para WC - Bloquea Malos olores en el baño no los disimula - Ideal para baños de casa y Oficina', 14, 950, 'ml', 'Botellas', 'Sprays', 'Scent Colors', '2026-03-27 18:23:19'),
+(18, 'Gel antibacterial Blumen sin fragancia 100 ml, con glicerina y aloe vera, elimina hasta el 99.9% de las bacterias. Limpia y desinfecta tus manos. 70% de alcohol. Sin aroma.', 10, 100, 'ml', 'Botellas', 'Geles', 'Blumen', '2026-03-27 18:23:19'),
+(19, 'Gel Antibacterial Walfort de 60 mililitros, elimina al instante la suciedad, gérmenes y bacterias con las que se tiene contacto.', 14, 60, 'ml', 'Botellas', 'Geles', 'Walfort', '2026-03-27 18:23:19'),
+(21, 'Jabón para Trastes, duro contra la grasa, suave con su bolsillo. Deje ollas y sartenes impecables.', 14, 750, 'ml', 'Botellas', 'Liquido', 'Uline', '2026-03-30 19:37:40');
 
 -- --------------------------------------------------------
 

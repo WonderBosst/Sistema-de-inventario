@@ -105,8 +105,15 @@ class="btn btn-warning btn-sm">
 class="btn btn-danger btn-sm"
 onclick="return confirm('¿Eliminar producto?')">🗑️</a>
 
-<button class="btn btn-info d-inline-flex align-items-center">
-  <i class="bi bi-info-circle me-2"></i> Informaci&oacute;n
+<button class="btn btn-info btn-sm btn-info-producto" 
+        data-cantidad="<?= $row['cantidad']; ?>"
+        data-conservado="<?= htmlspecialchars($row['conservado']); ?>"
+        data-nombre="<?= htmlspecialchars($row['nombre']); ?>"
+        data-reserva="<?= htmlspecialchars($row['reserva']); ?>"
+        data-medida="<?= htmlspecialchars($row['medida']); ?>"
+        data-tipo="<?= htmlspecialchars($row['tipo']); ?>"
+        data-marca="<?= htmlspecialchars($row['marca']); ?>">
+    <i class="bi bi-info-circle"></i> Informaci&oacute;n
 </button>
 
 </div>
@@ -122,6 +129,8 @@ onclick="return confirm('¿Eliminar producto?')">🗑️</a>
 </div>
 </div>
 
+<?php include '../includes/footer.php'; ?>
+
 <script>
 function actualizarCantidad(id, accion){
     fetch("actualizar_cantidad.php", {
@@ -135,6 +144,21 @@ function actualizarCantidad(id, accion){
     })
     .catch(error => console.error('Error:', error));
 }
+function actualizarCantidad(id, accion){
+    fetch("actualizar_cantidad.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "id=" + id + "&accion=" + accion
+    })
+    .then(response => response.text())
+    .then(nuevaCantidad => {
+        // 1. Actualiza el texto visual en la tabla
+        $("#cantidad-" + id).text(nuevaCantidad);
+        
+        // 2. ACTUALIZA EL ATRIBUTO EN EL BOTÓN DE INFORMACIÓN
+        // Esto busca el botón dentro de la misma fila (tr) donde está la cantidad
+        $("#cantidad-" + id).closest('tr').find('.btn-info-producto').attr('data-cantidad', nuevaCantidad);
+    })
+    .catch(error => console.error('Error:', error));
+}
 </script>
-
-<?php include '../includes/footer.php'; ?>
