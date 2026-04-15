@@ -298,50 +298,36 @@ class="btn btn-sm btn-danger">
 
 <h4 class="col-12">Datos de cliente</h4>
 
-<table class="table table-hover align-middle small">
-<thead class="table-light">
-<tr>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Nombre</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Apellidos</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Direcci&oacute;n</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Entre calles</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Correo</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Numero Tel&eacute;fonico</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Acciones</th>
-</tr>
-</thead>
-<tbody>
-
-<?php while($row = $result_cliente->fetch_assoc()): ?>
-
-<td id="cliente-nombre"><?= htmlspecialchars($row['nombre']); ?></td>
-
-<td id="cliente-apellidos"><?= htmlspecialchars($row['apellidos']); ?></td>
-
-<td id="cliente-direccion"><?= htmlspecialchars($row['direccion']); ?></td>
-
-<td id="cliente-entre_calles"><?= htmlspecialchars($row['entre_calles']); ?></td>
-
-<td id="cliente-correo"><?= htmlspecialchars($row['correo']); ?></td>
-
-<td id="cliente-numero_telefonico"><?= htmlspecialchars($row['numero_telefonico']); ?></td>
-
-<td>
-<a 
-  class="btn btn-sm btn-warning"
-  data-bs-toggle="collapse"
-  href="#collapseCliente"
-  role="button"
-  aria-expanded="false"
-  aria-controls="collapseCliente">
-  <i class="bi bi-arrow-counterclockwise"></i> Cambiar
-</a>
-</td>
-
-<?php endwhile; ?>
-
-</tbody>
-</table>
+<div class="table-responsive">
+    <table class="table table-hover align-middle small">
+        <thead class="table-light">
+            <tr>
+                <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Nombre</th>
+                <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Apellidos</th>
+                <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Direcci&oacute;n</th>
+                <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Entre calles</th>
+                <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Correo</th>
+                <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Numero Tel&eacute;fonico</th>
+                <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while($row = $result_cliente->fetch_assoc()): ?>
+            <tr> <td id="cliente-nombre"><?= htmlspecialchars($row['nombre']); ?></td>
+                <td id="cliente-apellidos"><?= htmlspecialchars($row['apellidos']); ?></td>
+                <td id="cliente-direccion"><?= htmlspecialchars($row['direccion']); ?></td>
+                <td id="cliente-entre_calles"><?= htmlspecialchars($row['entre_calles']); ?></td>
+                <td id="cliente-correo"><?= htmlspecialchars($row['correo']); ?></td>
+                <td id="cliente-numero_telefonico"><?= htmlspecialchars($row['numero_telefonico']); ?></td>
+                <td>
+                    <a class="btn btn-sm btn-warning" data-bs-toggle="collapse" href="#collapseCliente" role="button">
+                        <i class="bi bi-arrow-counterclockwise"></i> Cambiar
+                    </a>
+                </td>
+            </tr> <?php endwhile; ?>
+        </tbody>
+    </table>
+</div>
 
 <div class="collapse mt-3" id="collapseCliente">
   <div class="card card-body" style="max-height: 400px; overflow-y: auto;">
@@ -431,7 +417,7 @@ class="btn btn-sm btn-danger">
 
 
 <td class="text-center">
-<div class="d-flex flex-column flex-sm-row justify-content-center gap-1">
+<div class="d-flex flex-row flex-sm-row justify-content-center gap-1">
 
 <button class="btn btn-success btn-sm"
         data-id="<?= $row['id_producto']; ?>"

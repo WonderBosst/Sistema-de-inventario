@@ -72,7 +72,7 @@ SELECT * FROM material
 <td><?= htmlspecialchars($row['marca']); ?></td>
 
 <td class="text-center">
-<div class="d-flex flex-column flex-sm-row justify-content-center gap-1">
+<div class="d-flex flex-row flex-sm-row justify-content-center gap-1">
 
 <button class="btn btn-success btn-sm"
         onclick="actualizarCantidad(<?= $row['id_material']; ?>,'sumar')">

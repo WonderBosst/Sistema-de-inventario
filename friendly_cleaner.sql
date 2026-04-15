@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-04-2026 a las 23:46:02
+-- Tiempo de generación: 15-04-2026 a las 20:10:46
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -155,37 +155,39 @@ INSERT INTO `grupos_trabajadores` (`id_grupo_trabajadores`, `fecha_creacion`) VA
 CREATE TABLE `grupo_materiales` (
   `id_grupo_materiales` varchar(120) NOT NULL,
   `id_material` int(11) NOT NULL,
-  `cantidad` int(11) DEFAULT NULL
+  `cantidad` int(11) DEFAULT NULL,
+  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
+  `ultima_actualizacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `grupo_materiales`
 --
 
-INSERT INTO `grupo_materiales` (`id_grupo_materiales`, `id_material`, `cantidad`) VALUES
-('2XXTFT78', 1, 4),
-('2XXTFT78', 2, 20),
-('2XXTFT78', 3, 11),
-('3XXTFT98', 3, 7),
-('3XXTFT98', 5, 1),
-('3XXTFT98', 7, 2),
-('3XXTFT98', 8, 3),
-('3XXTFT98', 9, 20),
-('3XXTFT98', 11, 20),
-('3XXTFT98', 12, 22),
-('3XXTFT98', 13, 10),
-('4XXTFT91', 2, 9),
-('4XXTFT91', 3, 8),
-('4XXTFT91', 9, 7),
-('Lfw9sHXp', 3, 1),
-('Lfw9sHXp', 18, 1),
-('MkAPdm0o', 2, 4),
-('MkAPdm0o', 6, 20),
-('ne5VIHWP', 5, 11),
-('Qz74N14I', 1, 11),
-('Qz74N14I', 2, 2),
-('Qz74N14I', 4, 9),
-('Qz74N14I', 11, 3);
+INSERT INTO `grupo_materiales` (`id_grupo_materiales`, `id_material`, `cantidad`, `fecha_creacion`, `ultima_actualizacion`) VALUES
+('2XXTFT78', 1, 4, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
+('2XXTFT78', 2, 20, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
+('2XXTFT78', 3, 11, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
+('3XXTFT98', 3, 7, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
+('3XXTFT98', 5, 1, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
+('3XXTFT98', 7, 2, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
+('3XXTFT98', 8, 3, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
+('3XXTFT98', 9, 20, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
+('3XXTFT98', 11, 20, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
+('3XXTFT98', 12, 22, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
+('3XXTFT98', 13, 10, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
+('4XXTFT91', 2, 9, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
+('4XXTFT91', 3, 8, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
+('4XXTFT91', 9, 7, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
+('Lfw9sHXp', 3, 1, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
+('Lfw9sHXp', 18, 1, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
+('MkAPdm0o', 2, 4, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
+('MkAPdm0o', 6, 20, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
+('ne5VIHWP', 5, 11, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
+('Qz74N14I', 1, 11, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
+('Qz74N14I', 2, 2, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
+('Qz74N14I', 4, 9, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
+('Qz74N14I', 11, 3, '2026-04-15 18:02:25', '2026-04-15 18:03:27');
 
 --
 -- Disparadores `grupo_materiales`
@@ -259,52 +261,54 @@ DELIMITER ;
 CREATE TABLE `grupo_productos` (
   `id_grupo_productos` varchar(120) NOT NULL,
   `id_producto` int(11) NOT NULL,
-  `cantidad` double DEFAULT NULL
+  `cantidad` double DEFAULT NULL,
+  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
+  `ultima_actualizacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `grupo_productos`
 --
 
-INSERT INTO `grupo_productos` (`id_grupo_productos`, `id_producto`, `cantidad`) VALUES
-('2XXTFT78', 3, 22),
-('2XXTFT78', 6, 8),
-('2XXTFT78', 7, 12),
-('2XXTFT78', 8, 7),
-('2XXTFT78', 10, 0),
-('2XXTFT78', 11, 0),
-('2XXTFT78', 12, 0),
-('3XXTFT98', 3, 0),
-('3XXTFT98', 6, 8),
-('3XXTFT98', 7, 0),
-('3XXTFT98', 8, 0),
-('3XXTFT98', 9, 4),
-('3XXTFT98', 10, 0),
-('3XXTFT98', 11, 0),
-('3XXTFT98', 12, 0),
-('3XXTFT98', 13, 0),
-('4XXTFT91', 7, 1),
-('4XXTFT91', 11, 2),
-('4XXTFT91', 14, 1),
-('Lfw9sHXp', 7, 2),
-('Lfw9sHXp', 8, 1),
-('Lfw9sHXp', 9, 1),
-('Lfw9sHXp', 10, 0),
-('Lfw9sHXp', 18, 2),
-('MkAPdm0o', 6, 0),
-('MkAPdm0o', 7, 0),
-('MkAPdm0o', 8, 0),
-('MkAPdm0o', 9, 0),
-('MkAPdm0o', 10, 0),
-('ne5VIHWP', 6, 9),
-('ne5VIHWP', 8, 2),
-('ne5VIHWP', 9, 3),
-('ne5VIHWP', 10, 1),
-('ne5VIHWP', 11, 2),
-('Qz74N14I', 7, 6),
-('Qz74N14I', 8, 4),
-('Qz74N14I', 9, 3),
-('Qz74N14I', 10, 3);
+INSERT INTO `grupo_productos` (`id_grupo_productos`, `id_producto`, `cantidad`, `fecha_creacion`, `ultima_actualizacion`) VALUES
+('2XXTFT78', 3, 22, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('2XXTFT78', 6, 8, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('2XXTFT78', 7, 12, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('2XXTFT78', 8, 7, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('2XXTFT78', 10, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('2XXTFT78', 11, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('2XXTFT78', 12, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('3XXTFT98', 3, 10, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('3XXTFT98', 6, 8, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('3XXTFT98', 7, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('3XXTFT98', 8, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('3XXTFT98', 9, 4, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('3XXTFT98', 10, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('3XXTFT98', 11, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('3XXTFT98', 12, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('3XXTFT98', 13, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('4XXTFT91', 7, 1, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('4XXTFT91', 11, 2, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('4XXTFT91', 14, 1, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('Lfw9sHXp', 7, 2, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('Lfw9sHXp', 8, 1, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('Lfw9sHXp', 9, 1, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('Lfw9sHXp', 10, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('Lfw9sHXp', 18, 2, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('MkAPdm0o', 6, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('MkAPdm0o', 7, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('MkAPdm0o', 8, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('MkAPdm0o', 9, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('MkAPdm0o', 10, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('ne5VIHWP', 6, 9, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('ne5VIHWP', 8, 2, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('ne5VIHWP', 9, 3, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('ne5VIHWP', 10, 1, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('ne5VIHWP', 11, 2, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('Qz74N14I', 7, 6, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('Qz74N14I', 8, 4, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('Qz74N14I', 9, 3, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('Qz74N14I', 10, 3, '2026-04-15 18:09:51', '2026-04-15 17:58:50');
 
 --
 -- Disparadores `grupo_productos`
@@ -377,57 +381,59 @@ DELIMITER ;
 
 CREATE TABLE `grupo_trabajadores` (
   `id_grupo_trabajadores` varchar(120) NOT NULL,
-  `id_trabajador` int(11) NOT NULL
+  `id_trabajador` int(11) NOT NULL,
+  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
+  `ultima_actualizacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `grupo_trabajadores`
 --
 
-INSERT INTO `grupo_trabajadores` (`id_grupo_trabajadores`, `id_trabajador`) VALUES
-('2XXTFT78', 1),
-('2XXTFT78', 4),
-('2XXTFT78', 5),
-('2XXTFT78', 11),
-('2XXTFT78', 13),
-('2XXTFT78', 14),
-('2XXTFT78', 16),
-('2XXTFT78', 17),
-('2XXTFT78', 19),
-('3XXTFT98', 1),
-('3XXTFT98', 2),
-('3XXTFT98', 3),
-('3XXTFT98', 4),
-('3XXTFT98', 9),
-('3XXTFT98', 12),
-('3XXTFT98', 14),
-('3XXTFT98', 16),
-('3XXTFT98', 19),
-('3XXTFT98', 20),
-('3XXTFT98', 21),
-('4XXTFT91', 1),
-('4XXTFT91', 3),
-('4XXTFT91', 4),
-('Lfw9sHXp', 20),
-('Lfw9sHXp', 21),
-('Lfw9sHXp', 22),
-('MkAPdm0o', 1),
-('MkAPdm0o', 3),
-('MkAPdm0o', 12),
-('MkAPdm0o', 13),
-('ne5VIHWP', 3),
-('ne5VIHWP', 4),
-('ne5VIHWP', 5),
-('ne5VIHWP', 12),
-('ne5VIHWP', 15),
-('ne5VIHWP', 16),
-('ne5VIHWP', 19),
-('ne5VIHWP', 21),
-('ne5VIHWP', 23),
-('ne5VIHWP', 26),
-('Qz74N14I', 1),
-('Qz74N14I', 3),
-('Qz74N14I', 10);
+INSERT INTO `grupo_trabajadores` (`id_grupo_trabajadores`, `id_trabajador`, `fecha_creacion`, `ultima_actualizacion`) VALUES
+('2XXTFT78', 1, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('2XXTFT78', 4, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('2XXTFT78', 5, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('2XXTFT78', 11, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('2XXTFT78', 13, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('2XXTFT78', 14, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('2XXTFT78', 16, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('2XXTFT78', 17, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('2XXTFT78', 19, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('3XXTFT98', 1, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('3XXTFT98', 2, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('3XXTFT98', 3, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('3XXTFT98', 4, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('3XXTFT98', 9, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('3XXTFT98', 12, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('3XXTFT98', 14, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('3XXTFT98', 16, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('3XXTFT98', 19, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('3XXTFT98', 20, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('3XXTFT98', 21, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('4XXTFT91', 1, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('4XXTFT91', 3, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('4XXTFT91', 4, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('Lfw9sHXp', 20, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('Lfw9sHXp', 21, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('Lfw9sHXp', 22, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('MkAPdm0o', 1, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('MkAPdm0o', 3, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('MkAPdm0o', 12, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('MkAPdm0o', 13, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('ne5VIHWP', 3, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('ne5VIHWP', 4, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('ne5VIHWP', 5, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('ne5VIHWP', 12, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('ne5VIHWP', 15, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('ne5VIHWP', 16, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('ne5VIHWP', 19, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('ne5VIHWP', 21, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('ne5VIHWP', 23, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('ne5VIHWP', 26, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('Qz74N14I', 1, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('Qz74N14I', 3, '2026-04-15 18:05:14', '2026-04-15 18:04:45'),
+('Qz74N14I', 10, '2026-04-15 18:05:14', '2026-04-15 18:04:45');
 
 -- --------------------------------------------------------
 
@@ -551,7 +557,7 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id_producto`, `nombre`, `cantidad`, `reserva`, `medida`, `conservado`, `tipo`, `marca`, `fecha_creacion`) VALUES
-(3, 'Blanqueador concentrado', 10, 900, 'ml', 'Botellas', 'Liquido', 'Clorox', '2026-03-27 18:23:19'),
+(3, 'Blanqueador concentrado', 0, 900, 'ml', 'Botellas', 'Liquido', 'Clorox', '2026-03-27 18:23:19'),
 (6, 'Gel desmaquillador', 4, 600, 'g', 'Frascos', 'Geles', 'Stain Cleaner', '2026-03-27 18:23:19'),
 (7, 'Limpiador de pisos', 16, 7, 'Unidades', 'Bolsas', 'Pastillas', 'Wow! Clean', '2026-03-27 18:23:19'),
 (8, 'Toallas desinfectantes', 6, 8, 'Unidades', 'Frascos', 'Toallitas humedas', 'Lysol', '2026-03-27 18:23:19'),
@@ -561,11 +567,11 @@ INSERT INTO `productos` (`id_producto`, `nombre`, `cantidad`, `reserva`, `medida
 (12, 'Limpiador de teclados y arranca polvo de aparatos de electrónica', 16, 4, 'Unidades', 'Cajas', 'Geles', 'TABS', '2026-03-27 18:23:19'),
 (13, 'Pastillas de tratamiento con cloro para agua', 35, 12, 'Unidades', 'Bolsas', 'Pastillas', 'TABS', '2026-03-27 18:23:19'),
 (14, 'Liquido en cloro', 21, 1, 'L', 'Botellas', 'Liquido', 'Cloralex', '2026-03-27 18:23:19'),
-(15, 'Gel de inodoro, 60 sellos de gel para inodoro, 5 tipos de aroma, kit de sellos de gel para limpiador de inodoro', 67, 7, 'Unidades', 'Tubos', 'Pastillas', 'KILOSTEP', '2026-03-27 18:23:19'),
-(16, 'Toilet Spray para Antes de IR al baño - Aromatizante para WC - Bloquea Malos olores en el baño no los disimula - Ideal para baños de casa y Oficina', 14, 950, 'ml', 'Botellas', 'Sprays', 'Scent Colors', '2026-03-27 18:23:19'),
-(18, 'Gel antibacterial Blumen sin fragancia 100 ml, con glicerina y aloe vera, elimina hasta el 99.9% de las bacterias. Limpia y desinfecta tus manos. 70% de alcohol. Sin aroma.', 10, 100, 'ml', 'Botellas', 'Geles', 'Blumen', '2026-03-27 18:23:19'),
-(19, 'Gel Antibacterial Walfort de 60 mililitros, elimina al instante la suciedad, gérmenes y bacterias con las que se tiene contacto.', 14, 60, 'ml', 'Botellas', 'Geles', 'Walfort', '2026-03-27 18:23:19'),
-(21, 'Jabón para Trastes, duro contra la grasa, suave con su bolsillo. Deje ollas y sartenes impecables.', 14, 750, 'ml', 'Botellas', 'Liquido', 'Uline', '2026-03-30 19:37:40');
+(15, 'Gel de inodoro', 67, 7, 'Unidades', 'Tubos', 'Pastillas', 'KILOSTEP', '2026-03-27 18:23:19'),
+(16, 'Aromatizante para WC', 14, 950, 'ml', 'Botellas', 'Sprays', 'Scent Colors', '2026-03-27 18:23:19'),
+(18, 'Gel antibacterial', 10, 100, 'ml', 'Botellas', 'Geles', 'Blumen', '2026-03-27 18:23:19'),
+(19, 'Gel Antibacterial', 14, 60, 'ml', 'Botellas', 'Geles', 'Walfort', '2026-03-27 18:23:19'),
+(21, 'Jabón para Trastes', 14, 750, 'ml', 'Botellas', 'Liquido', 'Uline', '2026-03-30 19:37:40');
 
 -- --------------------------------------------------------
 

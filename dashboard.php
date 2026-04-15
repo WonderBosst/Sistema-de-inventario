@@ -91,33 +91,16 @@ $rol_usuario = $_SESSION['rol'] ?? '1';
 </div>
 <?php endif; ?>
 
-</div>
-
-<!-- ===== GR�FICO ===== -->
-
 <?php if($rol_usuario == '1'): ?>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-new Chart(document.getElementById('produccionChart'), {
-type: 'bar',
-data: {
-labels: <?= json_encode($labels) ?>,
-datasets: [{
-label: 'Produccion',
-data: <?= json_encode($valores) ?>,
-backgroundColor: '#633123'
-}]
-}
-});
-</script>
+<div class="col-6 col-md-3">
+<a href="estadisticas/vista.php" class="text-decoration-none">
+<div class="card shadow rounded-4 p-4 text-center h-100 hover-scale">
+<i class="bi bi-bar-chart fs-1 text-danger"></i>
+<h6 class="mt-3">Estad&iacute;sticas</h6>
+</div>
+</a>
+</div>
 <?php endif; ?>
-
-<style>
-.hover-scale:hover {
-transform: scale(1.05);
-transition: 0.3s;
-}
-</style>
+</div>
 
 <?php include 'includes/footer.php'; ?>

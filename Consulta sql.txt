@@ -32,6 +32,8 @@ CREATE TABLE productos (
     id_producto INT NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
     cantidad double,
+    reserva double null,
+    medida varchar(120),
     conservado varchar(120),
     tipo varchar(120),
     marca varchar(120),
@@ -431,8 +433,20 @@ git push -u origin main
 if() :?? :??
 
 
+SELECT 
+    T.nombre,
+    COUNT(*) AS total_participaciones
+FROM grupo_trabajadores AS GT INNER JOIN rh as T ON GT.id_trabajador = T.id_trabajador
+WHERE MONTH(GT.fecha_creacion) = 4 
+  AND YEAR(GT.fecha_creacion) = 2026
+GROUP BY T.nombre
+ORDER BY total_participaciones DESC;
 
-
+Selección de mes por operaciones realizadas,
+Selección de productos usados,
+Selección de materiales usados,
+Selección de trabajadores que mas trabajaron,
+Bajo stock,
 
 
 

@@ -72,7 +72,7 @@ SELECT * FROM rh
 <td><?= htmlspecialchars($row['fecha_creacion']); ?></td>
 
 <td class="text-center">
-<div class="d-flex flex-column flex-sm-row justify-content-center gap-1">
+<div class="d-flex flex-row flex-sm-row justify-content-center gap-1">
 
 <a href="editar.php?id=<?= $row['id_trabajador']; ?>" 
 class="btn btn-sm btn-warning">
