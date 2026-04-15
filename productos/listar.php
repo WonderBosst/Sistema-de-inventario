@@ -152,11 +152,9 @@ function actualizarCantidad(id, accion){
     })
     .then(response => response.text())
     .then(nuevaCantidad => {
-        // 1. Actualiza el texto visual en la tabla
+
         $("#cantidad-" + id).text(nuevaCantidad);
         
-        // 2. ACTUALIZA EL ATRIBUTO EN EL BOTÓN DE INFORMACIÓN
-        // Esto busca el botón dentro de la misma fila (tr) donde está la cantidad
         $("#cantidad-" + id).closest('tr').find('.btn-info-producto').attr('data-cantidad', nuevaCantidad);
     })
     .catch(error => console.error('Error:', error));

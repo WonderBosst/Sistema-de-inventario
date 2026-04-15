@@ -65,12 +65,12 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
      style="cursor: pointer; margin-left: 5px;" 
      data-bs-toggle="tooltip" 
      data-bs-placement="top" 
-     title="Escriba en unidades cuantos producto tiene.">
+     title="Escriba en unidades cuantos productos tiene.">
   </i>
 </label>
 <input type="number" step="0"
 name="cantidad"
-class="form-control"
+class="form-control" min="1"
 required>
 </div>
 
@@ -85,7 +85,7 @@ required>
 </label>
 <input type="number" step="0"
 name="reserva"
-class="form-control"
+class="form-control" min="1"
 required>
 </div>
 

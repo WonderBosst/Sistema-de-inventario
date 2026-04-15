@@ -71,3 +71,28 @@ body {
 container.py-3 {
     flex-grow: 1;
 }
+
+@media screen and (max-width: 600px) {
+    /* Ocultar el encabezado real */
+    table thead {
+        display: none;
+    }
+
+    table td {
+        display: block;
+        text-align: right;
+        border-bottom: 1px solid #ddd;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    /* Insertar el nombre de la columna antes del valor */
+    table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        text-align: left;
+        font-weight: bold;
+    }
+}
