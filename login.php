@@ -3,7 +3,7 @@ header('Content-Type: text/html; charset=utf8mb4');
 session_start();
 include 'includes/conexion.php';
 
-// Si ya est¨¢ logueado, redirige al dashboard
+// Si ya estï¿½ï¿½ logueado, redirige al dashboard
 if(isset($_SESSION['user_id'])){
     header("Location: dashboard.php");
     exit();
@@ -15,7 +15,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    $stmt = $conn->prepare("SELECT * FROM RH WHERE correo=? AND rol=1 AND activo=1");
+    $stmt = $conn->prepare("SELECT * FROM rh WHERE correo=? AND rol=1 AND activo=1");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();

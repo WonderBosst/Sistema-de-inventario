@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-04-2026 a las 20:10:46
+-- Tiempo de generación: 20-04-2026 a las 23:17:04
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -271,13 +271,13 @@ CREATE TABLE `grupo_productos` (
 --
 
 INSERT INTO `grupo_productos` (`id_grupo_productos`, `id_producto`, `cantidad`, `fecha_creacion`, `ultima_actualizacion`) VALUES
-('2XXTFT78', 3, 22, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('2XXTFT78', 3, 11, '2026-04-15 18:09:51', '2026-04-15 20:41:57'),
 ('2XXTFT78', 6, 8, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
 ('2XXTFT78', 7, 12, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
 ('2XXTFT78', 8, 7, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('2XXTFT78', 10, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('2XXTFT78', 11, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('2XXTFT78', 12, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('2XXTFT78', 10, 1, '2026-04-15 18:09:51', '2026-04-15 20:35:54'),
+('2XXTFT78', 11, 1, '2026-04-15 18:09:51', '2026-04-15 20:35:55'),
+('2XXTFT78', 12, 1, '2026-04-15 18:09:51', '2026-04-15 20:35:55'),
 ('3XXTFT98', 3, 10, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
 ('3XXTFT98', 6, 8, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
 ('3XXTFT98', 7, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
@@ -286,7 +286,7 @@ INSERT INTO `grupo_productos` (`id_grupo_productos`, `id_producto`, `cantidad`, 
 ('3XXTFT98', 10, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
 ('3XXTFT98', 11, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
 ('3XXTFT98', 12, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('3XXTFT98', 13, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('3XXTFT98', 13, 9, '2026-04-15 18:09:51', '2026-04-15 18:47:44'),
 ('4XXTFT91', 7, 1, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
 ('4XXTFT91', 11, 2, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
 ('4XXTFT91', 14, 1, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
@@ -532,7 +532,7 @@ INSERT INTO `operacion` (`id_operacion`, `trabajo_realizado`, `estatus`, `id_gru
 (18, 'Trabajo de limpieza de baño', 'Terminado', 'MkAPdm0o', 'MkAPdm0o', 'MkAPdm0o', 1, '2026-04-09 20:58:52', '2026-04-09 14:37:23'),
 (19, 'Limpieza de cochera', 'Terminado', 'm1AuZFlD', 'm1AuZFlD', 'm1AuZFlD', 2, '2026-04-09 21:22:10', '2026-04-09 14:37:32'),
 (21, 'Trabajo de limpieza de almacén de autos viejos', 'En proceso', 'DiOYBT5q', 'DiOYBT5q', 'DiOYBT5q', 3, '2026-04-10 18:02:44', '2026-04-13 11:04:00'),
-(22, 'Trabajo de limpieza de techo', 'En proceso', 'Qz74N14I', 'Qz74N14I', 'Qz74N14I', 10, '2026-04-10 18:37:03', NULL);
+(22, 'Trabajo de limpieza de techo', 'En proceso', 'Qz74N14I', 'Qz74N14I', 'Qz74N14I', 10, '2026-04-10 18:37:03', '2026-04-16 12:08:00');
 
 -- --------------------------------------------------------
 
@@ -557,15 +557,15 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id_producto`, `nombre`, `cantidad`, `reserva`, `medida`, `conservado`, `tipo`, `marca`, `fecha_creacion`) VALUES
-(3, 'Blanqueador concentrado', 0, 900, 'ml', 'Botellas', 'Liquido', 'Clorox', '2026-03-27 18:23:19'),
-(6, 'Gel desmaquillador', 4, 600, 'g', 'Frascos', 'Geles', 'Stain Cleaner', '2026-03-27 18:23:19'),
-(7, 'Limpiador de pisos', 16, 7, 'Unidades', 'Bolsas', 'Pastillas', 'Wow! Clean', '2026-03-27 18:23:19'),
+(3, 'Blanqueador concentrado', 18, 900, 'ml', 'Botellas', 'Liquido', 'Clorox', '2026-03-27 18:23:19'),
+(6, 'Gel desmaquillador', 9, 600, 'g', 'Frascos', 'Geles', 'Stain Cleaner', '2026-03-27 18:23:19'),
+(7, 'Limpiador de pisos', 6, 7, 'Unidades', 'Bolsas', 'Pastillas', 'Wow! Clean', '2026-03-27 18:23:19'),
 (8, 'Toallas desinfectantes', 6, 8, 'Unidades', 'Frascos', 'Toallitas humedas', 'Lysol', '2026-03-27 18:23:19'),
 (9, 'Pastillas activas para retrete', 69, 7, 'Unidades', 'Tubos', 'Pastillas', 'Harpic', '2026-03-27 18:23:19'),
-(10, 'Limpiador quita sarro de retrete', 15, 7, 'Unidades', 'Bolsas', 'Pastillas', 'BeoClean', '2026-03-27 18:23:19'),
-(11, 'Discos activos de aromatizante de retrete', 54, 7, 'Unidades', 'Tubos', 'Pastillas', 'Pato', '2026-03-27 18:23:19'),
-(12, 'Limpiador de teclados y arranca polvo de aparatos de electrónica', 16, 4, 'Unidades', 'Cajas', 'Geles', 'TABS', '2026-03-27 18:23:19'),
-(13, 'Pastillas de tratamiento con cloro para agua', 35, 12, 'Unidades', 'Bolsas', 'Pastillas', 'TABS', '2026-03-27 18:23:19'),
+(10, 'Limpiador quita sarro de retrete', 14, 7, 'Unidades', 'Bolsas', 'Pastillas', 'BeoClean', '2026-03-27 18:23:19'),
+(11, 'Discos activos de aromatizante de retrete', 53, 7, 'Unidades', 'Tubos', 'Pastillas', 'Pato', '2026-03-27 18:23:19'),
+(12, 'Limpiador de teclados y arranca polvo de aparatos de electrónica', 15, 4, 'Unidades', 'Cajas', 'Geles', 'TABS', '2026-03-27 18:23:19'),
+(13, 'Pastillas de tratamiento con cloro para agua', 26, 12, 'Unidades', 'Bolsas', 'Pastillas', 'TABS', '2026-03-27 18:23:19'),
 (14, 'Liquido en cloro', 21, 1, 'L', 'Botellas', 'Liquido', 'Cloralex', '2026-03-27 18:23:19'),
 (15, 'Gel de inodoro', 67, 7, 'Unidades', 'Tubos', 'Pastillas', 'KILOSTEP', '2026-03-27 18:23:19'),
 (16, 'Aromatizante para WC', 14, 950, 'ml', 'Botellas', 'Sprays', 'Scent Colors', '2026-03-27 18:23:19'),
@@ -624,7 +624,23 @@ INSERT INTO `rh` (`id_trabajador`, `nombre`, `apellidos`, `rol`, `password`, `ed
 (23, 'Miguel Ángel', 'Ríos Delgado', 0, NULL, 33, 'Colonia: Santa Teresita, Calle: Azucena #150', 'Clavel y Rosa', 'miri@gmail.com', 3112233445, 1, '2026-03-30 20:21:42'),
 (24, 'Patricia', 'López Herrera', 1, 'pat12345', 37, 'Colonia: Las Flores, Calle: Jazmín #200', 'Lirio y Orquídea', 'palo@hotmail.com', 3113344556, 1, '2026-03-30 20:21:42'),
 (25, 'Jorge Luis', 'Vega Castillo', 0, NULL, 28, 'Colonia: Puerta del Sol, Calle: Eclipse #12', 'Sol y Luna', 'jove@gmail.com', 3114455667, 1, '2026-03-30 20:21:42'),
-(26, 'Fernanda', 'Cruz Morales', 0, NULL, 24, 'Colonia: Nuevo Amanecer, Calle: Aurora #88', 'Estrella y Cometa', 'fecr@hotmail.com', 3115566778, 1, '2026-03-30 20:21:42');
+(26, 'Fernanda', 'Cruz Morales', 0, NULL, 24, 'Colonia: Nuevo Amanecer, Calle: Aurora #88', 'Estrella y Cometa', 'fecr@hotmail.com', 3115566778, 1, '2026-03-30 20:21:42'),
+(1001, 'LucyFlores', 'Admin Uno', 1, 'Tech7482', NULL, NULL, NULL, 'LucyFlores@gmail.com', NULL, 1, '2026-04-20 21:14:23'),
+(1002, 'techdomotic', 'Admin Dos', 1, 'Tech7889', NULL, NULL, NULL, 'techdomotic@gmail.com', NULL, 1, '2026-04-20 21:14:23');
+
+--
+-- Disparadores `rh`
+--
+DELIMITER $$
+CREATE TRIGGER `prevent_delete_superadmins` BEFORE DELETE ON `rh` FOR EACH ROW BEGIN
+    -- Si el ID es alguno de los super admins, lanzamos un error
+    IF OLD.id_trabajador IN (1001, 1002) THEN
+        SIGNAL SQLSTATE '45000' 
+        SET MESSAGE_TEXT = 'Error: No se permite eliminar a los Administradores principales del sistema.';
+    END IF;
+END
+$$
+DELIMITER ;
 
 --
 -- Índices para tablas volcadas
@@ -748,7 +764,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `rh`
 --
 ALTER TABLE `rh`
-  MODIFY `id_trabajador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_trabajador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1003;
 
 --
 -- Restricciones para tablas volcadas
