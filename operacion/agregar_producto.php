@@ -110,6 +110,18 @@ $result_productos = $conn->query("
 </form>
 </td>
 
+<td>
+<form method="POST" class="d-flex gap-2 align-items-center">
+    <input type="number" name="cantidad" class="form-control" min="1" style="width: 80px;" required>
+    <input type="hidden" name="id_grupo_materiales" value="<?= $id_grupo_materiales; ?>">
+    <input type="hidden" name="id_material" value="<?= $row['id_material']; ?>">
+    <button type="submit" class="btn btn-sm btn-success">
+        <i class="bi bi-plus-lg"></i> Agregar
+    </button>
+	
+</form>
+</td>
+
 </tr>
 
 <?php $contador++; ?>
