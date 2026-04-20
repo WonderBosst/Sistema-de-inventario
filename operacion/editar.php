@@ -392,7 +392,8 @@ class="btn btn-sm btn-danger">
 <tr>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">#</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Nombre</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Cantidad usada:</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Unidades usadas:</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Porci&oacute;n usada</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Consevado en:</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Tipo</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Marca</th>
