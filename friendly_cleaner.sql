@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-04-2026 a las 23:17:04
+-- Tiempo de generación: 21-04-2026 a las 23:24:17
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -262,6 +262,8 @@ CREATE TABLE `grupo_productos` (
   `id_grupo_productos` varchar(120) NOT NULL,
   `id_producto` int(11) NOT NULL,
   `cantidad` double DEFAULT NULL,
+  `consumido` double DEFAULT NULL,
+  `medida` varchar(150) DEFAULT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
   `ultima_actualizacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -270,45 +272,45 @@ CREATE TABLE `grupo_productos` (
 -- Volcado de datos para la tabla `grupo_productos`
 --
 
-INSERT INTO `grupo_productos` (`id_grupo_productos`, `id_producto`, `cantidad`, `fecha_creacion`, `ultima_actualizacion`) VALUES
-('2XXTFT78', 3, 11, '2026-04-15 18:09:51', '2026-04-15 20:41:57'),
-('2XXTFT78', 6, 8, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('2XXTFT78', 7, 12, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('2XXTFT78', 8, 7, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('2XXTFT78', 10, 1, '2026-04-15 18:09:51', '2026-04-15 20:35:54'),
-('2XXTFT78', 11, 1, '2026-04-15 18:09:51', '2026-04-15 20:35:55'),
-('2XXTFT78', 12, 1, '2026-04-15 18:09:51', '2026-04-15 20:35:55'),
-('3XXTFT98', 3, 10, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('3XXTFT98', 6, 8, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('3XXTFT98', 7, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('3XXTFT98', 8, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('3XXTFT98', 9, 4, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('3XXTFT98', 10, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('3XXTFT98', 11, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('3XXTFT98', 12, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('3XXTFT98', 13, 9, '2026-04-15 18:09:51', '2026-04-15 18:47:44'),
-('4XXTFT91', 7, 1, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('4XXTFT91', 11, 2, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('4XXTFT91', 14, 1, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('Lfw9sHXp', 7, 2, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('Lfw9sHXp', 8, 1, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('Lfw9sHXp', 9, 1, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('Lfw9sHXp', 10, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('Lfw9sHXp', 18, 2, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('MkAPdm0o', 6, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('MkAPdm0o', 7, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('MkAPdm0o', 8, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('MkAPdm0o', 9, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('MkAPdm0o', 10, 0, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('ne5VIHWP', 6, 9, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('ne5VIHWP', 8, 2, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('ne5VIHWP', 9, 3, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('ne5VIHWP', 10, 1, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('ne5VIHWP', 11, 2, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('Qz74N14I', 7, 6, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('Qz74N14I', 8, 4, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('Qz74N14I', 9, 3, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
-('Qz74N14I', 10, 3, '2026-04-15 18:09:51', '2026-04-15 17:58:50');
+INSERT INTO `grupo_productos` (`id_grupo_productos`, `id_producto`, `cantidad`, `consumido`, `medida`, `fecha_creacion`, `ultima_actualizacion`) VALUES
+('2XXTFT78', 3, 11, 0, NULL, '2026-04-15 18:09:51', '2026-04-21 21:23:22'),
+('2XXTFT78', 6, 21, NULL, NULL, '2026-04-15 18:09:51', '2026-04-20 21:33:50'),
+('2XXTFT78', 7, 12, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('2XXTFT78', 8, 7, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('2XXTFT78', 10, 1, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 20:35:54'),
+('2XXTFT78', 11, 1, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 20:35:55'),
+('2XXTFT78', 12, 1, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 20:35:55'),
+('3XXTFT98', 3, 10, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('3XXTFT98', 6, 19, NULL, NULL, '2026-04-15 18:09:51', '2026-04-20 21:33:20'),
+('3XXTFT98', 7, 2, NULL, NULL, '2026-04-15 18:09:51', '2026-04-20 21:45:46'),
+('3XXTFT98', 8, 2, NULL, NULL, '2026-04-15 18:09:51', '2026-04-20 21:45:45'),
+('3XXTFT98', 9, 4, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('3XXTFT98', 10, 0, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('3XXTFT98', 11, 0, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('3XXTFT98', 12, 0, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('3XXTFT98', 13, 9, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 18:47:44'),
+('4XXTFT91', 7, 1, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('4XXTFT91', 11, 2, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('4XXTFT91', 14, 1, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('Lfw9sHXp', 7, 2, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('Lfw9sHXp', 8, 1, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('Lfw9sHXp', 9, 1, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('Lfw9sHXp', 10, 0, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('Lfw9sHXp', 18, 2, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('MkAPdm0o', 6, 0, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('MkAPdm0o', 7, 0, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('MkAPdm0o', 8, 0, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('MkAPdm0o', 9, 0, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('MkAPdm0o', 10, 0, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('ne5VIHWP', 6, 9, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('ne5VIHWP', 8, 2, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('ne5VIHWP', 9, 3, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('ne5VIHWP', 10, 1, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('ne5VIHWP', 11, 2, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('Qz74N14I', 7, 6, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('Qz74N14I', 8, 4, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('Qz74N14I', 9, 3, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('Qz74N14I', 10, 3, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50');
 
 --
 -- Disparadores `grupo_productos`
@@ -558,11 +560,11 @@ CREATE TABLE `productos` (
 
 INSERT INTO `productos` (`id_producto`, `nombre`, `cantidad`, `reserva`, `medida`, `conservado`, `tipo`, `marca`, `fecha_creacion`) VALUES
 (3, 'Blanqueador concentrado', 18, 900, 'ml', 'Botellas', 'Liquido', 'Clorox', '2026-03-27 18:23:19'),
-(6, 'Gel desmaquillador', 9, 600, 'g', 'Frascos', 'Geles', 'Stain Cleaner', '2026-03-27 18:23:19'),
-(7, 'Limpiador de pisos', 6, 7, 'Unidades', 'Bolsas', 'Pastillas', 'Wow! Clean', '2026-03-27 18:23:19'),
-(8, 'Toallas desinfectantes', 6, 8, 'Unidades', 'Frascos', 'Toallitas humedas', 'Lysol', '2026-03-27 18:23:19'),
+(6, 'Gel desmaquillador', 7, 600, 'g', 'Frascos', 'Geles', 'Stain Cleaner', '2026-03-27 18:23:19'),
+(7, 'Limpiador de pisos', 7, 7, 'Unidades', 'Bolsas', 'Pastillas', 'Wow! Clean', '2026-03-27 18:23:19'),
+(8, 'Toallas desinfectantes', 7, 8, 'Unidades', 'Frascos', 'Toallitas humedas', 'Lysol', '2026-03-27 18:23:19'),
 (9, 'Pastillas activas para retrete', 69, 7, 'Unidades', 'Tubos', 'Pastillas', 'Harpic', '2026-03-27 18:23:19'),
-(10, 'Limpiador quita sarro de retrete', 14, 7, 'Unidades', 'Bolsas', 'Pastillas', 'BeoClean', '2026-03-27 18:23:19'),
+(10, 'Limpiador quita sarro de retrete', 7, 7, 'Unidades', 'Bolsas', 'Pastillas', 'BeoClean', '2026-03-27 18:23:19'),
 (11, 'Discos activos de aromatizante de retrete', 53, 7, 'Unidades', 'Tubos', 'Pastillas', 'Pato', '2026-03-27 18:23:19'),
 (12, 'Limpiador de teclados y arranca polvo de aparatos de electrónica', 15, 4, 'Unidades', 'Cajas', 'Geles', 'TABS', '2026-03-27 18:23:19'),
 (13, 'Pastillas de tratamiento con cloro para agua', 26, 12, 'Unidades', 'Bolsas', 'Pastillas', 'TABS', '2026-03-27 18:23:19'),

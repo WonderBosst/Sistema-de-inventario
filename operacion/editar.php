@@ -83,7 +83,9 @@ SELECT C.id_cliente,
 $result_grupo_productos = $conn->query("
 SELECT P.id_producto,
 	   P.nombre, 
-	   GP.cantidad, 
+	   GP.cantidad,
+       GP.consumido,
+       GP.medida, 
 	   P.conservado, 
 	   P.tipo,
 	   P.marca FROM productos AS P INNER JOIN 
@@ -392,7 +394,9 @@ class="btn btn-sm btn-danger">
 <tr>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">#</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Nombre</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Unidades usadas:</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Unidades usadas</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Cantidad usada</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Medida</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Consevado en:</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Tipo</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Marca</th>
@@ -408,6 +412,10 @@ class="btn btn-sm btn-danger">
 <td><?= htmlspecialchars($row['nombre']); ?></td>
 
 <td><span id="cantidad-<?= $row['id_producto']; ?>"><?= htmlspecialchars($row['cantidad']); ?></span></td>
+
+<td><?= htmlspecialchars($row['consumido']); ?></td>
+
+<td><?= htmlspecialchars($row['medida']); ?></td>
 
 <td><?= htmlspecialchars($row['conservado']); ?></td>
 
