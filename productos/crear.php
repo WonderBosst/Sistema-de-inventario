@@ -9,6 +9,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $nombre = trim($_POST['nombre']);
 	$cantidad = intval($_POST['cantidad']);
     $reserva = intval($_POST['reserva']);
+    $total = $cantidad*$reserva;
     $medida = $_POST['medida'];
     $conservado = $_POST['conservado'];
 	$tipo = $_POST['tipo'];
@@ -20,11 +21,11 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     }
 
     $stmt = $conn->prepare("
-        INSERT INTO productos (nombre, cantidad, reserva, medida, conservado, tipo, marca)
-        VALUES (?,?,?,?,?)
+        INSERT INTO productos (nombre, cantidad, reserva, total, medida, conservado, tipo, marca)
+        VALUES (?,?,?,?,?,?,?,?)
     ");
 
-    $stmt->bind_param("siissss",$nombre,$cantidad,$reserva,$medida,$conservado,$tipo,$marca);
+    $stmt->bind_param("siiissss",$nombre,$cantidad,$reserva,$total,$medida,$conservado,$tipo,$marca);
     $stmt->execute();
 
     header("Location: listar.php?exito=Producto creado correctamente");

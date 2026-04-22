@@ -20,6 +20,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $id_grupo_productos = trim($_POST['id_grupo_productos']);
     $id_producto = intval($_POST['id_producto']);
 	$consumido = intval($_POST['consumido']);
+    
 	
 	$stmt = $conn->prepare("
         INSERT INTO grupo_productos (id_grupo_productos, id_producto, consumido, cantidad)
@@ -46,6 +47,8 @@ $result_productos = $conn->query("
     SELECT P.id_producto,
 	   P.nombre, 
        P.cantidad,
+       p.reserva,
+       p.total,
        p.medida,
        P.conservado, 
        P.tipo,
@@ -79,11 +82,20 @@ $result_productos = $conn->query("
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">#</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Nombre</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Cantidad</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Reserva</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Total</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Medida</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Conservado en:</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Tipo</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Marca</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Fecha_creacion</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Agregado
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Agrega la cantidad de producto a usar según la columna total">
+  </i>
+</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Acciones</th>
 </tr>
 </thead>
@@ -96,23 +108,26 @@ $result_productos = $conn->query("
 <td><strong><?= $contador; ?></strong></td>
 <td><?= htmlspecialchars($row['nombre']); ?></td>
 <td><?= htmlspecialchars($row['cantidad']); ?></td>
+<td><?= htmlspecialchars($row['reserva']); ?></td>
+<td><?= htmlspecialchars($row['total']); ?></td>
 <td><?= htmlspecialchars($row['medida']); ?></td>
 <td><?= htmlspecialchars($row['conservado']); ?></td>
 <td><?= htmlspecialchars($row['tipo']); ?></td>
 <td><?= htmlspecialchars($row['marca']); ?></td>
-<td><?= htmlspecialchars($row['fecha_creacion']); ?></td>
 
-<td>
 <form method="POST" class="d-flex gap-2 align-items-center">
-    <input type="number" name="consumido" class="form-control" min="1" style="width: 80px;" required>
+
+<td><input type="number" name="consumido" class="form-control" min="1" style="width: 80px;" required></td>
+<td>
     <input type="hidden" name="id_grupo_productos" value="<?= $id_grupo_productos; ?>">
     <input type="hidden" name="id_producto" value="<?= $row['id_producto']; ?>">
     
     <button type="submit" class="btn btn-sm btn-success">
         <i class="bi bi-plus-lg"></i> Agregar
     </button>
-</form>
+
 </td>
+</form>
 
 </tr>
 

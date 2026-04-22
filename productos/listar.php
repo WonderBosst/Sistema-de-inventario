@@ -54,6 +54,7 @@ SELECT * FROM productos
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Aplicaci&oacute;n</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Cantidad</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Reserva</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Total</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Medida</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Conservado en:</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Tipo</th>
@@ -78,6 +79,8 @@ SELECT * FROM productos
    </td>
 
 <td><?= htmlspecialchars($row['reserva']); ?></td>
+
+<td><?= htmlspecialchars($row['total']); ?></td>
 
 <td><?= htmlspecialchars($row['medida']); ?></td>
 

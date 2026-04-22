@@ -92,7 +92,7 @@ if (intval($id_operacion) > 0) {
 }
 
 if (intval($id_operacion) > 0) {
-    $query = "SELECT P.nombre, GP.cantidad, P.conservado, P.tipo, P.marca 
+    $query = "SELECT P.nombre, GP.cantidad, GP.consumido, P.medida, P.conservado, P.tipo, P.marca 
               FROM productos AS P 
               INNER JOIN grupo_productos AS GP ON GP.id_producto = P.id_producto 
               INNER JOIN grupos_productos AS GSP ON GSP.id_grupo_productos = GP.id_grupo_productos 
@@ -108,7 +108,9 @@ if (intval($id_operacion) > 0) {
             <thead>
                 <tr>
                     <th>Producto</th>
-                    <th>Cant.</th>
+                    <th>Unidades usadas</th>
+                    <th>Total usado</th>
+                    <th>Medida</th>
                     <th>Tipo</th>
                     <th>Marca</th>
                     <th>Conservado</th>
@@ -121,6 +123,8 @@ if (intval($id_operacion) > 0) {
                 <tr>
                     <td>" . htmlspecialchars($t['nombre']) . "</td>
                     <td style='text-align: center;'>" . htmlspecialchars($t['cantidad']) . "</td>
+                    <td>" . htmlspecialchars($t['total']) . "</td>
+                    <td>" . htmlspecialchars($t['medida']) . "</td>
                     <td>" . htmlspecialchars($t['tipo']) . "</td>
                     <td>" . htmlspecialchars($t['marca']) . "</td>
                     <td>" . htmlspecialchars($t['conservado']) . "</td>

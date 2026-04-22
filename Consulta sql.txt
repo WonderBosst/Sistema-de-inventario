@@ -417,22 +417,6 @@ INSERT INTO notas (titulo, escrito) VALUES ('Cliente criticon', ' El señor anto
 
 
 
-
-
-
-
-echo "# Consultorio" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/WonderBosst/Consultorio.git
-git push -u origin main
-
-
-if() :?? :??
-
-
 SELECT 
     T.nombre,
     COUNT(*) AS total_participaciones
@@ -442,9 +426,64 @@ WHERE MONTH(GT.fecha_creacion) = 4
 GROUP BY T.nombre
 ORDER BY total_participaciones DESC;
 
-Selección de mes por operaciones realizadas,
-Selección de productos usados,
-Selección de materiales usados,
-Selección de trabajadores que mas trabajaron,
-Bajo stock,
+
+
+26 Cajas con 12 unidades cada caja, 
+
+20 unidades de  12 cajas 
+
+69 cajas 7 pastillas tubo 
+
+34 34/7
+
+25
+75/3     34/7
+6        
+__
+15
+15
+__
+0
+
+caso mililitros o gramos
+4200 -1300 = 2900/600 = 4.8333 y 5-7 = 2
+Tabla productos y la tabla grupo_productos 
+
+cantidad, reserva y total  (kg g / L ml / Unidades)
+   7        600     4200     ml
+
+cantidad usada, consumido y medida
+    2              1300     ml
+
+cantidad, reserva y total  (kg g / L ml / Unidades)
+   5        600     2900     ml
+
+caso litros o kilogramos
+(7*1000) - 3300 = 3700/1000 = 3.7 y 4-7 = 3
+Tabla productos y la tabla grupo_productos 
+
+cantidad, reserva y total  (kg g / L ml / Unidades)
+   7        1       7         L
+
+cantidad usada, consumido y medida
+    3              3300     L
+
+cantidad, reserva y total  (kg g / L ml / Unidades)
+   4        1     3.7     ml
+
+caso unidades
+60 - 14 = 46/4 = 11.5 y 12-15 = 3
+Tabla productos y la tabla grupo_productos 
+
+cantidad, reserva y total  (kg g / L ml / Unidades)
+   15        4       60         Unidades
+
+cantidad usada, consumido y medida
+    3              14     Unidades
+
+cantidad, reserva y total  (kg g / L ml / Unidades)
+   12        4     46     ml
+
+INSERT INTO grupo_productos (id_grupo_productos, id_producto, consumido, cantidad)
+        VALUES ('2XXTFT78',13,20,)
 

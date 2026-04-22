@@ -85,7 +85,7 @@ SELECT P.id_producto,
 	   P.nombre, 
 	   GP.cantidad,
        GP.consumido,
-       GP.medida, 
+       P.medida, 
 	   P.conservado, 
 	   P.tipo,
 	   P.marca FROM productos AS P INNER JOIN 
@@ -245,7 +245,7 @@ required>
 
 <h4 class="col-12">Lista de trabajadores en la operaci&oacute;n</h4>
 
-<div class="col-12 mt-3">
+<div class="col-12 mt-3 mb-4">
 	<a href="agregar_trabajador.php?id=<?= $id; ?>&id_grupo_trabajadores=<?= $id_grupo_trabajadores; ?>" 
 	class="btn btn-sm btn-warning">
 	<i class="bi bi-person-plus"></i> Editar listado de trabajadores
@@ -298,7 +298,7 @@ class="btn btn-sm btn-danger">
 </div>
 </div>
 
-<h4 class="col-12">Datos de cliente</h4>
+<h4 class="col-12 mt-4">Datos de cliente</h4>
 
 <div class="table-responsive">
     <table class="table table-hover align-middle small">
@@ -379,7 +379,7 @@ class="btn btn-sm btn-danger">
 
 <h4 class="col-12">Lista de productos en la operaci&oacute;n</h4>
 
-<div class="col-12 mt-3">
+<div class="col-12 mt-3 mb-4">
 	<a href="agregar_producto.php?id=<?= $id; ?>&id_grupo_productos=<?= $id_grupo_trabajadores; ?>"  
 	class="btn btn-sm btn-warning">
 	<i class="bi bi-cart-plus"></i> Editar listado de productos
@@ -395,7 +395,7 @@ class="btn btn-sm btn-danger">
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">#</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Nombre</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Unidades usadas</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Cantidad usada</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Total usado</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Medida</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Consevado en:</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Tipo</th>
@@ -427,13 +427,14 @@ class="btn btn-sm btn-danger">
 <td class="text-center">
 <div class="d-flex flex-row flex-sm-row justify-content-center gap-1">
 
-<button class="btn btn-success btn-sm"
+<?php /*<button class="btn btn-success btn-sm"
         data-id="<?= $row['id_producto']; ?>"
         onclick="actualizarCantidad(<?= $row['id_producto']; ?>,'sumar','<?= $id_grupo_trabajadores; ?>' )"><i class="bi bi-plus-lg"></i>
 
 <button class="btn btn-danger btn-sm"
         data-id="<?= $row['id_producto']; ?>"
         onclick="actualizarCantidad(<?= $row['id_producto']; ?>,'restar','<?= $id_grupo_trabajadores; ?>' )"><i class="bi bi-dash-lg"></i>
+*/?>
 
 <button onclick="quitarProducto(<?= $row['id_producto']; ?>, '<?= $id_grupo_trabajadores; ?>', <?= $id; ?>)"
 class="btn btn-sm btn-danger">
@@ -454,9 +455,9 @@ class="btn btn-sm btn-danger">
 </div>
 </div>
 
-<h4 class="col-12">Lista de materiales en la operaci&oacute;n</h4>
+<h4 class="col-12 mt-4">Lista de materiales en la operaci&oacute;n</h4>
 
-<div class="col-12 mt-3">
+<div class="col-12 mt-3 mb-4">
 	<a href="agregar_material.php?id=<?= $id; ?>&id_grupo_materiales=<?= $id_grupo_trabajadores; ?>" 
 	class="btn btn-sm btn-warning">
 	<i class="bi bi-cart-plus"></i> Editar listado de materiales
@@ -556,6 +557,7 @@ function quitarMaterial(id, grupo_material, id_operacion) {
     });
 }
 
+/*
 function actualizarCantidad(id, accion, grupo_productos){
     fetch("actualizar_cantidad.php", {
         method: "POST",
@@ -576,6 +578,7 @@ function actualizarCantidad(id, accion, grupo_productos){
     })
     .catch(error => console.error('Error:', error));
 }
+*/
 
 function selectCliente(idOperacion, idCliente, idGrupoTrabajadores) {
     fetch(`editar.php?id=${idOperacion}&id_cliente=${idCliente}&id_grupo_trabajadores=${idGrupoTrabajadores}&ajax=1`)

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-04-2026 a las 23:24:17
+-- Tiempo de generación: 22-04-2026 a las 23:24:24
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -280,7 +280,6 @@ INSERT INTO `grupo_productos` (`id_grupo_productos`, `id_producto`, `cantidad`, 
 ('2XXTFT78', 10, 1, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 20:35:54'),
 ('2XXTFT78', 11, 1, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 20:35:55'),
 ('2XXTFT78', 12, 1, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 20:35:55'),
-('3XXTFT98', 3, 10, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
 ('3XXTFT98', 6, 19, NULL, NULL, '2026-04-15 18:09:51', '2026-04-20 21:33:20'),
 ('3XXTFT98', 7, 2, NULL, NULL, '2026-04-15 18:09:51', '2026-04-20 21:45:46'),
 ('3XXTFT98', 8, 2, NULL, NULL, '2026-04-15 18:09:51', '2026-04-20 21:45:45'),
@@ -547,6 +546,7 @@ CREATE TABLE `productos` (
   `nombre` varchar(250) NOT NULL,
   `cantidad` double DEFAULT NULL,
   `reserva` double DEFAULT NULL,
+  `total` double DEFAULT NULL,
   `medida` varchar(120) DEFAULT NULL,
   `conservado` varchar(120) DEFAULT NULL,
   `tipo` varchar(120) DEFAULT NULL,
@@ -558,22 +558,23 @@ CREATE TABLE `productos` (
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`id_producto`, `nombre`, `cantidad`, `reserva`, `medida`, `conservado`, `tipo`, `marca`, `fecha_creacion`) VALUES
-(3, 'Blanqueador concentrado', 18, 900, 'ml', 'Botellas', 'Liquido', 'Clorox', '2026-03-27 18:23:19'),
-(6, 'Gel desmaquillador', 7, 600, 'g', 'Frascos', 'Geles', 'Stain Cleaner', '2026-03-27 18:23:19'),
-(7, 'Limpiador de pisos', 7, 7, 'Unidades', 'Bolsas', 'Pastillas', 'Wow! Clean', '2026-03-27 18:23:19'),
-(8, 'Toallas desinfectantes', 7, 8, 'Unidades', 'Frascos', 'Toallitas humedas', 'Lysol', '2026-03-27 18:23:19'),
-(9, 'Pastillas activas para retrete', 69, 7, 'Unidades', 'Tubos', 'Pastillas', 'Harpic', '2026-03-27 18:23:19'),
-(10, 'Limpiador quita sarro de retrete', 7, 7, 'Unidades', 'Bolsas', 'Pastillas', 'BeoClean', '2026-03-27 18:23:19'),
-(11, 'Discos activos de aromatizante de retrete', 53, 7, 'Unidades', 'Tubos', 'Pastillas', 'Pato', '2026-03-27 18:23:19'),
-(12, 'Limpiador de teclados y arranca polvo de aparatos de electrónica', 15, 4, 'Unidades', 'Cajas', 'Geles', 'TABS', '2026-03-27 18:23:19'),
-(13, 'Pastillas de tratamiento con cloro para agua', 26, 12, 'Unidades', 'Bolsas', 'Pastillas', 'TABS', '2026-03-27 18:23:19'),
-(14, 'Liquido en cloro', 21, 1, 'L', 'Botellas', 'Liquido', 'Cloralex', '2026-03-27 18:23:19'),
-(15, 'Gel de inodoro', 67, 7, 'Unidades', 'Tubos', 'Pastillas', 'KILOSTEP', '2026-03-27 18:23:19'),
-(16, 'Aromatizante para WC', 14, 950, 'ml', 'Botellas', 'Sprays', 'Scent Colors', '2026-03-27 18:23:19'),
-(18, 'Gel antibacterial', 10, 100, 'ml', 'Botellas', 'Geles', 'Blumen', '2026-03-27 18:23:19'),
-(19, 'Gel Antibacterial', 14, 60, 'ml', 'Botellas', 'Geles', 'Walfort', '2026-03-27 18:23:19'),
-(21, 'Jabón para Trastes', 14, 750, 'ml', 'Botellas', 'Liquido', 'Uline', '2026-03-30 19:37:40');
+INSERT INTO `productos` (`id_producto`, `nombre`, `cantidad`, `reserva`, `total`, `medida`, `conservado`, `tipo`, `marca`, `fecha_creacion`) VALUES
+(3, 'Blanqueador concentrado', 28, 900, 16200, 'ml', 'Botellas', 'Liquido', 'Clorox', '2026-03-27 18:23:19'),
+(6, 'Gel desmaquillador', 7, 600, 4200, 'g', 'Frascos', 'Geles', 'Stain Cleaner', '2026-03-27 18:23:19'),
+(7, 'Limpiador de pisos', 7, 7, 49, 'Unidades', 'Bolsas', 'Pastillas', 'Wow! Clean', '2026-03-27 18:23:19'),
+(8, 'Toallas desinfectantes', 7, 8, 56, 'Unidades', 'Frascos', 'Toallitas humedas', 'Lysol', '2026-03-27 18:23:19'),
+(9, 'Pastillas activas para retrete', 69, 7, 483, 'Unidades', 'Tubos', 'Pastillas', 'Harpic', '2026-03-27 18:23:19'),
+(10, 'Limpiador quita sarro de retrete', 7, 7, 49, 'Unidades', 'Bolsas', 'Pastillas', 'BeoClean', '2026-03-27 18:23:19'),
+(11, 'Discos activos de aromatizante de retrete', 53, 7, 371, 'Unidades', 'Tubos', 'Pastillas', 'Pato', '2026-03-27 18:23:19'),
+(12, 'Limpiador de teclados y arranca polvo de aparatos de electrónica', 15, 4, 60, 'Unidades', 'Cajas', 'Geles', 'TABS', '2026-03-27 18:23:19'),
+(13, 'Pastillas de tratamiento con cloro para agua', 26, 12, 312, 'Unidades', 'Bolsas', 'Pastillas', 'TABS', '2026-03-27 18:23:19'),
+(14, 'Liquido en cloro', 21, 1, 21, 'L', 'Botellas', 'Liquido', 'Cloralex', '2026-03-27 18:23:19'),
+(15, 'Gel de inodoro', 67, 7, 469, 'Unidades', 'Tubos', 'Pastillas', 'KILOSTEP', '2026-03-27 18:23:19'),
+(16, 'Aromatizante para WC', 14, 950, 13300, 'ml', 'Botellas', 'Sprays', 'Scent Colors', '2026-03-27 18:23:19'),
+(18, 'Gel antibacterial', 10, 100, 1000, 'ml', 'Botellas', 'Geles', 'Blumen', '2026-03-27 18:23:19'),
+(19, 'Gel Antibacterial', 14, 60, 840, 'ml', 'Botellas', 'Geles', 'Walfort', '2026-03-27 18:23:19'),
+(21, 'Jabón para Trastes', 14, 750, 10500, 'ml', 'Botellas', 'Liquido', 'Uline', '2026-03-30 19:37:40'),
+(22, 'Desinfectante de baños', 14, 950, 13300, 'ml', 'Botellas', 'Sprays', 'Jhonson', '2026-04-22 19:21:13');
 
 -- --------------------------------------------------------
 
@@ -760,7 +761,7 @@ ALTER TABLE `operacion`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `rh`

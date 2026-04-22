@@ -1,7 +1,7 @@
 </div>
 <footer class="footer mt-auto py-3" style="background-color: #268db5; margin-top: auto;">
   <div class="container text-center">
-    <span class="text-white">© 2026 EcoFriendlySolutions</span>
+    <span class="text-white">© 2026 EcoFriendlySolutions - Creado por TechDomotic</span>
   </div>
 </footer>
 <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
