@@ -25,7 +25,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         VALUES (?,?,?,?,?,?,?,?)
     ");
 
-    $stmt->bind_param("siiissss",$nombre,$cantidad,$reserva,$total,$medida,$conservado,$tipo,$marca);
+    $stmt->bind_param("siiissssi",$nombre,$cantidad,$reserva,$total,$medida,$conservado,$tipo,$marca);
     $stmt->execute();
 
     header("Location: listar.php?exito=Producto creado correctamente");

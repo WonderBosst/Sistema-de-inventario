@@ -14,7 +14,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         VALUES (?,?)
     ");
 
-    $stmt->bind_param("ss",$titulo,$escrito);
+    $stmt->bind_param("ssi",$titulo,$escrito);
     $stmt->execute();
 
     header("Location: listar.php?exito=Nota creada correctamente");

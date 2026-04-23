@@ -20,7 +20,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         VALUES (?,?,?)
     ");
 
-    $stmt->bind_param("sis",$nombre,$cantidad,$marca);
+    $stmt->bind_param("sisi",$nombre,$cantidad,$marca,$estatus);
     $stmt->execute();
 
     header("Location: listar.php?exito=Material creado correctamente");
@@ -43,12 +43,26 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 <form method="POST" class="row g-3">
 
 <div class="col-12">
-<label class="form-label">Nombre de material</label>
+<label class="form-label">Nombre de material 
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba el uso que tiene el material.">
+    </i>
+</label>
 <input type="text" name="nombre" class="form-control" required>
 </div>
 
 <div class="col-md-3">
-<label class="form-label">Cantidad</label>
+<label class="form-label">Cantidad
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba en número la cantidad de unidades de material de limpieza">
+  </i>
+</label>
 <input type="number" step="0"
 name="cantidad"
 class="form-control"
@@ -56,7 +70,14 @@ required>
 </div>
 
 <div class="col-md-3">
-<label class="form-label">Marca</label>
+<label class="form-label">Marca
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba el distribuidor del material de limpieza">
+  </i>
+</label>
 <input type="text" name="marca" class="form-control" required>
 </div>
 

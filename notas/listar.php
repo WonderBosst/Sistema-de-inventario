@@ -11,7 +11,7 @@ Consultamos materiales en existencia
 requireRole(['1']);
 
 $result = $conn->query("
-SELECT * FROM notas
+SELECT * FROM notas WHERE estatus = true
 ");
 
 ?>

@@ -484,6 +484,41 @@ cantidad usada, consumido y medida
 cantidad, reserva y total  (kg g / L ml / Unidades)
    12        4     46     ml
 
-INSERT INTO grupo_productos (id_grupo_productos, id_producto, consumido, cantidad)
-        VALUES ('2XXTFT78',13,20,)
+DELIMITER $$
+
+CREATE TRIGGER `before_insert_grupo_productos` 
+BEFORE INSERT ON `grupo_productos` 
+FOR EACH ROW 
+BEGIN
+    DECLARE v_total_antiguo DOUBLE;
+    DECLARE v_reserva DOUBLE;
+    DECLARE v_nuevo_total DOUBLE;
+    DECLARE v_nueva_cantidad_envases INT;
+    DECLARE v_cant_antigua_envases INT;
+
+    -- 1. Obtener datos actuales del producto
+    SELECT total, reserva, cantidad INTO v_total_antiguo, v_reserva, v_cant_antigua_envases
+    FROM productos
+    WHERE id_producto = NEW.id_producto;
+
+    -- 2. Restar lo consumido al total general
+    SET v_nuevo_total = v_total_antiguo - NEW.consumido;
+
+    -- 3. Calcular nueva cantidad de envases (Redondeo hacia arriba)
+    -- Ejemplo: 2900 / 600 = 4.83 -> CEIL(4.83) = 5
+    SET v_nueva_cantidad_envases = CEIL(v_nuevo_total / v_reserva);
+
+    -- 4. Calcular la 'cantidad usada' (la diferencia de envases físicos)
+    -- Ejemplo: 7 envases iniciales - 5 finales = 2 usados
+    SET NEW.cantidad_usada = v_cant_antigua_envases - v_nueva_cantidad_envases;
+
+    -- 5. Actualizar la tabla Maestra (productos)
+    UPDATE productos 
+    SET total = v_nuevo_total,
+        cantidad = v_nueva_cantidad_envases
+    WHERE id_producto = NEW.id_producto;
+
+END$$
+
+DELIMITER ;
 

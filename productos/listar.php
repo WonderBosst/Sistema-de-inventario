@@ -28,7 +28,7 @@ if(isset($_GET['id']) && isset($_GET['accion'])){
 }
 
 $result = $conn->query("
-SELECT * FROM productos
+SELECT * FROM productos WHERE estatus = true
 ");
 
 ?>

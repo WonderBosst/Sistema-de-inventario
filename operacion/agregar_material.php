@@ -53,15 +53,17 @@ if(isset($_GET['msg'])){
 
 $result_materiales = $conn->query("
     SELECT M.id_material,
-	   M.nombre, 
+       M.nombre, 
        M.cantidad,
        M.marca,
        M.fecha_creacion
-       FROM material AS M 
-    WHERE M.id_material NOT IN (
-    SELECT id_material FROM grupo_materiales
-    WHERE id_grupo_materiales = '$id_grupo_materiales'
-    );
+    FROM material AS M 
+    WHERE NOT EXISTS (
+        SELECT 1 
+        FROM grupo_materiales AS GM
+        WHERE GM.id_material = M.id_material 
+        AND GM.id_grupo_materiales = '$id_grupo_materiales'
+    ) AND estatus = true;
 ");
 ?>
 

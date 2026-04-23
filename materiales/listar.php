@@ -28,7 +28,7 @@ if(isset($_GET['id']) && isset($_GET['accion'])){
 }
 
 $result = $conn->query("
-SELECT * FROM material
+SELECT * FROM material WHERE estatus = true
 ");
 
 ?>

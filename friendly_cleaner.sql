@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-04-2026 a las 23:24:24
+-- Tiempo de generación: 23-04-2026 a las 22:28:25
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -153,8 +153,9 @@ INSERT INTO `grupos_trabajadores` (`id_grupo_trabajadores`, `fecha_creacion`) VA
 --
 
 CREATE TABLE `grupo_materiales` (
+  `id_interno` int(11) NOT NULL,
   `id_grupo_materiales` varchar(120) NOT NULL,
-  `id_material` int(11) NOT NULL,
+  `id_material` int(11) DEFAULT NULL,
   `cantidad` int(11) DEFAULT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
   `ultima_actualizacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -164,39 +165,21 @@ CREATE TABLE `grupo_materiales` (
 -- Volcado de datos para la tabla `grupo_materiales`
 --
 
-INSERT INTO `grupo_materiales` (`id_grupo_materiales`, `id_material`, `cantidad`, `fecha_creacion`, `ultima_actualizacion`) VALUES
-('2XXTFT78', 1, 4, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
-('2XXTFT78', 2, 20, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
-('2XXTFT78', 3, 11, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
-('3XXTFT98', 3, 7, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
-('3XXTFT98', 5, 1, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
-('3XXTFT98', 7, 2, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
-('3XXTFT98', 8, 3, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
-('3XXTFT98', 9, 20, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
-('3XXTFT98', 11, 20, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
-('3XXTFT98', 12, 22, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
-('3XXTFT98', 13, 10, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
-('4XXTFT91', 2, 9, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
-('4XXTFT91', 3, 8, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
-('4XXTFT91', 9, 7, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
-('Lfw9sHXp', 3, 1, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
-('Lfw9sHXp', 18, 1, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
-('MkAPdm0o', 2, 4, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
-('MkAPdm0o', 6, 20, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
-('ne5VIHWP', 5, 11, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
-('Qz74N14I', 1, 11, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
-('Qz74N14I', 2, 2, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
-('Qz74N14I', 4, 9, '2026-04-15 18:02:25', '2026-04-15 18:03:27'),
-('Qz74N14I', 11, 3, '2026-04-15 18:02:25', '2026-04-15 18:03:27');
+INSERT INTO `grupo_materiales` (`id_interno`, `id_grupo_materiales`, `id_material`, `cantidad`, `fecha_creacion`, `ultima_actualizacion`) VALUES
+(1, '2XXTFT78', 8, 10, '2026-04-23 20:17:01', '2026-04-23 20:17:01'),
+(2, '2XXTFT78', 5, 1, '2026-04-23 20:17:27', '2026-04-23 20:17:27'),
+(3, '2XXTFT78', NULL, 10, '2026-04-23 20:25:43', '2026-04-23 20:25:43');
 
 --
 -- Disparadores `grupo_materiales`
 --
 DELIMITER $$
 CREATE TRIGGER `after_delete_grupo_materiales` AFTER DELETE ON `grupo_materiales` FOR EACH ROW BEGIN
-    UPDATE material
-    SET cantidad = cantidad + OLD.cantidad
-    WHERE id_material = OLD.id_material;
+	IF OLD.id_material IS NOT NULL THEN
+    	UPDATE material
+    	SET cantidad = cantidad + OLD.cantidad
+    	WHERE id_material = OLD.id_material;
+    END IF;
 END
 $$
 DELIMITER ;
@@ -226,27 +209,29 @@ CREATE TRIGGER `before_update_grupo_materiales` BEFORE UPDATE ON `grupo_material
 
     SET diferencia = NEW.cantidad - OLD.cantidad;
 
-    IF diferencia > 0 THEN
-        -- Solo validar si está aumentando
-        SELECT cantidad INTO stock_actual
-        FROM materiales
-        WHERE id_material = NEW.id_material;
+    -- 1. PRIMERO: Verificamos que el material exista. 
+    -- Si es NULL (porque se borró el material original), no hacemos nada de stock.
+    IF NEW.id_material IS NOT NULL THEN
 
-        IF stock_actual < diferencia THEN
-            SIGNAL SQLSTATE '45000'
-            SET MESSAGE_TEXT = 'No hay suficiente stock para actualizar';
+        -- 2. SI LA CANTIDAD AUMENTA: Validamos si hay stock suficiente en el almacén
+        IF diferencia > 0 THEN
+            SELECT cantidad INTO stock_actual
+            FROM material
+            WHERE id_material = NEW.id_material;
+
+            IF stock_actual < diferencia THEN
+                SIGNAL SQLSTATE '45000'
+                SET MESSAGE_TEXT = 'No hay suficiente stock para actualizar';
+            END IF;
         END IF;
 
+        -- 3. ACTUALIZACIÓN UNIFICADA: 
+        -- Si diferencia es positiva, resta. Si es negativa, suma (menos por menos da más).
         UPDATE material
         SET cantidad = cantidad - diferencia
         WHERE id_material = NEW.id_material;
 
-    ELSE
-        -- Si reduces cantidad → devolver stock
-        UPDATE material
-        SET cantidad = cantidad + ABS(diferencia)
-        WHERE id_material = NEW.id_material;
-    END IF;
+    END IF; -- Aquí termina la protección del id_material IS NOT NULL
 
 END
 $$
@@ -455,12 +440,9 @@ CREATE TABLE `material` (
 --
 
 INSERT INTO `material` (`id_material`, `nombre`, `cantidad`, `marca`, `fecha_creacion`) VALUES
-(1, 'Trapiadores largos', 12, 'Generico', '2026-03-10 18:55:11'),
 (2, 'Escobas', 1, 'Generico', '2026-03-10 18:55:11'),
 (3, 'Aspiradoras', 0, 'Kymberly-Clark', '2026-03-10 18:55:11'),
-(4, 'Cubetas', 25, 'Fapsa', '2026-03-10 18:55:11'),
 (5, 'Recojedores', 1, 'Solprac', '2026-03-10 18:55:11'),
-(6, 'Cepillo para inodoro', 3, 'Tork', '2026-03-10 18:55:11'),
 (7, 'Espátulas', 21, 'Tork', '2026-03-10 18:55:11'),
 (8, 'Plumero extensible', 18, 'Biozone', '2026-03-10 18:55:11'),
 (9, 'Plumero corto', 3, 'Biozone', '2026-03-10 18:55:11'),
@@ -469,8 +451,7 @@ INSERT INTO `material` (`id_material`, `nombre`, `cantidad`, `marca`, `fecha_cre
 (12, 'Jalador de vidrios', 32, 'Oval', '2026-03-10 18:55:11'),
 (13, 'Destapacaños', 1, 'Jofel', '2026-03-10 18:55:11'),
 (14, 'Cinta destapacaños', 32, 'Gojo', '2026-03-10 18:55:11'),
-(15, 'Cepillo de limpieza de esquinas', 19, 'Wiese', '2026-03-10 18:55:11'),
-(18, 'Pañuelos de limpieza de algodón', 11, 'TABS', '2026-03-30 21:44:07');
+(15, 'Cepillo de limpieza de esquinas', 19, 'Wiese', '2026-03-10 18:55:11');
 
 -- --------------------------------------------------------
 
@@ -603,7 +584,7 @@ CREATE TABLE `rh` (
 
 INSERT INTO `rh` (`id_trabajador`, `nombre`, `apellidos`, `rol`, `password`, `edad`, `direccion`, `entre_calles`, `correo`, `numero_telefonico`, `activo`, `fecha_creacion`) VALUES
 (1, 'Juan Pedro', 'Lagunillas Romero', 0, '', 29, 'Colonia: Juan Escutia, Calle: Salamanca #33', 'Parque Sovietico y Rio suchiatorio', 'jupe@gmail.com', 3117885890, 1, '2026-03-05 18:32:29'),
-(2, 'Ricardo Canaya', 'Riquin Canallin', 0, NULL, 32, 'Colonia: Vistas de la cantera, Calle: Villa de Luevano #89', 'Villa de Cordoba y Villa de León', 'rica@hotmail.com', 3117764533, 0, '2026-03-05 18:32:29'),
+(2, 'Ricardo Canaya', 'Riquin Canallin', 0, '', 32, 'Colonia: Vistas de la cantera, Calle: Villa de Luevano #89', 'Villa de Cordoba y Villa de León', 'rica@hotmail.com', 3117764533, 0, '2026-03-05 18:32:29'),
 (3, 'Esmeralda Luna', 'Soto Camayo', 1, '12345', 45, 'Colonia: Agustín Iturbide, Calle: Bolivia #112', 'Parque Argentina y África ', 'eslu@gmail.com', 3118909907, 1, '2026-03-05 18:32:29'),
 (4, 'Violeta Laura', 'Lomeli Palomas', 0, NULL, 23, 'Colonia: Vistas de la cantera, Calle: Real del Monte #43', 'Real de Plata y Real de Huasca', 'vila@hotmail.com', 3111215543, 1, '2026-03-05 18:32:29'),
 (5, 'Paloma', 'Veridiana Camillas', 0, NULL, 25, 'Colonia: Villas de la cantera, Calle: Rubi #117', 'Agua Marina y Blvd Granate', 'pave@gmail.com', 3119900766, 1, '2026-03-05 18:32:29'),
@@ -677,7 +658,8 @@ ALTER TABLE `grupos_trabajadores`
 -- Indices de la tabla `grupo_materiales`
 --
 ALTER TABLE `grupo_materiales`
-  ADD PRIMARY KEY (`id_grupo_materiales`,`id_material`),
+  ADD PRIMARY KEY (`id_interno`),
+  ADD KEY `idx_grupo_codigo` (`id_grupo_materiales`),
   ADD KEY `fk_materiales_grupomateriales` (`id_material`);
 
 --
@@ -740,6 +722,12 @@ ALTER TABLE `crm`
   MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT de la tabla `grupo_materiales`
+--
+ALTER TABLE `grupo_materiales`
+  MODIFY `id_interno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `material`
 --
 ALTER TABLE `material`
@@ -778,7 +766,7 @@ ALTER TABLE `rh`
 --
 ALTER TABLE `grupo_materiales`
   ADD CONSTRAINT `fk_grupomateriales_gruposmateriales` FOREIGN KEY (`id_grupo_materiales`) REFERENCES `grupos_materiales` (`id_grupo_materiales`),
-  ADD CONSTRAINT `fk_materiales_grupomateriales` FOREIGN KEY (`id_material`) REFERENCES `material` (`id_material`);
+  ADD CONSTRAINT `fk_materiales_grupomateriales` FOREIGN KEY (`id_material`) REFERENCES `material` (`id_material`) ON DELETE SET NULL;
 
 --
 -- Filtros para la tabla `grupo_productos`

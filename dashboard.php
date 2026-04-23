@@ -15,32 +15,68 @@ if ($rol_usuario == '1') {
         $productos_bajos[] = $row_s;
     }
 }
+
+$materiales_bajos = [];
+if ($rol_usuario == '1') {
+    // Buscamos productos con cantidad menor a 6
+    $res_stock = $conn->query("SELECT nombre, cantidad FROM material WHERE cantidad < 6 AND estatus = true");
+    while ($row_s = $res_stock->fetch_assoc()) {
+        $materiales_bajos[] = $row_s;
+    }
+}
 ?>
+
+<div class="row">
+    <div class="col-12">
+        
+        <?php if (!empty($productos_bajos)): ?>
+            <div class="alert alert-danger shadow-sm rounded-4 mb-3" role="alert">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-exclamation-triangle-fill fs-4 me-3"></i>
+                    <div>
+                        <strong>¡Stock Crítico (Productos)!</strong> Hay productos agotándose.
+                        <ul class="mb-0 mt-2">
+                            <?php foreach ($productos_bajos as $p): ?>
+                                <li>
+                                    <strong><?= htmlspecialchars($p['nombre']); ?></strong>: 
+                                    <span class="badge bg-danger"><?= $p['cantidad']; ?> unidades</span>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+                <a href="productos/listar.php" class="alert-link small">Gestionar Productos →</a>
+            </div>
+        <?php endif; ?>
+
+        <?php if (!empty($materiales_bajos)): ?>
+            <div class="alert alert-warning shadow-sm rounded-4 mb-4" role="alert" style="border-left: 5px solid #ffc107;">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-box-seam-fill fs-4 me-3"></i>
+                    <div>
+                        <strong>¡Stock Bajo (Materiales)!</strong> Es necesario revisar los insumos.
+                        <ul class="mb-0 mt-2">
+                            <?php foreach ($materiales_bajos as $m): ?>
+                                <li>
+                                    <strong><?= htmlspecialchars($m['nombre']); ?></strong>: 
+                                    <span class="badge bg-dark"><?= $m['cantidad']; ?> disp.</span>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+                <a href="materiales/listar.php" class="alert-link small text-dark">Gestionar Materiales →</a>
+            </div>
+        <?php endif; ?>
+
+    </div>
+</div>
 
 <h5 class="mb-3 fw-bold">Panel de Control</h5>
 
 <div class="row g-4">
-
-<?php if (!empty($productos_bajos)): ?>
-    <div class="alert alert-danger shadow-sm rounded-4 mb-4" role="alert">
-        <div class="d-flex align-items-center">
-            <i class="bi bi-exclamation-triangle-fill fs-4 me-3"></i>
-            <div>
-                <strong>¡Atención! Stock Crítico:</strong> Hay productos con menos de 6 unidades.
-                <ul class="mb-0 mt-2">
-                    <?php foreach ($productos_bajos as $p): ?>
-                        <li>
-                            <strong><?= htmlspecialchars($p['nombre']); ?></strong>: 
-                            <span class="badge bg-danger"><?= $p['cantidad']; ?> unidades</span>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-        </div>
-        <hr>
-        <a href="productos/listar.php" class="alert-link small">Ir a inventario para reponer →</a>
-    </div>
-<?php endif; ?>
 
 <?php if($rol_usuario == '1'): ?>
 <div class="col-6 col-md-3">
