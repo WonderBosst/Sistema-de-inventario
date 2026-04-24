@@ -20,7 +20,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         VALUES (?,?,?)
     ");
 
-    $stmt->bind_param("sisi",$nombre,$cantidad,$marca,$estatus);
+    $stmt->bind_param("sis",$nombre,$cantidad,$marca);
     $stmt->execute();
 
     header("Location: listar.php?exito=Material creado correctamente");

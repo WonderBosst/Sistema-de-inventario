@@ -15,7 +15,7 @@ $trabajadores_html = "";
 $productos_html = "";
 $material_html = "";
 
-if (intval($id_operacion) > 0) { // Usa id_operacion para buscar
+if (intval($id_operacion) > 0) {
     $query = "SELECT C.nombre, 
                 C.apellidos,
                 C.direccion,
@@ -80,7 +80,6 @@ if (intval($id_operacion) > 0) {
         $trabajadores_html = "<ul>";
         while ($t = $result_trabajadores->fetch_assoc()) {
             $nombre_completo = $t['nombre'] . " " . $t['apellidos'];
-            $contacto = " | " . $t['correo'] . " | " . $t['numero_telefonico'];
             $trabajadores_html .= "<li>" . htmlspecialchars($nombre_completo . $contacto) . "</li>";
         }
         $trabajadores_html .= "</ul>";
@@ -102,7 +101,6 @@ if (intval($id_operacion) > 0) {
     $result_productos = $conn->query($query);
 
     if ($result_productos && $result_productos->num_rows > 0) {
-        // Iniciamos la tabla con encabezados
         $productos_html = "
         <table class='tabla-productos'>
             <thead>
@@ -145,7 +143,6 @@ if (intval($id_operacion) > 0) {
     $result_materiales = $conn->query($query);
 
     if ($result_materiales && $result_materiales->num_rows > 0) {
-        // Iniciamos la tabla con encabezados
         $materiales_html = "
         <table class='tabla-productos'>
             <thead>

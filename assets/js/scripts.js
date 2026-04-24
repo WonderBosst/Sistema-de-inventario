@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    
     // --- 1. LÓGICA PARA TABLAS RESPONSIVAS ---
     // Recorremos cada tabla para asignar los data-label de los encabezados a las celdas
     $('table').each(function() {

@@ -67,7 +67,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
      data-bs-toggle="tooltip" 
      data-bs-placement="top" 
      title="Escriba en unidades cuantos productos tiene.">
-  </i>
+    </i>
 </label>
 <input type="number" step="0"
 name="cantidad"
@@ -82,7 +82,7 @@ required>
      data-bs-toggle="tooltip" 
      data-bs-placement="top" 
      title="Escriba cuanto pesa por producto en cantidad númerica. Ejemplo: 1 botella igual a 900 ML">
-  </i>
+    </i>
 </label>
 <input type="number" step="0"
 name="reserva"
@@ -133,7 +133,7 @@ required>
      data-bs-toggle="tooltip" 
      data-bs-placement="top" 
      title="Seleccione como esta hecho el producto.">
-  </i>
+    </i>
 </label>
 <select name="tipo" class="form-select" required>
 <option value="Sprays">Sprays</option>
@@ -153,7 +153,7 @@ required>
      data-bs-toggle="tooltip" 
      data-bs-placement="top" 
      title="Escriba que distribuidor representa el producto.">
-  </i>
+    </i>
 </label>
 <input type="text" name="marca" class="form-control" required>
 </div>

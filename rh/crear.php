@@ -60,17 +60,38 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 <form method="POST" class="row g-3">
 
 <div class="col-md-6">
-<label class="form-label">Nombre</label>
+<label class="form-label">Nombre
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba el nombre del nuevo integrante a la empresa">
+    </i>
+</label>
 <input type="text" name="nombre" class="form-control" required>
 </div>
 
 <div class="col-md-6">
-<label class="form-label">Apellidos</label>
+<label class="form-label">Apellidos
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba los apellidos del nuevo integrante a la empresa">
+    </i>
+</label>
 <input type="text" name="apellidos" class="form-control" required>
 </div>
 
 <div class="col-12">
-<label class="form-label">Rol</label>
+<label class="form-label">Rol
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Seleccione el rol que ejercera la persona en la empresa">
+    </i>
+</label>
 <select name="rol" id="rolSelect" class="form-select" required>
 <option value="0">Trabajador</option>
 <option value="1">Administrador</option>
@@ -80,7 +101,14 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 <div class="collapse mt-3" id="collapseRol">
   <div class="card card-body">
     <div class="mb-3">
-       <label>Contraseña</label>
+       <label>Contraseña
+        <i class="bi bi-question-circle text-primary" 
+            style="cursor: pointer; margin-left: 5px;" 
+            data-bs-toggle="tooltip" 
+            data-bs-placement="top" 
+            title="Debido a que el nuevo personal sera administrador asignale una contraseña">
+        </i>
+       </label>
        <input type="password"
        name="password"
        id="passwordInput"
@@ -90,27 +118,62 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 </div>
 
 <div class="col-md-6">
-<label class="form-label">Edad</label>
+<label class="form-label">Edad
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Anote la edad de la persona">
+    </i>
+</label>
 <input type="text" name="edad" class="form-control" required>
 </div>
 
 <div class="col-md-6">
-<label class="form-label">Direcci&oacute;n</label>
+<label class="form-label">Direcci&oacute;n
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escribe la dirección del nuevo trabajador de la empresa">
+    </i>
+</label>
 <input type="text" name="direccion" class="form-control" required>
 </div>
 
 <div class="col-md-6">
-<label class="form-label">Entre calles</label>
+<label class="form-label">Entre calles
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba las calles paralelas al domicilio del cliente">
+    </i>
+</label>
 <input type="text" name="entre_calles" class="form-control" required>
 </div>
 
 <div class="col-md-6">
-<label class="form-label">Correo</label>
+<label class="form-label">Correo
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba el medio por el cual el cliente recibe mensajes electrónicos">
+    </i>
+</label>
 <input type="text" name="correo" class="form-control" required>
 </div>
 
 <div class="col-md-6">
-<label class="form-label">N&uacute;mero Tel&eacute;fonico</label>
+<label class="form-label">N&uacute;mero Tel&eacute;fonico
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba el número de contacto teléfonico del cliente">
+    </i>
+</label>
 <input type="text" name="numero_telefonico" class="form-control" required>
 </div>
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-04-2026 a las 22:28:25
+-- Tiempo de generación: 24-04-2026 a las 23:00:31
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -168,7 +168,9 @@ CREATE TABLE `grupo_materiales` (
 INSERT INTO `grupo_materiales` (`id_interno`, `id_grupo_materiales`, `id_material`, `cantidad`, `fecha_creacion`, `ultima_actualizacion`) VALUES
 (1, '2XXTFT78', 8, 10, '2026-04-23 20:17:01', '2026-04-23 20:17:01'),
 (2, '2XXTFT78', 5, 1, '2026-04-23 20:17:27', '2026-04-23 20:17:27'),
-(3, '2XXTFT78', NULL, 10, '2026-04-23 20:25:43', '2026-04-23 20:25:43');
+(3, '2XXTFT78', NULL, 10, '2026-04-23 20:25:43', '2026-04-23 20:25:43'),
+(4, '2XXTFT78', 7, 10, '2026-04-23 21:01:03', '2026-04-23 21:01:03'),
+(5, '2XXTFT78', 10, 30, '2026-04-23 21:02:12', '2026-04-23 21:02:12');
 
 --
 -- Disparadores `grupo_materiales`
@@ -432,6 +434,7 @@ CREATE TABLE `material` (
   `nombre` varchar(100) NOT NULL,
   `cantidad` double DEFAULT NULL,
   `marca` varchar(120) DEFAULT NULL,
+  `estatus` tinyint(1) DEFAULT 1,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -439,19 +442,27 @@ CREATE TABLE `material` (
 -- Volcado de datos para la tabla `material`
 --
 
-INSERT INTO `material` (`id_material`, `nombre`, `cantidad`, `marca`, `fecha_creacion`) VALUES
-(2, 'Escobas', 1, 'Generico', '2026-03-10 18:55:11'),
-(3, 'Aspiradoras', 0, 'Kymberly-Clark', '2026-03-10 18:55:11'),
-(5, 'Recojedores', 1, 'Solprac', '2026-03-10 18:55:11'),
-(7, 'Espátulas', 21, 'Tork', '2026-03-10 18:55:11'),
-(8, 'Plumero extensible', 18, 'Biozone', '2026-03-10 18:55:11'),
-(9, 'Plumero corto', 3, 'Biozone', '2026-03-10 18:55:11'),
-(10, 'Paños de limpieza de microfibra', 33, 'Glade', '2026-03-10 18:55:11'),
-(11, 'Jalador de pisos', 1, 'Oval', '2026-03-10 18:55:11'),
-(12, 'Jalador de vidrios', 32, 'Oval', '2026-03-10 18:55:11'),
-(13, 'Destapacaños', 1, 'Jofel', '2026-03-10 18:55:11'),
-(14, 'Cinta destapacaños', 32, 'Gojo', '2026-03-10 18:55:11'),
-(15, 'Cepillo de limpieza de esquinas', 19, 'Wiese', '2026-03-10 18:55:11');
+INSERT INTO `material` (`id_material`, `nombre`, `cantidad`, `marca`, `estatus`, `fecha_creacion`) VALUES
+(2, 'Escobas', 9, 'Generico', 1, '2026-03-10 18:55:11'),
+(3, 'Aspiradoras', 7, 'Kymberly-Clark', 1, '2026-03-10 18:55:11'),
+(5, 'Recojedores', 8, 'Solprac', 1, '2026-03-10 18:55:11'),
+(7, 'Espátulas', 9, 'Tork', 1, '2026-03-10 18:55:11'),
+(8, 'Plumero extensible', 18, 'Biozone', 1, '2026-03-10 18:55:11'),
+(9, 'Plumero corto', 7, 'Biozone', 1, '2026-03-10 18:55:11'),
+(10, 'Paños de limpieza de microfibra', 7, 'Glade', 1, '2026-03-10 18:55:11'),
+(11, 'Jalador de pisos', 7, 'Oval', 1, '2026-03-10 18:55:11'),
+(12, 'Jalador de vidrios', 32, 'Oval', 1, '2026-03-10 18:55:11'),
+(13, 'Destapacaños', 7, 'Jofel', 1, '2026-03-10 18:55:11'),
+(14, 'Cinta destapacaños', 32, 'Gojo', 1, '2026-03-10 18:55:11'),
+(15, 'Cepillo de limpieza de esquinas', 19, 'Wiese', 1, '2026-03-10 18:55:11'),
+(23, 'Espátulas de hierro', 22, 'BeoClean', 1, '2026-04-24 19:50:34'),
+(24, 'Trapeadores cortos', 14, 'Unline', 1, '2026-04-24 19:53:30'),
+(25, 'Trapeadores largos', 10, 'Rubbermaid', 1, '2026-04-24 19:54:49'),
+(26, 'Trapeador de microfibra', 8, 'Rubbermaid', 1, '2026-04-24 19:55:24'),
+(27, 'Trapeador rectangular largo de 50 cm', 6, 'Rubbermaid', 1, '2026-04-24 19:55:57'),
+(28, 'Escoba de cepillo de largo de 40 cm', 14, 'Rubbermaid', 1, '2026-04-24 19:57:50'),
+(29, 'Escoba angular', 14, 'Uline', 1, '2026-04-24 19:59:47'),
+(30, 'Botella de sprays', 16, 'Generico', 1, '2026-04-24 20:01:57');
 
 -- --------------------------------------------------------
 
@@ -464,6 +475,7 @@ CREATE TABLE `notas` (
   `id_operacion` int(11) DEFAULT NULL,
   `titulo` varchar(150) NOT NULL,
   `escrito` varchar(500) DEFAULT NULL,
+  `estatus` tinyint(1) DEFAULT 1,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -471,13 +483,14 @@ CREATE TABLE `notas` (
 -- Volcado de datos para la tabla `notas`
 --
 
-INSERT INTO `notas` (`id_notas`, `id_operacion`, `titulo`, `escrito`, `fecha_creacion`) VALUES
-(1, 4, 'Cliente criticon', 'El señor antonio es un cliente distinguido que constantemente tiene desacuerdos en la limpieza, se sugiere mantener mucha limpieza y evitar conflictos con el cliente', '2026-04-06 21:15:08'),
-(2, 5, 'Cuidado con el perro', ' La señora Fernanda tiene un pitbull muy bravo se sugiere que se comuniquen primero con la dueña para pedir que lo amarre', '2026-04-06 21:15:08'),
-(4, 19, 'Cliente con perro', 'El cliente tiene un pitbull se sugiere ir por la tarde por que en esos tiempos no esta el perro en casa', '2026-04-09 21:22:10'),
-(5, 21, 'Patío con reclamos', 'El patío del cliente esta normalmente siendo muy reclamado por el vecino debido a que dice que se sobrepaso en la construcción del hogar del cliente, se sugiere ignorar y continuar con la limpieza.', '2026-04-10 18:26:55'),
-(6, 18, 'Cliente criticon', 'sadsasdasdsadas', '2026-04-10 18:29:40'),
-(7, 22, 'Casa con techo resbaladizo', 'Se sugiere llevar zapatos especiales para no resbalarse del techo.', '2026-04-10 18:37:44');
+INSERT INTO `notas` (`id_notas`, `id_operacion`, `titulo`, `escrito`, `estatus`, `fecha_creacion`) VALUES
+(1, 4, 'Cliente criticon', 'El señor antonio es un cliente distinguido que constantemente tiene desacuerdos en la limpieza, se sugiere mantener mucha limpieza y evitar conflictos con el cliente', 1, '2026-04-06 21:15:08'),
+(2, 5, 'Cuidado con el perro', ' La señora Fernanda tiene un pitbull muy bravo se sugiere que se comuniquen primero con la dueña para pedir que lo amarre', 1, '2026-04-06 21:15:08'),
+(4, 19, 'Cliente con perro', 'El cliente tiene un pitbull se sugiere ir por la tarde por que en esos tiempos no esta el perro en casa', 1, '2026-04-09 21:22:10'),
+(5, 21, 'Patío con reclamos', 'El patío del cliente esta normalmente siendo muy reclamado por el vecino debido a que dice que se sobrepaso en la construcción del hogar del cliente, se sugiere ignorar y continuar con la limpieza.', 1, '2026-04-10 18:26:55'),
+(6, 18, 'Cliente criticon', 'sadsasdasdsadas', 0, '2026-04-10 18:29:40'),
+(7, 22, 'Casa con techo resbaladizo', 'Se sugiere llevar zapatos especiales para no resbalarse del techo.', 1, '2026-04-10 18:37:44'),
+(8, NULL, 'Patío con reclamos', 'sdfdsfdsfsd', 1, '2026-04-23 21:28:14');
 
 -- --------------------------------------------------------
 
@@ -532,6 +545,7 @@ CREATE TABLE `productos` (
   `conservado` varchar(120) DEFAULT NULL,
   `tipo` varchar(120) DEFAULT NULL,
   `marca` varchar(120) DEFAULT NULL,
+  `estatus` tinyint(1) DEFAULT 1,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -539,23 +553,24 @@ CREATE TABLE `productos` (
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`id_producto`, `nombre`, `cantidad`, `reserva`, `total`, `medida`, `conservado`, `tipo`, `marca`, `fecha_creacion`) VALUES
-(3, 'Blanqueador concentrado', 28, 900, 16200, 'ml', 'Botellas', 'Liquido', 'Clorox', '2026-03-27 18:23:19'),
-(6, 'Gel desmaquillador', 7, 600, 4200, 'g', 'Frascos', 'Geles', 'Stain Cleaner', '2026-03-27 18:23:19'),
-(7, 'Limpiador de pisos', 7, 7, 49, 'Unidades', 'Bolsas', 'Pastillas', 'Wow! Clean', '2026-03-27 18:23:19'),
-(8, 'Toallas desinfectantes', 7, 8, 56, 'Unidades', 'Frascos', 'Toallitas humedas', 'Lysol', '2026-03-27 18:23:19'),
-(9, 'Pastillas activas para retrete', 69, 7, 483, 'Unidades', 'Tubos', 'Pastillas', 'Harpic', '2026-03-27 18:23:19'),
-(10, 'Limpiador quita sarro de retrete', 7, 7, 49, 'Unidades', 'Bolsas', 'Pastillas', 'BeoClean', '2026-03-27 18:23:19'),
-(11, 'Discos activos de aromatizante de retrete', 53, 7, 371, 'Unidades', 'Tubos', 'Pastillas', 'Pato', '2026-03-27 18:23:19'),
-(12, 'Limpiador de teclados y arranca polvo de aparatos de electrónica', 15, 4, 60, 'Unidades', 'Cajas', 'Geles', 'TABS', '2026-03-27 18:23:19'),
-(13, 'Pastillas de tratamiento con cloro para agua', 26, 12, 312, 'Unidades', 'Bolsas', 'Pastillas', 'TABS', '2026-03-27 18:23:19'),
-(14, 'Liquido en cloro', 21, 1, 21, 'L', 'Botellas', 'Liquido', 'Cloralex', '2026-03-27 18:23:19'),
-(15, 'Gel de inodoro', 67, 7, 469, 'Unidades', 'Tubos', 'Pastillas', 'KILOSTEP', '2026-03-27 18:23:19'),
-(16, 'Aromatizante para WC', 14, 950, 13300, 'ml', 'Botellas', 'Sprays', 'Scent Colors', '2026-03-27 18:23:19'),
-(18, 'Gel antibacterial', 10, 100, 1000, 'ml', 'Botellas', 'Geles', 'Blumen', '2026-03-27 18:23:19'),
-(19, 'Gel Antibacterial', 14, 60, 840, 'ml', 'Botellas', 'Geles', 'Walfort', '2026-03-27 18:23:19'),
-(21, 'Jabón para Trastes', 14, 750, 10500, 'ml', 'Botellas', 'Liquido', 'Uline', '2026-03-30 19:37:40'),
-(22, 'Desinfectante de baños', 14, 950, 13300, 'ml', 'Botellas', 'Sprays', 'Jhonson', '2026-04-22 19:21:13');
+INSERT INTO `productos` (`id_producto`, `nombre`, `cantidad`, `reserva`, `total`, `medida`, `conservado`, `tipo`, `marca`, `estatus`, `fecha_creacion`) VALUES
+(3, 'Blanqueador concentrado', 28, 900, 16200, 'ml', 'Botellas', 'Liquido', 'Clorox', 1, '2026-03-27 18:23:19'),
+(6, 'Gel desmaquillador', 16, 600, 4200, 'g', 'Frascos', 'Geles', 'Stain Cleaner', 1, '2026-03-27 18:23:19'),
+(7, 'Limpiador de pisos', 7, 7, 49, 'Unidades', 'Bolsas', 'Pastillas', 'Wow! Clean', 1, '2026-03-27 18:23:19'),
+(8, 'Toallas desinfectantes', 7, 8, 56, 'Unidades', 'Frascos', 'Toallitas humedas', 'Lysol', 1, '2026-03-27 18:23:19'),
+(9, 'Pastillas activas para retrete', 69, 7, 483, 'Unidades', 'Tubos', 'Pastillas', 'Harpic', 1, '2026-03-27 18:23:19'),
+(10, 'Limpiador quita sarro de retrete', 7, 7, 49, 'Unidades', 'Bolsas', 'Pastillas', 'BeoClean', 1, '2026-03-27 18:23:19'),
+(11, 'Discos activos de aromatizante de retrete', 53, 7, 371, 'Unidades', 'Tubos', 'Pastillas', 'Pato', 1, '2026-03-27 18:23:19'),
+(12, 'Limpiador de teclados y arranca polvo de aparatos de electrónica', 15, 4, 60, 'Unidades', 'Cajas', 'Geles', 'TABS', 1, '2026-03-27 18:23:19'),
+(13, 'Pastillas de tratamiento con cloro para agua', 26, 12, 312, 'Unidades', 'Bolsas', 'Pastillas', 'TABS', 1, '2026-03-27 18:23:19'),
+(14, 'Liquido en cloro', 21, 1, 21, 'L', 'Botellas', 'Liquido', 'Cloralex', 1, '2026-03-27 18:23:19'),
+(15, 'Gel de inodoro', 67, 7, 469, 'Unidades', 'Tubos', 'Pastillas', 'KILOSTEP', 1, '2026-03-27 18:23:19'),
+(16, 'Aromatizante para WC', 14, 950, 13300, 'ml', 'Botellas', 'Sprays', 'Scent Colors', 1, '2026-03-27 18:23:19'),
+(18, 'Gel antibacterial', 10, 100, 1000, 'ml', 'Botellas', 'Geles', 'Blumen', 1, '2026-03-27 18:23:19'),
+(19, 'Gel Antibacterial', 14, 60, 840, 'ml', 'Botellas', 'Geles', 'Walfort', 1, '2026-03-27 18:23:19'),
+(21, 'Jabón para Trastes', 14, 750, 10500, 'ml', 'Botellas', 'Liquido', 'Uline', 1, '2026-03-30 19:37:40'),
+(22, 'Desinfectante de baños', 14, 950, 13300, 'ml', 'Botellas', 'Sprays', 'Jhonson', 1, '2026-04-22 19:21:13'),
+(23, 'Lava trastes', 30, 900, 27000, 'ml', 'Botellas', 'Liquido', 'Salvamanos', 1, '2026-04-23 21:34:59');
 
 -- --------------------------------------------------------
 
@@ -725,19 +740,19 @@ ALTER TABLE `crm`
 -- AUTO_INCREMENT de la tabla `grupo_materiales`
 --
 ALTER TABLE `grupo_materiales`
-  MODIFY `id_interno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_interno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `material`
 --
 ALTER TABLE `material`
-  MODIFY `id_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `notas`
 --
 ALTER TABLE `notas`
-  MODIFY `id_notas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_notas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `operacion`
@@ -749,7 +764,7 @@ ALTER TABLE `operacion`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `rh`

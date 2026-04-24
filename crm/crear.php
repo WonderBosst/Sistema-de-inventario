@@ -39,32 +39,74 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 <form method="POST" class="row g-3">
 
 <div class="col-md-3">
-<label class="form-label">Nombre</label>
+<label class="form-label">Nombre
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Agregue el nombre del cliente que se añadira al sistema">
+    </i>
+</label>
 <input type="text" name="nombre" class="form-control" required>
 </div>
 
 <div class="col-md-3">
-<label class="form-label">Apellidos</label>
+<label class="form-label">Apellidos
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escribe los apellidos del cliente que se añadira al sistema">
+    </i>
+</label>
 <input type="text" name="apellidos" class="form-control" required>
 </div>
 
 <div class="col-12">
-<label class="form-label">Direcci&oacute;n</label>
+<label class="form-label">Direcci&oacute;n
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba la dirección de la casa del cliente">
+    </i>
+</label>
 <input type="text" name="direccion" class="form-control" required>
 </div>
 
 <div class="col-12">
-<label class="form-label">Entre_calles</label>
+<label class="form-label">Entre_calles
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba las calles paralelas al domicilio del cliente">
+    </i>
+</label>
 <input type="text" name="entre_calles" class="form-control" required>
 </div>
 
 <div class="col-md-3">
-<label class="form-label">Correo</label>
+<label class="form-label">Correo
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba el medio por el cual el cliente recibe mensajes electrónicos">
+    </i>
+</label>
 <input type="text" name="correo" class="form-control" required>
 </div>
 
 <div class="col-md-3">
-<label class="form-label">N&uacute;mero tel&eacute;fonico</label>
+<label class="form-label">N&uacute;mero tel&eacute;fonico
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba el número de contacto teléfonico del cliente">
+    </i>
+</label>
 <input type="text" name="numero_telefonico" class="form-control" required>
 </div>
 

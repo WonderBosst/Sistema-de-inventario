@@ -5,9 +5,6 @@ include '../includes/header.php';
 
 requireRole(['1']);
 
-/*
-Consultamos productos en existencia
-*/
 requireRole(['1']);
 
 if(isset($_GET['id']) && isset($_GET['accion'])){
@@ -44,23 +41,38 @@ SELECT * FROM productos WHERE estatus = true
 </div>
 <?php endif; ?>
 
+<nav class="navbar bg-body-tertiary mb-3 rounded-4 shadow-sm">
+  <div class="container-fluid">
+    <div class="col-12 col-md-6"> <form class="d-flex" role="search" onsubmit="return false;">
+      <input 
+        class="form-control me-2" 
+        type="search" 
+        id="inputBusqueda" 
+        placeholder="¿Qué producto buscas?" 
+        aria-label="Search"
+        >
+        </form>
+    </div>
+  </div>
+</nav>
+
 <div class="card shadow rounded-4">
 <div class="card-body table-responsive" style="max-height: 600px; overflow-y: auto;">
 
-<table class="table table-hover align-middle small">
+<table class="table table-hover align-middle small" id="tablaProductos">
 <thead class="table-light">
-<tr class="<?= $claseAlerta ?>">
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">#</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Aplicaci&oacute;n</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Cantidad</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Reserva</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Total</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Medida</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Conservado en:</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Tipo</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Marca</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Acciones</th>
-</tr>
+    <tr class="<?= $claseAlerta ?>">
+        <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">#</th>
+        <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Aplicaci&oacute;n</th>
+        <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Cantidad</th>
+        <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Reserva</th>
+        <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Total</th>
+        <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Medida</th>
+        <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Conservado en:</th>
+        <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Tipo</th>
+        <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Marca</th>
+        <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Acciones</th>
+    </tr>
 </thead>
 <tbody>
 <?php $contador = 1; ?>
@@ -139,6 +151,22 @@ onclick="return confirm('¿Eliminar producto?')">🗑️</a>
 <?php include '../includes/footer.php'; ?>
 
 <script>
+$(document).ready(function() {
+    
+    $("#inputBusqueda").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+
+        if ($("#tablaProductos tbody tr").length === 0) {
+            console.warn("No se encontraron filas en #tablaProductos tbody tr");
+        }
+
+        $("#tablaProductos tbody tr").filter(function() {
+            var textoFila = $(this).text().toLowerCase();
+            $(this).toggle(textoFila.indexOf(value) > -1);
+        });
+    });
+});
+
 function actualizarCantidad(id, accion) {
     $.ajax({
         url: "actualizar_cantidad.php",

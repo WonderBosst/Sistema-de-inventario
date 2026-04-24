@@ -5,6 +5,10 @@ include '../includes/header.php';
 requireRole(['1']);
 ?>
 
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3><i class="bi bi-bar-chart fs-1 text-danger"></i> Estad&iacute;sticas</h3>
+</div>
+
 <div class="card shadow rounded-4">
   <div class="card-body">
     <div class="row g-3"> 

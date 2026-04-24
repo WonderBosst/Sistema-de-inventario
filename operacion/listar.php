@@ -16,11 +16,19 @@ SELECT O.id_operacion, O.trabajo_realizado, O.estatus, C.nombre, C.direccion, O.
     <a href="crear.php" class="btn btn-success">➕ Nueva operaci&oacute;n</a>
 </div>
 
+<nav class="navbar bg-body-tertiary mb-3 rounded-4 shadow-sm">
+  <div class="container-fluid">
+    <div class="col-12 col-md-6"> <form class="d-flex" role="search" onsubmit="return false;">
+            <input class="form-control me-2" type="search" id="inputBusqueda" placeholder="Buscar operación...">
+        </form>
+    </div>
+  </div>
+</nav>
 
 <div class="card shadow rounded-4">
 <div class="card-body table-responsive" style="max-height: 600px; overflow-y: auto;">
 
-<table class="table table-hover align-middle small">
+<table class="table table-hover align-middle small" id="tablaop">
 <thead class="table-light">
 <tr>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">#</th>
@@ -75,5 +83,26 @@ class="btn btn-sm btn-warning">
 
 </div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const inputBusqueda = document.getElementById("inputBusqueda");
+    const filas = document.querySelectorAll("#tablaop tbody tr");
+
+    inputBusqueda.addEventListener("keyup", function() {
+        const valor = inputBusqueda.value.toLowerCase().trim();
+
+        filas.forEach(fila => {
+            const textoFila = fila.textContent.toLowerCase();
+            
+            if (textoFila.indexOf(valor) > -1) {
+                fila.style.display = "";
+            } else {
+                fila.style.display = "none";
+            }
+        });
+    });
+});
+</script>
 
 <?php include '../includes/footer.php'; ?>
