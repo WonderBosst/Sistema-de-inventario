@@ -83,7 +83,14 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 <form method="POST" class="row g-3">
 
 <div class="col-md-6">
-<label>Nombre</label>
+<label>Nombre
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba el nombre del trabajador">
+    </i>
+</label>
 <input type="text" name="nombre"
 class="form-control"
 value="<?= htmlspecialchars($trabajador['nombre']); ?>"
@@ -91,7 +98,14 @@ required>
 </div>
 
 <div class="col-md-6">
-<label>Apellidos</label>
+<label>Apellidos
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba los apellidos del trabajador">
+    </i>
+</label>
 <input type="text"
 name="apellidos"
 class="form-control"
@@ -100,7 +114,14 @@ required>
 </div>
 
 <div class="mb-3">
-<label>Rol</label>
+<label>Rol
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Seleccione el rol que ejercera la persona en la empresa">
+    </i>
+</label>
 <select name="rol" id="rolSelect" class="form-select">
     <option value="1" <?= $trabajador['rol']=='1'?'selected':'' ?>>Administrador</option>
     <option value="0" <?= $trabajador['rol']=='0'?'selected':'' ?>>Trabajador</option>
@@ -110,7 +131,14 @@ required>
 <div class="collapse mt-3" id="collapseRol">
   <div class="card card-body">
     <div class="mb-3">
-       <label>Contraseña</label>
+       <label>Contraseña
+            <i class="bi bi-question-circle text-primary" 
+                style="cursor: pointer; margin-left: 5px;" 
+                data-bs-toggle="tooltip" 
+                data-bs-placement="top" 
+                title="Debido a que el nuevo personal sera administrador asignale una contraseña">
+            </i>
+       </label>
        <input type="password"
        name="password"
        id="passwordInput"
@@ -121,7 +149,14 @@ required>
 </div>
 
 <div class="col-md-6">
-<label>Edad</label>
+<label>Edad
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Anote la edad de la persona">
+    </i>
+</label>
 <input type="text" name="edad"
 class="form-control"
 value="<?= htmlspecialchars($trabajador['edad']); ?>"
@@ -129,7 +164,14 @@ required>
 </div>
 
 <div class="col-12">
-<label>Direcci&oacute;n</label>
+<label>Direcci&oacute;n
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escribe la dirección del trabajador">
+    </i>
+</label>
 <input type="text" name="direccion"
 class="form-control"
 value="<?= htmlspecialchars($trabajador['direccion']); ?>"
@@ -137,7 +179,14 @@ required>
 </div>
 
 <div class="col-12">
-<label>Entre calles</label>
+<label>Entre calles
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba las calles paralelas al domicilio del trabajador">
+    </i>
+</label>
 <input type="text" name="entre_calles"
 class="form-control"
 value="<?= htmlspecialchars($trabajador['entre_calles']); ?>"
@@ -145,7 +194,14 @@ required>
 </div>
 
 <div class="col-md-6">
-<label>correo</label>
+<label>correo
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba el medio por el cual el trabajador recibe mensajes electrónicos">
+    </i>
+</label>
 <input type="text" name="correo"
 class="form-control"
 value="<?= htmlspecialchars($trabajador['correo']); ?>"
@@ -153,7 +209,14 @@ required>
 </div>
 
 <div class="col-md-6">
-<label>N&uacute;mero tel&eacute;fonico</label>
+<label>N&uacute;mero tel&eacute;fonico
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba el número de contacto teléfonico del trabajador">
+    </i>
+</label>
 <input type="text" name="numero_telefonico"
 class="form-control"
 value="<?= intval($trabajador['numero_telefonico']); ?>"
@@ -161,7 +224,14 @@ required>
 </div>
 
 <div class="col-md-6">
-<label>Activo</label>
+<label>Activo
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Seleccione si el trabajador seguira activo o no">
+    </i>
+</label>
 <select name="activo" id="activoSelect" class="form-select">
 <option value="1" <?= $trabajador['activo']=='1'?'selected':'' ?>>Activo</option>
 <option value="0" <?= $trabajador['activo']=='0'?'selected':'' ?>>Dar de baja</option>

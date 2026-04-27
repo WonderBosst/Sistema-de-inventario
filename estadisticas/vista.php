@@ -6,7 +6,14 @@ requireRole(['1']);
 ?>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h3><i class="bi bi-bar-chart fs-1 text-danger"></i> Estad&iacute;sticas</h3>
+    <h3><i class="bi bi-bar-chart fs-1 text-danger"></i> Estad&iacute;sticas
+      <i class="bi bi-question-circle text-primary" 
+        style="cursor: pointer; margin-left: 5px;" 
+        data-bs-toggle="tooltip" 
+        data-bs-placement="top" 
+        title="En esté apartado podra ver por mes y año cuales fueron los trabajadores más participativos, los productos más usados, los materiales más usados y las operaciones realizadas">
+      </i>
+    </h3>
 </div>
 
 <div class="card shadow rounded-4">

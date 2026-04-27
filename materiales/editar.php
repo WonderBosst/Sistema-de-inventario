@@ -44,7 +44,14 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 <form method="POST" class="row g-3">
 
 <div class="col-12">
-<label>Nombre</label>
+<label>Nombre
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba el uso que tiene el material.">
+    </i>
+</label>
 <input type="text" name="nombre"
 class="form-control"
 value="<?= htmlspecialchars($material['nombre']); ?>"
@@ -52,7 +59,14 @@ required>
 </div>
 
 <div class="col-md-6">
-<label>Cantidad</label>
+<label>Cantidad
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba en número la cantidad de unidades de material de limpieza">
+    </i>
+</label>
 <input type="double"
 name="cantidad"
 class="form-control"
@@ -61,7 +75,14 @@ required>
 </div>
 
 <div class="col-md-6">
-<label>Marca</label>
+<label>Marca
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba el distribuidor del material de limpieza">
+    </i>
+</label>
 <input type="text" name="marca"
 class="form-control"
 value="<?= htmlspecialchars($material['marca']); ?>"

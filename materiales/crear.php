@@ -61,7 +61,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
      data-bs-toggle="tooltip" 
      data-bs-placement="top" 
      title="Escriba en número la cantidad de unidades de material de limpieza">
-  </i>
+    </i>
 </label>
 <input type="number" step="0"
 name="cantidad"
@@ -76,7 +76,7 @@ required>
      data-bs-toggle="tooltip" 
      data-bs-placement="top" 
      title="Escriba el distribuidor del material de limpieza">
-  </i>
+    </i>
 </label>
 <input type="text" name="marca" class="form-control" required>
 </div>

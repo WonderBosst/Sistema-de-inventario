@@ -53,7 +53,14 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 <form method="POST" class="row g-3">
 
 <div class="col-md-6">
-<label>Nombre</label>
+<label>Nombre
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Agregue el nombre del cliente al sistema">
+    </i>
+</label>
 <input type="text" name="nombre"
 class="form-control"
 value="<?= htmlspecialchars($cliente['nombre']); ?>"
@@ -61,7 +68,14 @@ required>
 </div>
 
 <div class="col-md-6">
-<label>Apellidos</label>
+<label>Apellidos
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escribe los apellidos del cliente al sistema">
+    </i>
+</label>
 <input type="text" name="apellidos"
 class="form-control"
 value="<?= htmlspecialchars($cliente['apellidos']); ?>"
@@ -69,7 +83,14 @@ required>
 </div>
 
 <div class="col-12">
-<label>Direcci&oacute;n</label>
+<label>Direcci&oacute;n
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba la dirección de la casa del cliente">
+    </i>
+</label>
 <input type="text" name="direccion"
 class="form-control"
 value="<?= htmlspecialchars($cliente['direccion']); ?>"
@@ -77,7 +98,14 @@ required>
 </div>
 
 <div class="col-12">
-<label>Entre calles</label>
+<label>Entre calles
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba las calles paralelas al domicilio del cliente">
+    </i>
+</label>
 <input type="text" name="entre_calles"
 class="form-control"
 value="<?= htmlspecialchars($cliente['entre_calles']); ?>"
@@ -85,7 +113,14 @@ required>
 </div>
 
 <div class="col-md-6">
-<label>Correo</label>
+<label>Correo
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba el medio por el cual el cliente recibe mensajes electrónicos">
+    </i>
+</label>
 <input type="text" name="correo"
 class="form-control"
 value="<?= htmlspecialchars($cliente['correo']); ?>"
@@ -93,7 +128,14 @@ required>
 </div>
 
 <div class="col-md-6">
-<label>N&uacute;mero tel&eacute;fonico</label>
+<label>N&uacute;mero tel&eacute;fonico
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba el número de contacto teléfonico del cliente">
+    </i>
+</label>
 <input type="text"
 name="numero_telefonico"
 class="form-control"
@@ -102,7 +144,14 @@ required>
 </div>
 
 <div class="col-md-6">
-<label>Activo</label>
+<label>Activo
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Seleccione si el cliente seguira solicitando el servicio o no">
+    </i>
+</label>
 <select name="activo" id="rolSelect" class="form-select">
     <option value="1" <?= $cliente['activo']=='1'?'selected':'' ?>>Cliente activo</option>
     <option value="0" <?= $cliente['activo']=='0'?'selected':'' ?>>Cliente inactivo</option>

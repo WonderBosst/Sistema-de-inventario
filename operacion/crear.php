@@ -99,7 +99,14 @@ try {
 
 <div class="col-12">
 
-<label class="form-label">Trabajo a realizar</label>
+<label class="form-label">Trabajo a realizar
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba el trabajo que se realizara o agregue una descripción">
+    </i>
+</label>
 <input type="text" name="trabajo_realizado" class="form-control" required>
 </div>
 
@@ -109,15 +116,35 @@ try {
   <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
     Agregar nota?
   </a>
+    <i class="bi bi-question-circle text-primary" 
+        style="cursor: pointer; margin-left: 5px;" 
+        data-bs-toggle="tooltip" 
+        data-bs-placement="top" 
+        title="Este botón permite agregar una nota a la operación">
+    </i>
 </p>
 <div class="collapse" id="collapseExample">
   <div class="col-md-6 mb-3">
-    <label class="form-label">T&iacute;tulo de la nota</label>
+    <label class="form-label">T&iacute;tulo de la nota
+        <i class="bi bi-question-circle text-primary" 
+            style="cursor: pointer; margin-left: 5px;" 
+            data-bs-toggle="tooltip" 
+            data-bs-placement="top" 
+            title="Agregue un titulo para reconocer el escrito">
+        </i>
+    </label>
     <input type="text" name="titulo" class="form-control">
   </div>
 
   <div class="mb-3">
-    <label class="form-label">Descripci&oacute;n</label>
+    <label class="form-label">Descripci&oacute;n
+        <i class="bi bi-question-circle text-primary" 
+            style="cursor: pointer; margin-left: 5px;" 
+            data-bs-toggle="tooltip" 
+            data-bs-placement="top" 
+            title="Escriba ideas, descripciónes, consejos, sugerencias o cualquier información que sea importante">
+        </i>
+    </label>
     <div class="form-floating">
       <textarea class="form-control" name="escrito" placeholder="Agrega una descripci&oacute;n" id="floatingTextarea2" style="height: 100px"></textarea>
     </div>
@@ -125,7 +152,13 @@ try {
 </div>
 
 
-<label class="form-label">Cliente a seleccionar</label>
+<label class="form-label">Cliente a seleccionar 
+    <i class="bi bi-question-circle text-primary" 
+        style="cursor: pointer; margin-left: 5px;" 
+        data-bs-toggle="tooltip" 
+        data-bs-placement="top" 
+        title="Seleccione el cliente a realizar el trabajo, una vez que lo seleccione aparecera un mensaje avisando el cliente seleccionado">
+    </i></label>
 
 <div id="mensaje-cliente" class="alert alert-info" style="display:none;"></div>
 

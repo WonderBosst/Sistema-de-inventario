@@ -20,17 +20,20 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
     $nombre = trim($_POST['nombre']);
 	$cantidad = intval($_POST['cantidad']);
+    $reserva = intval($_POST['reserva']);
+    $total = $cantidad*$reserva;
+    $medida = $_POST['medida'];
     $conservado = $_POST['conservado'];
 	$tipo = $_POST['tipo'];
 	$marca = $_POST['marca'];
 
     $stmt = $conn->prepare("
         UPDATE productos 
-        SET nombre=?, cantidad=?, conservado=?, tipo=?, marca=?
+        SET nombre=?, cantidad=?, reserva=?, total=?, medida=?, conservado=?, tipo=?, marca=?
         WHERE id_producto=?
     ");
 
-    $stmt->bind_param("sisssi",$nombre,$cantidad,$conservado,$tipo,$marca,$id);
+    $stmt->bind_param("siiissssi",$nombre,$cantidad,$reserva,$total,$medida,$conservado,$tipo,$marca,$id);
     $stmt->execute();
 
     header("Location: listar.php?exito=Producto actualizado");

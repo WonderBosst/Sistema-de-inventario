@@ -40,14 +40,28 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 <form method="POST" class="row g-3">
 
 <div class="col-md-2">
-<label class="form-label">T&iacute;tulo</label>
+<label class="form-label">T&iacute;tulo
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba un titulo para reconocer el escrito">
+    </i>
+</label>
 <input type="text" name="titulo"
 class="form-control"
 value="<?= htmlspecialchars($nota['titulo']); ?>"
 required>
 </div>
 
-<label class="form-label">Descripci&oacute;n</label>
+<label class="form-label">Descripci&oacute;n
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Escriba ideas, descripciónes, consejos, sugerencias o cualquier información que sea importante">
+    </i>
+</label>
 <div class="form-floating">
   <textarea class="form-control" name="escrito" id="floatingTextarea2" style="height: 100px" required><?= htmlspecialchars($nota['escrito']); ?></textarea>
 </div>

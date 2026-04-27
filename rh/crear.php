@@ -147,7 +147,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
      style="cursor: pointer; margin-left: 5px;" 
      data-bs-toggle="tooltip" 
      data-bs-placement="top" 
-     title="Escriba las calles paralelas al domicilio del cliente">
+     title="Escriba las calles paralelas al domicilio del trabajador">
     </i>
 </label>
 <input type="text" name="entre_calles" class="form-control" required>
@@ -159,7 +159,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
      style="cursor: pointer; margin-left: 5px;" 
      data-bs-toggle="tooltip" 
      data-bs-placement="top" 
-     title="Escriba el medio por el cual el cliente recibe mensajes electrónicos">
+     title="Escriba el medio por el cual el trabajador recibe mensajes electrónicos">
     </i>
 </label>
 <input type="text" name="correo" class="form-control" required>
@@ -171,7 +171,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
      style="cursor: pointer; margin-left: 5px;" 
      data-bs-toggle="tooltip" 
      data-bs-placement="top" 
-     title="Escriba el número de contacto teléfonico del cliente">
+     title="Escriba el número de contacto teléfonico del trabajador">
     </i>
 </label>
 <input type="text" name="numero_telefonico" class="form-control" required>

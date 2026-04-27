@@ -213,12 +213,24 @@ required>
 <button type="submit" name="btn_actualizar_operacion" class="btn btn-sm btn-warning">
     <i class="bi bi-arrow-repeat"></i> Actualizar trabajo realizado y estatus
 </button>
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Este botón solo actualizara los primeros 3 datos al comienzo de página (Trabajo realizado, estatus y fecha realización)">
+    </i>
 </div>
 
 <p class="d-inline-flex gap-1 mt-4">
   <a class="btn btn-info" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
     Agregar o editar nota?
-  </a>
+  </a> 
+  <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Este botón puede permitirle agregar o editar una nota a la operación">
+    </i>
 </p>
 <div class="collapse" id="collapseExample">
 <div class="card card-body border-info">

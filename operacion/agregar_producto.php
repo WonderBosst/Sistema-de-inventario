@@ -65,7 +65,7 @@ $result_productos = $conn->query("
 
 <h3 class="mb-4">✏️ Editar productos en la operación</h3>
 
-<h4 class="col-12">Lista de productos disponibles</h4>
+<h4 class="col-12">Lista de productos disponibles</h4> 
 
 <?php if($mensaje): ?>
 <div class="alert alert-success">

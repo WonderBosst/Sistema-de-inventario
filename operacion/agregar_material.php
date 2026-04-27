@@ -89,7 +89,14 @@ $result_materiales = $conn->query("
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Cantidad</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Marca</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Fecha_creacion</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Acciones</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Acciones
+    <i class="bi bi-question-circle text-primary" 
+     style="cursor: pointer; margin-left: 5px;" 
+     data-bs-toggle="tooltip" 
+     data-bs-placement="top" 
+     title="Agregue el material que va usar sin rebasar la cantidad existente">
+    </i>
+</th>
 </tr>
 </thead>
 <tbody>
