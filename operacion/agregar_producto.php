@@ -19,15 +19,16 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
     $id_grupo_productos = trim($_POST['id_grupo_productos']);
     $id_producto = intval($_POST['id_producto']);
-	$consumido = intval($_POST['consumido']);
-    
+    $reserva = intval($_POST['reserva']);
+    $consumido = intval($_POST['cantidad']) * $reserva;
+	$cantidad = intval($_POST['cantidad']);
 	
 	$stmt = $conn->prepare("
         INSERT INTO grupo_productos (id_grupo_productos, id_producto, consumido, cantidad)
         VALUES (?,?,?,?)
     ");
 
-    $stmt->bind_param("sii", $id_grupo_productos, $id_producto, $consumido, $cantidad);
+    $stmt->bind_param("siii", $id_grupo_productos, $id_producto, $consumido, $cantidad);
 
     if($stmt->execute()){
         $mensaje = "Producto agregado a la operación";
@@ -93,7 +94,7 @@ $result_productos = $conn->query("
      style="cursor: pointer; margin-left: 5px;" 
      data-bs-toggle="tooltip" 
      data-bs-placement="top" 
-     title="Agrega la cantidad de producto a usar según la columna total">
+     title="Agrega la cantidad de producto a usar">
   </i>
 </th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Acciones</th>
@@ -117,11 +118,12 @@ $result_productos = $conn->query("
 
 <form method="POST" class="d-flex gap-2 align-items-center">
 
-<td><input type="number" name="consumido" class="form-control" min="1" style="width: 80px;" required></td>
+<td><input type="number" name="cantidad" class="form-control" min="1" style="width: 80px;" required></td>
 <td>
     <input type="hidden" name="id_grupo_productos" value="<?= $id_grupo_productos; ?>">
     <input type="hidden" name="id_producto" value="<?= $row['id_producto']; ?>">
-    
+    <input type="hidden" name="reserva" value="<?= $row['reserva']; ?>">
+
     <button type="submit" class="btn btn-sm btn-success">
         <i class="bi bi-plus-lg"></i> Agregar
     </button>
