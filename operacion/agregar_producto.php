@@ -3,6 +3,8 @@ include '../includes/conexion.php';
 include '../includes/auth.php';
 include '../includes/header.php';
 
+$conn->report_mode = MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT;
+
 requireRole(['1']);
 
 if (!isset($_GET['id']) || !isset($_GET['id_grupo_productos'])) {
@@ -20,27 +22,34 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $id_grupo_productos = trim($_POST['id_grupo_productos']);
     $id_producto = intval($_POST['id_producto']);
     $reserva = intval($_POST['reserva']);
+    $cantidad = intval($_POST['cantidad']);
     $consumido = intval($_POST['cantidad']) * $reserva;
-	$cantidad = intval($_POST['cantidad']);
+    $medida = intval($_POST['medida']);
 	
 	$stmt = $conn->prepare("
-        INSERT INTO grupo_productos (id_grupo_productos, id_producto, consumido, cantidad)
-        VALUES (?,?,?,?)
+        INSERT INTO grupo_productos (id_grupo_productos, id_producto, cantidad, consumido, medida)
+        VALUES (?,?,?,?,?)
     ");
 
-    $stmt->bind_param("siii", $id_grupo_productos, $id_producto, $consumido, $cantidad);
+    $stmt->bind_param("siiis", $id_grupo_productos, $id_producto, $cantidad, $consumido, $medida);
 
-    if($stmt->execute()){
+    try {
+        $stmt->execute();
         $mensaje = "Producto agregado a la operación";
-    } else {
-        $mensaje = "Error al agregar producto";
+
+        header("Location: agregar_producto.php?id=".$id."&id_grupo_productos=".$id_grupo_productos."&msg=1");
+        exit;
+    } catch (mysqli_sql_exception $e) {
+        if (strpos($e->getMessage(), 'No hay suficiente stock') !== false) {
+            $mensaje = "No hay suficiente stock para este producto";
+        } else {
+            $mensaje = "Error al agregar producto: " . $e->getMessage();
+        }
     }
 
-    header("Location: agregar_producto.php?id=".$id."&id_grupo_productos=".$id_grupo_productos."&msg=1");
-    exit;
 }
 
-if(isset($_GET['msg'])){
+if (isset($_GET['msg']) && $_SERVER['REQUEST_METHOD'] !== 'POST') {
     $mensaje = "Producto agregado a la operación";
 }
 
@@ -69,9 +78,10 @@ $result_productos = $conn->query("
 <h4 class="col-12">Lista de productos disponibles</h4> 
 
 <?php if($mensaje): ?>
-<div class="alert alert-success">
-    <?= $mensaje; ?>
-</div>
+    <div class="alert <?= (strpos($mensaje,'stock') !== false || strpos($mensaje,'Error') !== false) ? 'alert-danger' : 'alert-success' ?> alert-dismissible fade show" role="alert">
+        <?= $mensaje; ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 <?php endif; ?>
 
 <div class="card shadow rounded-4">
@@ -123,6 +133,7 @@ $result_productos = $conn->query("
     <input type="hidden" name="id_grupo_productos" value="<?= $id_grupo_productos; ?>">
     <input type="hidden" name="id_producto" value="<?= $row['id_producto']; ?>">
     <input type="hidden" name="reserva" value="<?= $row['reserva']; ?>">
+    <input type="hidden" name="medida" value="<?= $row['medida']; ?>">
 
     <button type="submit" class="btn btn-sm btn-success">
         <i class="bi bi-plus-lg"></i> Agregar

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-04-2026 a las 23:00:31
+-- Tiempo de generación: 28-04-2026 a las 22:45:24
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -170,7 +170,10 @@ INSERT INTO `grupo_materiales` (`id_interno`, `id_grupo_materiales`, `id_materia
 (2, '2XXTFT78', 5, 1, '2026-04-23 20:17:27', '2026-04-23 20:17:27'),
 (3, '2XXTFT78', NULL, 10, '2026-04-23 20:25:43', '2026-04-23 20:25:43'),
 (4, '2XXTFT78', 7, 10, '2026-04-23 21:01:03', '2026-04-23 21:01:03'),
-(5, '2XXTFT78', 10, 30, '2026-04-23 21:02:12', '2026-04-23 21:02:12');
+(5, '2XXTFT78', 10, 30, '2026-04-23 21:02:12', '2026-04-23 21:02:12'),
+(6, '3XXTFT98', 3, 7, '2026-04-24 21:17:31', '2026-04-24 21:17:31'),
+(7, '3XXTFT98', 2, 5, '2026-04-24 21:17:46', '2026-04-24 21:17:46'),
+(9, '3XXTFT98', 5, 1, '2026-04-24 21:17:56', '2026-04-24 21:17:56');
 
 --
 -- Disparadores `grupo_materiales`
@@ -264,9 +267,14 @@ INSERT INTO `grupo_productos` (`id_grupo_productos`, `id_producto`, `cantidad`, 
 ('2XXTFT78', 6, 21, NULL, NULL, '2026-04-15 18:09:51', '2026-04-20 21:33:50'),
 ('2XXTFT78', 7, 12, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
 ('2XXTFT78', 8, 7, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 17:58:50'),
+('2XXTFT78', 9, 60, 420, NULL, '2026-04-28 18:10:44', '2026-04-28 18:10:44'),
 ('2XXTFT78', 10, 1, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 20:35:54'),
 ('2XXTFT78', 11, 1, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 20:35:55'),
 ('2XXTFT78', 12, 1, NULL, NULL, '2026-04-15 18:09:51', '2026-04-15 20:35:55'),
+('2XXTFT78', 13, 20, 240, '0', '2026-04-28 18:50:11', '2026-04-28 18:50:11'),
+('2XXTFT78', 14, 20, 20, '0', '2026-04-28 18:55:07', '2026-04-28 18:55:07'),
+('2XXTFT78', 15, 30, 210, '0', '2026-04-28 18:55:11', '2026-04-28 18:55:11'),
+('2XXTFT78', 16, 10, 9500, '0', '2026-04-28 18:57:39', '2026-04-28 18:57:39'),
 ('3XXTFT98', 6, 19, NULL, NULL, '2026-04-15 18:09:51', '2026-04-20 21:33:20'),
 ('3XXTFT98', 7, 2, NULL, NULL, '2026-04-15 18:09:51', '2026-04-20 21:45:46'),
 ('3XXTFT98', 8, 2, NULL, NULL, '2026-04-15 18:09:51', '2026-04-20 21:45:45'),
@@ -443,9 +451,9 @@ CREATE TABLE `material` (
 --
 
 INSERT INTO `material` (`id_material`, `nombre`, `cantidad`, `marca`, `estatus`, `fecha_creacion`) VALUES
-(2, 'Escobas', 9, 'Generico', 1, '2026-03-10 18:55:11'),
-(3, 'Aspiradoras', 7, 'Kymberly-Clark', 1, '2026-03-10 18:55:11'),
-(5, 'Recojedores', 8, 'Solprac', 1, '2026-03-10 18:55:11'),
+(2, 'Escobas', 7, 'Generico', 1, '2026-03-10 18:55:11'),
+(3, 'Aspiradoras', 8, 'Kymberly-Clark', 1, '2026-03-10 18:55:11'),
+(5, 'Recojedores', 7, 'Solprac', 1, '2026-03-10 18:55:11'),
 (7, 'Espátulas', 9, 'Tork', 1, '2026-03-10 18:55:11'),
 (8, 'Plumero extensible', 18, 'Biozone', 1, '2026-03-10 18:55:11'),
 (9, 'Plumero corto', 7, 'Biozone', 1, '2026-03-10 18:55:11'),
@@ -554,23 +562,41 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id_producto`, `nombre`, `cantidad`, `reserva`, `total`, `medida`, `conservado`, `tipo`, `marca`, `estatus`, `fecha_creacion`) VALUES
-(3, 'Blanqueador concentrado', 28, 900, 16200, 'ml', 'Botellas', 'Liquido', 'Clorox', 1, '2026-03-27 18:23:19'),
+(3, 'Blanqueador concentrado', 28, 900, 16200, 'kg', 'Botellas', 'Liquido', 'Clorox', 1, '2026-03-27 18:23:19'),
 (6, 'Gel desmaquillador', 16, 600, 4200, 'g', 'Frascos', 'Geles', 'Stain Cleaner', 1, '2026-03-27 18:23:19'),
 (7, 'Limpiador de pisos', 7, 7, 49, 'Unidades', 'Bolsas', 'Pastillas', 'Wow! Clean', 1, '2026-03-27 18:23:19'),
 (8, 'Toallas desinfectantes', 7, 8, 56, 'Unidades', 'Frascos', 'Toallitas humedas', 'Lysol', 1, '2026-03-27 18:23:19'),
-(9, 'Pastillas activas para retrete', 69, 7, 483, 'Unidades', 'Tubos', 'Pastillas', 'Harpic', 1, '2026-03-27 18:23:19'),
+(9, 'Pastillas activas para retrete', 9, 7, 483, 'Unidades', 'Tubos', 'Pastillas', 'Harpic', 1, '2026-03-27 18:23:19'),
 (10, 'Limpiador quita sarro de retrete', 7, 7, 49, 'Unidades', 'Bolsas', 'Pastillas', 'BeoClean', 1, '2026-03-27 18:23:19'),
 (11, 'Discos activos de aromatizante de retrete', 53, 7, 371, 'Unidades', 'Tubos', 'Pastillas', 'Pato', 1, '2026-03-27 18:23:19'),
 (12, 'Limpiador de teclados y arranca polvo de aparatos de electrónica', 15, 4, 60, 'Unidades', 'Cajas', 'Geles', 'TABS', 1, '2026-03-27 18:23:19'),
-(13, 'Pastillas de tratamiento con cloro para agua', 26, 12, 312, 'Unidades', 'Bolsas', 'Pastillas', 'TABS', 1, '2026-03-27 18:23:19'),
-(14, 'Liquido en cloro', 21, 1, 21, 'L', 'Botellas', 'Liquido', 'Cloralex', 1, '2026-03-27 18:23:19'),
-(15, 'Gel de inodoro', 67, 7, 469, 'Unidades', 'Tubos', 'Pastillas', 'KILOSTEP', 1, '2026-03-27 18:23:19'),
-(16, 'Aromatizante para WC', 14, 950, 13300, 'ml', 'Botellas', 'Sprays', 'Scent Colors', 1, '2026-03-27 18:23:19'),
+(13, 'Pastillas de tratamiento con cloro para agua', 6, 12, 312, 'Unidades', 'Bolsas', 'Pastillas', 'TABS', 1, '2026-03-27 18:23:19'),
+(14, 'Liquido en cloro', 1, 1, 21, 'L', 'Botellas', 'Liquido', 'Cloralex', 1, '2026-03-27 18:23:19'),
+(15, 'Gel de inodoro', 37, 7, 469, 'Unidades', 'Tubos', 'Pastillas', 'KILOSTEP', 1, '2026-03-27 18:23:19'),
+(16, 'Aromatizante para WC', 4, 950, 13300, 'ml', 'Botellas', 'Sprays', 'Scent Colors', 1, '2026-03-27 18:23:19'),
 (18, 'Gel antibacterial', 10, 100, 1000, 'ml', 'Botellas', 'Geles', 'Blumen', 1, '2026-03-27 18:23:19'),
 (19, 'Gel Antibacterial', 14, 60, 840, 'ml', 'Botellas', 'Geles', 'Walfort', 1, '2026-03-27 18:23:19'),
 (21, 'Jabón para Trastes', 14, 750, 10500, 'ml', 'Botellas', 'Liquido', 'Uline', 1, '2026-03-30 19:37:40'),
 (22, 'Desinfectante de baños', 14, 950, 13300, 'ml', 'Botellas', 'Sprays', 'Jhonson', 1, '2026-04-22 19:21:13'),
-(23, 'Lava trastes', 30, 900, 27000, 'ml', 'Botellas', 'Liquido', 'Salvamanos', 1, '2026-04-23 21:34:59');
+(23, 'Lava trastes', 30, 950, 28500, 'kg', 'Botellas', 'Liquido', 'Salvamanos', 1, '2026-04-23 21:34:59');
+
+--
+-- Disparadores `productos`
+--
+DELIMITER $$
+CREATE TRIGGER `calcular_total_productos_insert` BEFORE INSERT ON `productos` FOR EACH ROW BEGIN
+    -- Calculamos el total multiplicando la nueva cantidad por la reserva
+    SET NEW.total = NEW.cantidad * NEW.reserva;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `calcular_total_productos_update` BEFORE UPDATE ON `productos` FOR EACH ROW BEGIN
+    -- Si cambia la cantidad o la reserva, actualizamos el total automáticamente
+    SET NEW.total = NEW.cantidad * NEW.reserva;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -598,7 +624,7 @@ CREATE TABLE `rh` (
 --
 
 INSERT INTO `rh` (`id_trabajador`, `nombre`, `apellidos`, `rol`, `password`, `edad`, `direccion`, `entre_calles`, `correo`, `numero_telefonico`, `activo`, `fecha_creacion`) VALUES
-(1, 'Juan Pedro', 'Lagunillas Romero', 0, '', 29, 'Colonia: Juan Escutia, Calle: Salamanca #33', 'Parque Sovietico y Rio suchiatorio', 'jupe@gmail.com', 3117885890, 1, '2026-03-05 18:32:29'),
+(1, 'Juan Pedro', 'Lagunillas Romero', 0, '', 29, 'Colonia: Juan Escutia, Calle: Salamanca #33', 'Parque Sovietico y Rio suchiatorio', 'jupe@gmail.com', 3117885890, 0, '2026-03-05 18:32:29'),
 (2, 'Ricardo Canaya', 'Riquin Canallin', 0, '', 32, 'Colonia: Vistas de la cantera, Calle: Villa de Luevano #89', 'Villa de Cordoba y Villa de León', 'rica@hotmail.com', 3117764533, 0, '2026-03-05 18:32:29'),
 (3, 'Esmeralda Luna', 'Soto Camayo', 1, '12345', 45, 'Colonia: Agustín Iturbide, Calle: Bolivia #112', 'Parque Argentina y África ', 'eslu@gmail.com', 3118909907, 1, '2026-03-05 18:32:29'),
 (4, 'Violeta Laura', 'Lomeli Palomas', 0, NULL, 23, 'Colonia: Vistas de la cantera, Calle: Real del Monte #43', 'Real de Plata y Real de Huasca', 'vila@hotmail.com', 3111215543, 1, '2026-03-05 18:32:29'),
@@ -740,7 +766,7 @@ ALTER TABLE `crm`
 -- AUTO_INCREMENT de la tabla `grupo_materiales`
 --
 ALTER TABLE `grupo_materiales`
-  MODIFY `id_interno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_interno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `material`
