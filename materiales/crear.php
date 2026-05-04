@@ -4,23 +4,35 @@ include '../includes/auth.php';
 include '../includes/header.php';
 requireRole(['1']);
 
-if($_SERVER['REQUEST_METHOD']=='POST'){
+$querySugerencias = $conn->query("SELECT DISTINCT nombre FROM material ORDER BY nombre ASC");
+$sugerencias = [];
+while ($rowS = $querySugerencias->fetch_assoc()) {
+    $sugerencias[] = $rowS['nombre'];
+}
 
-    $nombre = trim($_POST['nombre']);
-	$cantidad = intval($_POST['cantidad']);
-	$marca = $_POST['marca'];
-
-    if($cantidad <= 0){
-        header("Location: crear.php?error=La cantidad debe ser mayor a 0");
-        exit;
+function generateRandomCodigo() {
+    $letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    $randomPart = '';
+    
+    for ($i = 0; $i < 8; $i++) {
+        $randomPart .= $letters[rand(0, strlen($letters) - 1)];
     }
 
+    return "cleaner-" . $randomPart ;
+}
+
+if($_SERVER['REQUEST_METHOD']=='POST'){
+
+    $codigo = generateRandomCodigo();
+    $nombre = trim($_POST['nombre']);
+	$marca = $_POST['marca'];
+
     $stmt = $conn->prepare("
-        INSERT INTO material (nombre, cantidad, marca)
+        INSERT INTO material (codigo, nombre, marca)
         VALUES (?,?,?)
     ");
 
-    $stmt->bind_param("sis",$nombre,$cantidad,$marca);
+    $stmt->bind_param("sss",$codigo,$nombre,$marca);
     $stmt->execute();
 
     header("Location: listar.php?exito=Material creado correctamente");
@@ -42,31 +54,23 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
 <form method="POST" class="row g-3">
 
-<div class="col-12">
-<label class="form-label">Nombre de material 
-    <i class="bi bi-question-circle text-primary" 
-     style="cursor: pointer; margin-left: 5px;" 
-     data-bs-toggle="tooltip" 
-     data-bs-placement="top" 
-     title="Escriba el uso que tiene el material.">
-    </i>
-</label>
-<input type="text" name="nombre" class="form-control" required>
-</div>
-
 <div class="col-md-3">
-<label class="form-label">Cantidad
-    <i class="bi bi-question-circle text-primary" 
-     style="cursor: pointer; margin-left: 5px;" 
-     data-bs-toggle="tooltip" 
-     data-bs-placement="top" 
-     title="Escriba en número la cantidad de unidades de material de limpieza">
-    </i>
-</label>
-<input type="number" step="0"
-name="cantidad"
-class="form-control"
-required>
+    <label class="form-label">Art&iacute;culo de limpieza 
+        <i class="bi bi-question-circle text-primary" 
+           style="cursor: pointer; margin-left: 5px;" 
+           data-bs-toggle="tooltip" 
+           data-bs-placement="top" 
+           title="Escriba el nombre del articulo de limpieza en singular.">
+        </i>
+    </label>
+
+    <input type="text" name="nombre" class="form-control" list="listaMateriales" autocomplete="off" required>
+    
+    <datalist id="listaMateriales">
+        <?php foreach($sugerencias as $sug): ?>
+            <option value="<?= htmlspecialchars($sug); ?>">
+        <?php endforeach; ?>
+    </datalist>
 </div>
 
 <div class="col-md-3">
@@ -83,7 +87,7 @@ required>
 
 <div class="col-12">
 <button class="btn btn-success w-100">
-💾 Guardar Producto
+💾 Guardar material
 </button>
 </div>
 

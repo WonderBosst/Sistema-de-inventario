@@ -31,8 +31,20 @@ SELECT * FROM productos WHERE estatus = true
 ?>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h3>📦 Productos</h3>
-    <a href="crear.php" class="btn btn-success">➕ Nuevo Producto</a>
+    
+    <h3 class="mb-0">
+        <i class="bi bi-backpack2"></i>📦 Productos
+    </h3>
+
+    <div class="d-flex gap-2">
+        <a href="crear.php" class="btn btn-success">
+            <i class="bi bi-plus-lg"></i> Nuevo Producto
+        </a>
+        <a href="eliminado.php" class="btn btn-danger">
+            <i class="bi bi-trash"></i> Producto eliminado
+        </a>
+    </div>
+
 </div>
 
 <?php if(isset($_GET['exito'])): ?>
@@ -83,12 +95,12 @@ SELECT * FROM productos WHERE estatus = true
 <td><?= htmlspecialchars($row['nombre']); ?></td>
 
 <td>
-      <span id="cantidad-<?= $row['id_producto']; ?>" 
-            class="<?= ($row['cantidad'] < 6) ? 'text-danger fw-bold' : '' ?>">
-         <?= $row['cantidad']; ?>
-         <?php if($row['cantidad'] < 6) echo '<i class="bi bi-exclamation-triangle-fill text-danger"></i>'; ?>
-      </span>
-   </td>
+    <span id="cantidad-<?= $row['id_producto']; ?>" 
+        class="<?= ($row['cantidad'] < 6) ? 'text-danger fw-bold' : '' ?>">
+        <?= $row['cantidad']; ?>
+        <?php if($row['cantidad'] < 6) echo '<i class="bi bi-exclamation-triangle-fill text-danger"></i>'; ?>
+    </span>
+</td>
 
 <td><?= htmlspecialchars($row['reserva']); ?></td>
 

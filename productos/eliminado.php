@@ -5,30 +5,15 @@ include '../includes/header.php';
 
 requireRole(['1']);
 
-
-requireRole(['1']);
-
 $result = $conn->query("
-SELECT M.nombre, COUNT(*) AS total FROM material AS M WHERE estatus = true GROUP BY M.nombre
+SELECT * FROM productos WHERE estatus = false
 ");
 
 ?>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-    
-    <h3 class="mb-0">
-        <i class="bi bi-backpack2"></i> Materiales
-    </h3>
-
-    <div class="d-flex gap-2">
-        <a href="crear.php" class="btn btn-success">
-            <i class="bi bi-plus-lg"></i> Nuevo material
-        </a>
-        <a href="eliminado.php" class="btn btn-danger">
-            <i class="bi bi-trash"></i> Material eliminado
-        </a>
-    </div>
-
+    <h3>Producto eliminado</h3>
+    <a href="listar.php" class="btn btn-secondary">⬅ Volver</a>
 </div>
 
 <?php if(isset($_GET['exito'])): ?>
@@ -52,10 +37,17 @@ SELECT M.nombre, COUNT(*) AS total FROM material AS M WHERE estatus = true GROUP
 <table class="table table-hover align-middle small" id="tablaMateriales">
 <thead class="table-light">
 <tr>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">#</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Nombre</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Total</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;" class="text-center" >Informaci&oacute;n</th>
+        <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">#</th>
+        <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Aplicaci&oacute;n</th>
+        <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Cantidad</th>
+        <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Reserva</th>
+        <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Total</th>
+        <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Medida</th>
+        <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Conservado en:</th>
+        <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Tipo</th>
+        <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Marca</th>
+        <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">fecha creaci&oacute;n</th>
+        <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">fecha eliminaci&oacute;n</th>
 </tr>
 </thead>
 <tbody>
@@ -64,20 +56,26 @@ SELECT M.nombre, COUNT(*) AS total FROM material AS M WHERE estatus = true GROUP
 
 <td><strong><?= $contador; ?></strong></td>
 
-
 <td><?= htmlspecialchars($row['nombre']); ?></td>
+
+<td><?= htmlspecialchars($row['cantidad']); ?></td>
+
+<td><?= htmlspecialchars($row['reserva']); ?></td>
 
 <td><?= htmlspecialchars($row['total']); ?></td>
 
-<td class="text-center">
-<div class="d-flex flex-row flex-sm-row justify-content-center gap-1">
+<td><?= htmlspecialchars($row['medida']); ?></td>
 
-<a href="listado_especifico.php?nombre=<?= $row['nombre']; ?>" 
-class="btn btn-sm btn-info"><i class="bi bi-info-circle"></i> Informaci&oacute;n
-</a>
+<td><?= htmlspecialchars($row['conservado']); ?></td>
 
-</div>
-</td>
+<td><?= htmlspecialchars($row['tipo']); ?></td>
+
+<td><?= htmlspecialchars($row['marca']); ?></td>
+
+<td><?= htmlspecialchars($row['fecha_creacion']); ?></td>
+
+<td><?= htmlspecialchars($row['fecha_eliminacion']); ?></td>
+
 
 </tr>
 <?php $contador++; ?>
@@ -104,18 +102,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-function actualizarCantidad(id, accion){
-    fetch("actualizar_cantidad.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: "id=" + id + "&accion=" + accion
-    })
-    .then(response => response.text())
-    .then(cantidad => {
-        document.getElementById("cantidad-" + id).innerText = cantidad;
-    })
-    .catch(error => console.error('Error:', error));
-}
 </script>
 
 <?php include '../includes/footer.php'; ?>

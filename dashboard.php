@@ -9,7 +9,6 @@ $rol_usuario = $_SESSION['rol'] ?? '1';
 // --- LÓGICA DE STOCK BAJO ---
 $productos_bajos = [];
 if ($rol_usuario == '1') {
-    // Buscamos productos con cantidad menor a 6
     $res_stock = $conn->query("SELECT nombre, cantidad FROM productos WHERE cantidad < 6");
     while ($row_s = $res_stock->fetch_assoc()) {
         $productos_bajos[] = $row_s;
@@ -18,8 +17,7 @@ if ($rol_usuario == '1') {
 
 $materiales_bajos = [];
 if ($rol_usuario == '1') {
-    // Buscamos productos con cantidad menor a 6
-    $res_stock = $conn->query("SELECT nombre, cantidad FROM material WHERE cantidad < 6 AND estatus = true");
+    $res_stock = $conn->query("SELECT M.nombre, COUNT(*) AS total FROM material AS M WHERE M.estatus = true GROUP BY M.nombre HAVING COUNT(*) < 6");
     while ($row_s = $res_stock->fetch_assoc()) {
         $materiales_bajos[] = $row_s;
     }
@@ -50,6 +48,7 @@ if ($rol_usuario == '1') {
             </div>
         <?php endif; ?>
 
+         
         <?php if (!empty($materiales_bajos)): ?>
             <div class="alert alert-warning shadow-sm rounded-4 mb-4" role="alert" style="border-left: 5px solid #ffc107;">
                 <div class="d-flex align-items-center">
@@ -60,7 +59,7 @@ if ($rol_usuario == '1') {
                             <?php foreach ($materiales_bajos as $m): ?>
                                 <li>
                                     <strong><?= htmlspecialchars($m['nombre']); ?></strong>: 
-                                    <span class="badge bg-dark"><?= $m['cantidad']; ?> disp.</span>
+                                    <span class="badge bg-dark"><?= $m['total']; ?> disp.</span>
                                 </li>
                             <?php endforeach; ?>
                         </ul>
@@ -70,7 +69,6 @@ if ($rol_usuario == '1') {
                 <a href="materiales/listar.php" class="alert-link small text-dark">Gestionar Materiales →</a>
             </div>
         <?php endif; ?>
-
     </div>
 </div>
 

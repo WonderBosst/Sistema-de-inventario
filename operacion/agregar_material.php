@@ -21,24 +21,20 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
     $id_grupo_materiales = trim($_POST['id_grupo_materiales']);
     $id_material = intval($_POST['id_material']);
-
-    $cantidad = intval($_POST['cantidad']);    
-
+  
     $stmt = $conn->prepare("
 
-        INSERT INTO grupo_materiales (id_grupo_materiales, id_material, cantidad)
-        VALUES (?,?,?)
+        INSERT INTO grupo_materiales (id_grupo_materiales, id_material)
+        VALUES (?,?)
     ");
 
-    $stmt->bind_param("sii", $id_grupo_materiales, $id_material, $cantidad);
+    $stmt->bind_param("si", $id_grupo_materiales, $id_material);
 
 
     try {
         $stmt->execute();
-        // Solo asignar mensaje, no redirigir todavía
         $mensaje = "Material agregado a la operación";
     } catch (mysqli_sql_exception $e) {
-        // Captura específicamente el error del trigger
         if (strpos($e->getMessage(), 'No hay suficiente stock') !== false) {
             $mensaje = "No hay suficiente stock para este material";
         } else {
@@ -54,7 +50,6 @@ if(isset($_GET['msg'])){
 $result_materiales = $conn->query("
     SELECT M.id_material,
        M.nombre, 
-       M.cantidad,
        M.marca,
        M.fecha_creacion
     FROM material AS M 
@@ -78,15 +73,23 @@ $result_materiales = $conn->query("
 
 <?php endif; ?>
 
-<div class="card shadow rounded-4">
-<div class="card-body table-responsive" style="max-height: 700px; overflow-y: auto;">
+<nav class="navbar bg-body-tertiary mb-3 rounded-4 shadow-sm">
+  <div class="container-fluid">
+    <div class="col-12 col-md-6"> <form class="d-flex" role="search" onsubmit="return false;">
+        <input class="form-control" type="search" id="inputBusqueda" placeholder="Buscar materiales...">
+      </form>
+    </div>
+  </div>
+</nav>
 
-<table class="table table-hover align-middle small">
+<div class="card shadow rounded-4">
+<div class="card-body table-responsive" style="max-height: 600px; overflow-y: auto;">
+
+<table class="table table-hover align-middle small" id="tablaMateriales">
 <thead class="table-light">
 <tr>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">#</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Nombre</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Cantidad</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Marca</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Fecha_creacion</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Acciones
@@ -107,12 +110,10 @@ $result_materiales = $conn->query("
 <tr>
 <td><strong><?= $contador; ?></strong></td>
 <td><?= htmlspecialchars($row['nombre']); ?></td>
-<td><?= htmlspecialchars($row['cantidad']); ?></td>
 <td><?= htmlspecialchars($row['marca']); ?></td>
 <td><?= htmlspecialchars($row['fecha_creacion']); ?></td>
 <td>
 <form method="POST" class="d-flex gap-2 align-items-center">
-    <input type="number" name="cantidad" class="form-control" min="1" style="width: 80px;" required>
     <input type="hidden" name="id_grupo_materiales" value="<?= $id_grupo_materiales; ?>">
     <input type="hidden" name="id_material" value="<?= $row['id_material']; ?>">
     <button type="submit" class="btn btn-sm btn-success">
@@ -148,4 +149,19 @@ $result_materiales = $conn->query("
     </a>
 </div>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const buscador = document.getElementById("inputBusqueda");
+    const filas = document.querySelectorAll("#tablaMateriales tbody tr");
+
+    buscador.addEventListener("keyup", function() {
+        const termino = buscador.value.toLowerCase().trim();
+
+        filas.forEach(fila => {
+            const texto = fila.textContent.toLowerCase();
+            fila.style.display = texto.includes(termino) ? "" : "none";
+        });
+    });
+});
+</script>
 <?php include '../includes/footer.php'; ?>

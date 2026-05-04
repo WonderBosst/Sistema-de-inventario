@@ -25,6 +25,7 @@ function generateRandomIdGrupo($length = 8) {
 
     return $id_grupo;
 }
+
 if($_SERVER['REQUEST_METHOD']=='POST'){
 
     $codigo_operacion = generateRandomIdGrupo();
@@ -73,7 +74,7 @@ try {
 
     if (!empty($titulo) && !empty($escrito)) {
         $stmt_nota = $conn->prepare("INSERT INTO notas (titulo, escrito, id_operacion) VALUES (?, ?, ?)");
-        $stmt_nota->bind_param("ssii", $titulo, $escrito, $nuevo_id_operacion, $estatusnotas);
+        $stmt_nota->bind_param("ssi", $titulo, $escrito, $nuevo_id_operacion);
         $stmt_nota->execute();
     }
 

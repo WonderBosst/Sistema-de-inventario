@@ -56,7 +56,6 @@ $id_cliente = isset($_GET['id_cliente'])
     ? intval($_GET['id_cliente']) 
     : $operacion['id_cliente'];
 
-//Sección de listado de entidades existentes en tablas
 $result_trabajadores = $conn->query("
 SELECT R.id_trabajador,
 	   R.nombre, 
@@ -96,8 +95,8 @@ SELECT P.id_producto,
 
 $result_grupo_materiales = $conn->query("
 SELECT M.id_material,
-	   M.nombre, 
-	   GM.cantidad,  
+       M.codigo,
+	   M.nombre,   
 	   M.marca,
 	   GM.id_grupo_materiales FROM material AS M INNER JOIN 
 	   grupo_materiales AS GM ON GM.id_material = M.id_material INNER JOIN 
@@ -483,8 +482,8 @@ class="btn btn-sm btn-danger">
 <thead class="table-light">
 <tr>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">#</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Codigo</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Nombre</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Cantidad usada:</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Marca</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Acciones</th>
 </tr>
@@ -495,9 +494,9 @@ class="btn btn-sm btn-danger">
 
 <td><strong><?= $contador; ?></strong></td>
 
-<td><?= htmlspecialchars($row['nombre']); ?></td>
+<td><?= htmlspecialchars($row['codigo']); ?></td>
 
-<td><?= htmlspecialchars($row['cantidad']); ?></td>
+<td><?= htmlspecialchars($row['nombre']); ?></td>
 
 <td><?= htmlspecialchars($row['marca']); ?></td>
 

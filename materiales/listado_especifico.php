@@ -5,30 +5,24 @@ include '../includes/header.php';
 
 requireRole(['1']);
 
-
+/*
+Consultamos materiales en existencia
+*/
 requireRole(['1']);
 
+$nombre = trim($_GET['nombre']);
+
 $result = $conn->query("
-SELECT M.nombre, COUNT(*) AS total FROM material AS M WHERE estatus = true GROUP BY M.nombre
+SELECT M.id_material, M.codigo, M.nombre, M.marca, M.fecha_creacion FROM material AS M WHERE M.estatus = true AND M.nombre = '$nombre';
 ");
 
 ?>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-    
     <h3 class="mb-0">
         <i class="bi bi-backpack2"></i> Materiales
     </h3>
-
-    <div class="d-flex gap-2">
-        <a href="crear.php" class="btn btn-success">
-            <i class="bi bi-plus-lg"></i> Nuevo material
-        </a>
-        <a href="eliminado.php" class="btn btn-danger">
-            <i class="bi bi-trash"></i> Material eliminado
-        </a>
-    </div>
-
+    <a href="listar.php" class="btn btn-secondary">⬅ Volver</a>
 </div>
 
 <?php if(isset($_GET['exito'])): ?>
@@ -53,9 +47,11 @@ SELECT M.nombre, COUNT(*) AS total FROM material AS M WHERE estatus = true GROUP
 <thead class="table-light">
 <tr>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">#</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Codigo</th>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Nombre</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Total</th>
-<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;" class="text-center" >Informaci&oacute;n</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Marca</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Fecha creaci&oacute;n</th>
+<th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;" class="text-center" >Acciones</th>
 </tr>
 </thead>
 <tbody>
@@ -65,15 +61,28 @@ SELECT M.nombre, COUNT(*) AS total FROM material AS M WHERE estatus = true GROUP
 <td><strong><?= $contador; ?></strong></td>
 
 
+<td><?= htmlspecialchars($row['codigo']); ?></td>
+
 <td><?= htmlspecialchars($row['nombre']); ?></td>
 
-<td><?= htmlspecialchars($row['total']); ?></td>
+<td><?= htmlspecialchars($row['marca']); ?></td>
+
+<td><?= htmlspecialchars($row['fecha_creacion']); ?></td>
 
 <td class="text-center">
 <div class="d-flex flex-row flex-sm-row justify-content-center gap-1">
 
-<a href="listado_especifico.php?nombre=<?= $row['nombre']; ?>" 
-class="btn btn-sm btn-info"><i class="bi bi-info-circle"></i> Informaci&oacute;n
+<a href="editar.php?id=<?= $row['id_material']; ?>&nombre=<?= $row['nombre']; ?>" 
+class="btn btn-sm btn-warning">
+✏️ Editar
+</a>
+
+<a href="#" 
+   class="btn btn-sm btn-danger"
+   onclick="let motivo = prompt('¿Por qué desea eliminar este material?'); 
+            if(motivo) { window.location.href = 'procesar_eliminar.php?id=<?= $row['id_material'] ?>&razon=' + encodeURIComponent(motivo); } 
+            return false;">
+    🗑️
 </a>
 
 </div>

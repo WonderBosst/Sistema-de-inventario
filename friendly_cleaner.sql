@@ -438,7 +438,7 @@ INSERT INTO `grupo_trabajadores` (`id_grupo_trabajadores`, `id_trabajador`, `fec
 --
 
 CREATE TABLE `material` (
-  `id_material` int(11) NOT NULL,
+  `id_material` INT NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
   `cantidad` double DEFAULT NULL,
   `marca` varchar(120) DEFAULT NULL,

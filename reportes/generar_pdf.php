@@ -135,7 +135,7 @@ if (intval($id_operacion) > 0) {
 }
 
 if (intval($id_operacion) > 0) {
-    $query = "SELECT M.id_material, M.nombre, GM.cantidad,  M.marca, GM.id_grupo_materiales 
+    $query = "SELECT M.id_material, M.codigo, M.nombre,  M.marca, GM.id_grupo_materiales 
               FROM material AS M INNER JOIN grupo_materiales AS GM ON GM.id_material = M.id_material 
               INNER JOIN grupos_materiales AS GSM ON GSM.id_grupo_materiales = GM.id_grupo_materiales 
               INNER JOIN operacion AS O ON O.id_grupo_materiales = GSM.id_grupo_materiales WHERE O.id_operacion = " . intval($id_operacion);
@@ -147,8 +147,8 @@ if (intval($id_operacion) > 0) {
         <table class='tabla-productos'>
             <thead>
                 <tr>
+                    <th>Codigo</th>
                     <th>Material</th>
-                    <th>Cantidad</th>
                     <th>Marca</th>
                 </tr>
             </thead>
@@ -157,8 +157,8 @@ if (intval($id_operacion) > 0) {
         while ($t = $result_materiales->fetch_assoc()) {
             $materiales_html .= "
                 <tr>
+                    <td>" . htmlspecialchars($t['codigo']) . "</td>
                     <td>" . htmlspecialchars($t['nombre']) . "</td>
-                    <td style='text-align: center;'>" . htmlspecialchars($t['cantidad']) . "</td>
                     <td>" . htmlspecialchars($t['marca']) . "</td>
                 </tr>";
         }

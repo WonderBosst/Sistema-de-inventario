@@ -25,7 +25,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         VALUES (?,?,?,?,?,?,?,?)
     ");
 
-    $stmt->bind_param("siiissssi",$nombre,$cantidad,$reserva,$total,$medida,$conservado,$tipo,$marca);
+    $stmt->bind_param("siiissss",$nombre,$cantidad,$reserva,$total,$medida,$conservado,$tipo,$marca);
     $stmt->execute();
 
     header("Location: listar.php?exito=Producto creado correctamente");
@@ -100,10 +100,9 @@ required>
   </i>
 </label>
 <select name="medida" class="form-select" required>
-<option value="kg">Kilogramos</option>
-<option value="g">Gramos</option>
-<option value="L">Litros</option>
-<option value="ml">Mililitros</option>
+<option value="Oz">Onza</option>
+<option value="lb">Libra</option>
+<option value="G">Galon</option>
 <option value="unidades">Unidades</option>
 </select>
 </div>
