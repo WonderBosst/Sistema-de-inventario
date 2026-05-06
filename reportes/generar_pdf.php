@@ -121,7 +121,7 @@ if (intval($id_operacion) > 0) {
                 <tr>
                     <td>" . htmlspecialchars($t['nombre']) . "</td>
                     <td style='text-align: center;'>" . htmlspecialchars($t['cantidad']) . "</td>
-                    <td>" . htmlspecialchars($t['total']) . "</td>
+                    <td>" . htmlspecialchars($t['consumido']) . "</td>
                     <td>" . htmlspecialchars($t['medida']) . "</td>
                     <td>" . htmlspecialchars($t['tipo']) . "</td>
                     <td>" . htmlspecialchars($t['marca']) . "</td>

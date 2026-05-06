@@ -6,23 +6,103 @@ include 'includes/header.php';
 
 $rol_usuario = $_SESSION['rol'] ?? '1';
 
-// --- LÓGICA DE STOCK BAJO ---
-$productos_bajos = [];
-if ($rol_usuario == '1') {
-    $res_stock = $conn->query("SELECT nombre, cantidad FROM productos WHERE cantidad < 6");
-    while ($row_s = $res_stock->fetch_assoc()) {
-        $productos_bajos[] = $row_s;
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['nuevo_limite'], $_POST['entidad_objetivo'])) {
+    if ($rol_usuario == '1') {
+        $nuevo_valor = (int)$_POST['nuevo_limite'];
+        $entidad = $_POST['entidad_objetivo'];
+
+        $stmt = $conn->prepare("UPDATE limitante SET limite = ? WHERE entidad = ?");
+        $stmt->bind_param("is", $nuevo_valor, $entidad);
+        
+        if ($stmt->execute()) {
+            header("Location: " . $_SERVER['PHP_SELF'] . "?actualizado=1");
+            exit;
+        }
     }
 }
 
+$res_limites = $conn->query("SELECT entidad, limite FROM limitante");
+$limites_db = [];
+while ($row = $res_limites->fetch_assoc()) {
+    $limites_db[$row['entidad']] = $row['limite'];
+}
+
+$limite_productos = $limites_db['productos'] ?? 6;
+$limite_materiales = $limites_db['materiales'] ?? 6;
+
+$productos_bajos = [];
 $materiales_bajos = [];
+
 if ($rol_usuario == '1') {
-    $res_stock = $conn->query("SELECT M.nombre, COUNT(*) AS total FROM material AS M WHERE M.estatus = true GROUP BY M.nombre HAVING COUNT(*) < 6");
+    $res_stock = $conn->query("SELECT nombre, cantidad FROM productos WHERE cantidad < $limite_productos");
     while ($row_s = $res_stock->fetch_assoc()) {
-        $materiales_bajos[] = $row_s;
+        $productos_bajos[] = $row_s;
+    }
+
+    $sql_mat = "SELECT M.nombre, COUNT(*) AS total 
+                FROM material AS M 
+                WHERE M.estatus = true 
+                GROUP BY M.nombre 
+                HAVING COUNT(*) < $limite_materiales";
+    $res_mat = $conn->query($sql_mat);
+    while ($row_m = $res_mat->fetch_assoc()) {
+        $materiales_bajos[] = $row_m;
     }
 }
 ?>
+
+<div class="row mb-4">
+    <div class="col-md-6 col-lg-5 mb-3">
+        <div class="card shadow-sm border-0 bg-light">
+            <div class="card-body">
+                <form method="POST" class="row g-2 align-items-center">
+                    <input type="hidden" name="entidad_objetivo" value="productos">
+                    
+                    <div class="col-auto">
+                        <label class="form-label small fw-bold mb-0">Límite Productos: 
+                            <i class="bi bi-question-circle text-primary" data-bs-toggle="tooltip" title="Límite de stock para productos"></i>
+                        </label>
+                        <input type="number" name="nuevo_limite" class="form-control form-control-sm" placeholder="Ej. 10" min="1" required>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary btn-sm mt-4">Actualizar</button>
+                    </div>
+                    <div class="col-auto ms-3 mt-4">
+                        <span class="badge bg-info text-dark p-2">
+                            Actual: <strong><?= $limite_productos ?></strong>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-5 mb-3">
+        <div class="card shadow-sm border-0 bg-light">
+            <div class="card-body">
+                <form method="POST" class="row g-2 align-items-center">
+
+                    <input type="hidden" name="entidad_objetivo" value="materiales">
+                    
+                    <div class="col-auto">
+                        <label class="form-label small fw-bold mb-0">Límite Materiales: 
+                            <i class="bi bi-question-circle text-primary" data-bs-toggle="tooltip" title="Límite de stock para materiales"></i>
+                        </label>
+                        <input type="number" name="nuevo_limite" class="form-control form-control-sm" placeholder="Ej. 10" min="1" required>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary btn-sm mt-4">Actualizar</button>
+                    </div>
+                    <div class="col-auto ms-3 mt-4">
+                        <span class="badge bg-info text-dark p-2">
+                            Actual: <strong><?= $limite_materiales ?></strong>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="row">
     <div class="col-12">

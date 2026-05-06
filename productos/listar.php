@@ -5,7 +5,9 @@ include '../includes/header.php';
 
 requireRole(['1']);
 
-requireRole(['1']);
+$res_limitante = $conn->query("SELECT limite FROM limitante WHERE entidad = 'productos' LIMIT 1");
+$row_lim = $res_limitante->fetch_assoc();
+$limite_actual = $row_lim['limite'] ?? 6;
 
 if(isset($_GET['id']) && isset($_GET['accion'])){
 
@@ -33,7 +35,7 @@ SELECT * FROM productos WHERE estatus = true
 <div class="d-flex justify-content-between align-items-center mb-4">
     
     <h3 class="mb-0">
-        <i class="bi bi-backpack2"></i>📦 Productos
+        <i class="bi bi-basket"></i> Productos
     </h3>
 
     <div class="d-flex gap-2">
@@ -96,9 +98,9 @@ SELECT * FROM productos WHERE estatus = true
 
 <td>
     <span id="cantidad-<?= $row['id_producto']; ?>" 
-        class="<?= ($row['cantidad'] < 6) ? 'text-danger fw-bold' : '' ?>">
+        class="<?= ($row['cantidad'] < $limite_actual) ? 'text-danger fw-bold' : '' ?>">
         <?= $row['cantidad']; ?>
-        <?php if($row['cantidad'] < 6) echo '<i class="bi bi-exclamation-triangle-fill text-danger"></i>'; ?>
+        <?php if($row['cantidad'] < $limite_actual) echo '<i class="bi bi-exclamation-triangle-fill text-danger"></i>'; ?>
     </span>
 </td>
 
@@ -180,35 +182,33 @@ $(document).ready(function() {
 });
 
 function actualizarCantidad(id, accion) {
+    // Traemos el límite desde PHP a una constante de JS
+    const limiteConfigurado = <?= $limite_actual ?>; 
+
     $.ajax({
         url: "actualizar_cantidad.php",
         method: "POST",
         data: { id: id, accion: accion },
         success: function(nuevaCantidad) {
-            // 1. Convertimos a número para comparar
             const cant = parseInt(nuevaCantidad);
             const $span = $("#cantidad-" + id);
             const $fila = $span.closest('tr');
 
-            // 2. Actualizamos el texto
             $span.text(nuevaCantidad);
 
-            // 3. Lógica de alertas visuales
-            if (cant < 6) {
-                // Si es bajo, pintamos la fila de rojo y añadimos alerta
+            // USAMOS EL LÍMITE DINÁMICO AQUÍ
+            if (cant < limiteConfigurado) {
                 $fila.addClass('table-danger');
                 $span.addClass('text-danger fw-bold');
                 if (!$span.find('.bi-exclamation-triangle').length) {
                     $span.append(' <i class="bi bi-exclamation-triangle-fill text-danger"></i>');
                 }
             } else {
-                // Si el stock es suficiente, limpiamos las alertas
                 $fila.removeClass('table-danger');
                 $span.removeClass('text-danger fw-bold');
                 $span.find('i').remove();
             }
 
-            // 4. Actualizamos el atributo data para el botón de información
             $fila.find('.btn-info-producto').attr('data-cantidad', nuevaCantidad);
         },
         error: function() {
