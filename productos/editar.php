@@ -105,10 +105,10 @@ required>
     </i>
 </label>
 <select name="medida" class="form-select" required>
-<option value="kg">Kilogramos</option>
-<option value="g">Gramos</option>
-<option value="L">Litros</option>
-<option value="ml">Mililitros</option>
+<option value="oz">Onza</option>
+<option value="lb">Libra</option>
+<option value="fl oz">Onza fluida</option>
+<option value="gl">Galon</option>
 <option value="unidades">Unidades</option>
 </select>
 </div>
@@ -146,6 +146,7 @@ required>
 <option value="Liquido" <?= $producto['tipo']=='Liquido'?'selected':'' ?>>Liquido</option>
 <option value="Pastillas" <?= $producto['tipo']=='Pastillas'?'selected':'' ?>>Pastillas</option>
 <option value="Espumas" <?= $producto['tipo']=='Espumas'?'selected':'' ?>>Espuma</option>
+<option value="Polvo" <?= $producto['tipo']=='Polvo'?'selected':'' ?>>Polvo</option>
 <option value="Toallitas humedas" <?= $producto['tipo']=='Toallitas humedas'?'selected':'' ?>>Toallitas h&uacute;medas</option>
 <option value="Barras de jabon" <?= $producto['tipo']=='Barras de jabon'?'selected':'' ?>>Barras de jab&oacute;n</option>
 </select>

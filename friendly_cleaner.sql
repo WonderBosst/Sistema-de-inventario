@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-05-2026 a las 21:42:19
+-- Tiempo de generación: 07-05-2026 a las 23:29:23
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -177,7 +177,15 @@ INSERT INTO `grupo_materiales` (`id_interno`, `id_grupo_materiales`, `id_materia
 (20, '2XXTFT78', 30, NULL, '2026-05-04 19:14:33', '2026-05-04 19:14:33'),
 (21, '2XXTFT78', 29, NULL, '2026-05-04 19:14:34', '2026-05-04 19:14:34'),
 (22, '2XXTFT78', 28, NULL, '2026-05-04 19:14:35', '2026-05-04 19:14:35'),
-(23, '2XXTFT78', 27, NULL, '2026-05-04 19:14:35', '2026-05-04 19:14:35');
+(23, '2XXTFT78', 27, NULL, '2026-05-04 19:14:35', '2026-05-04 19:14:35'),
+(28, '2XXTFT78', 35, NULL, '2026-05-07 20:46:54', '2026-05-07 20:46:54'),
+(29, '2XXTFT78', 36, NULL, '2026-05-07 20:46:56', '2026-05-07 20:46:56'),
+(30, '2XXTFT78', 37, NULL, '2026-05-07 20:46:57', '2026-05-07 20:46:57'),
+(31, '2XXTFT78', 38, NULL, '2026-05-07 21:11:41', '2026-05-07 21:11:41'),
+(32, '2XXTFT78', 40, NULL, '2026-05-07 21:11:42', '2026-05-07 21:11:42'),
+(33, '2XXTFT78', 41, NULL, '2026-05-07 21:11:43', '2026-05-07 21:11:43'),
+(34, '2XXTFT78', 42, NULL, '2026-05-07 21:11:44', '2026-05-07 21:11:44'),
+(35, '2XXTFT78', 43, NULL, '2026-05-07 21:13:02', '2026-05-07 21:13:02');
 
 -- --------------------------------------------------------
 
@@ -385,7 +393,7 @@ CREATE TABLE `limitante` (
 --
 
 INSERT INTO `limitante` (`id_limite`, `entidad`, `limite`) VALUES
-(1, 'materiales', 5),
+(1, 'materiales', 2),
 (2, 'productos', 5);
 
 -- --------------------------------------------------------
@@ -438,7 +446,7 @@ INSERT INTO `material` (`id_material`, `codigo`, `nombre`, `marca`, `razon`, `es
 (36, 'cleaner-PtO8cJdD', 'Espátula', 'Johnn Deree', NULL, 1, '2026-05-04 20:19:26', '2026-05-04 20:19:26'),
 (37, 'cleaner-1n7phEvw', 'Plumero corto', 'Jhonsson', NULL, 1, '2026-05-04 20:19:47', '2026-05-04 20:19:47'),
 (38, 'cleaner-vxXmM3bd', 'Botella de spray', 'Jhonsson', NULL, 1, '2026-05-04 20:24:55', '2026-05-04 20:24:55'),
-(39, 'cleaner-gsEtkNxj', 'Botella de spray', 'Fabuloso', NULL, 1, '2026-05-04 20:25:13', '2026-05-04 20:25:13'),
+(39, 'cleaner-gsEtkNxj', 'Botella de spray', 'Fabuloso', 'Se elimina por que se vacio', 0, '2026-05-04 20:25:13', '2026-05-07 20:37:28'),
 (40, 'cleaner-YBoSHtBK', 'Botella de spray', 'Clorox', NULL, 1, '2026-05-04 20:25:21', '2026-05-04 20:25:21'),
 (41, 'cleaner-ckogSs52', 'Cepillo de limpieza de esquinas', 'Wiese', NULL, 1, '2026-05-04 20:25:48', '2026-05-04 20:25:48'),
 (42, 'cleaner-XyFB6hEP', 'Cepillo de limpieza de esquinas', 'Wiese', NULL, 1, '2026-05-04 20:25:56', '2026-05-04 20:25:56'),
@@ -493,7 +501,15 @@ INSERT INTO `material` (`id_material`, `codigo`, `nombre`, `marca`, `razon`, `es
 (91, 'cleaner-S3hn6wzS', 'Plumero extensible', 'Salvo', NULL, 1, '2026-05-04 21:56:43', '2026-05-04 21:56:43'),
 (92, 'cleaner-5ZSMypQ4', 'Plumero extensible', 'Byozone', NULL, 1, '2026-05-04 21:56:52', '2026-05-04 21:56:52'),
 (93, 'cleaner-kDPmbjXe', 'Cepillo de limpieza de esquinas', 'Gojo', NULL, 1, '2026-05-06 19:31:01', '2026-05-06 19:31:01'),
-(94, 'cleaner-6yEFy9k3', 'Cepillo de limpieza de esquinas', 'Byozone', NULL, 1, '2026-05-06 19:31:11', '2026-05-06 19:31:11');
+(94, 'cleaner-6yEFy9k3', 'Cepillo de limpieza de esquinas', 'Byozone', NULL, 1, '2026-05-06 19:31:11', '2026-05-06 19:31:11'),
+(95, 'cleaner-3ei8xKjA', 'Escoba angular', 'Gojo', NULL, 1, '2026-05-06 20:40:16', '2026-05-06 20:40:16'),
+(96, 'cleaner-TdRxwjMi', 'Espátula', 'Salvo', NULL, 1, '2026-05-06 20:40:36', '2026-05-06 20:40:36'),
+(97, 'cleaner-Lm8IvR2D', 'Paños de limpieza de microfibra', 'Jhonsson', NULL, 1, '2026-05-06 20:40:45', '2026-05-06 20:40:45'),
+(98, 'cleaner-pB1AC4RG', 'Plumero corto', 'Gojo', NULL, 1, '2026-05-06 20:40:53', '2026-05-06 20:40:53'),
+(99, 'cleaner-TxELS0gm', 'Plumero corto', 'Byozone', NULL, 1, '2026-05-06 20:41:14', '2026-05-06 20:41:14'),
+(100, 'cleaner-lsjBCL6h', 'Trapeador de microfibra', 'Jhonsson', NULL, 1, '2026-05-06 20:41:23', '2026-05-06 20:41:23'),
+(101, 'cleaner-sU1oWvgO', 'Trapeador rectangular largo de 50 cm', 'Wiese', NULL, 1, '2026-05-06 20:41:56', '2026-05-06 20:41:56'),
+(102, 'cleaner-gnDh8nCy', 'Trapeador largo', 'Wiese', NULL, 1, '2026-05-06 20:43:15', '2026-05-06 20:43:15');
 
 -- --------------------------------------------------------
 
@@ -586,9 +602,9 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id_producto`, `nombre`, `cantidad`, `reserva`, `total`, `medida`, `conservado`, `tipo`, `marca`, `estatus`, `fecha_eliminacion`, `fecha_creacion`) VALUES
-(3, 'Blanqueador concentrado', 38, 900, 34200, 'ml', 'Botellas', 'Liquido', 'Clorox', 1, '2026-05-04 20:52:11', '2026-03-27 18:23:19'),
-(6, 'Gel desmaquillador', 16, 600, 4200, 'g', 'Frascos', 'Geles', 'Stain Cleaner', 1, '2026-05-04 20:50:03', '2026-03-27 18:23:19'),
-(7, 'Limpiador de pisos', 7, 7, 49, 'Unidades', 'Bolsas', 'Pastillas', 'Wow! Clean', 1, '2026-05-04 20:50:03', '2026-03-27 18:23:19'),
+(3, 'Blanqueador concentrado', 29, 900, 26100, 'ml', 'Botellas', 'Liquido', 'Clorox', 1, '2026-05-06 21:42:32', '2026-03-27 18:23:19'),
+(6, 'Gel desmaquillador', 5, 600, 3000, 'g', 'Frascos', 'Geles', 'Stain Cleaner', 1, '2026-05-06 21:42:35', '2026-03-27 18:23:19'),
+(7, 'Limpiador de pisos', 7, 7, 49, 'Unidades', 'Bolsas', 'Pastillas', 'Wow! Clean', 1, '2026-05-06 20:39:15', '2026-03-27 18:23:19'),
 (8, 'Toallas desinfectantes', 7, 8, 56, 'Unidades', 'Frascos', 'Toallitas humedas', 'Lysol', 1, '2026-05-04 20:50:03', '2026-03-27 18:23:19'),
 (9, 'Pastillas activas para retrete', 9, 7, 483, 'Unidades', 'Tubos', 'Pastillas', 'Harpic', 1, '2026-05-04 20:50:03', '2026-03-27 18:23:19'),
 (10, 'Limpiador quita sarro de retrete', 7, 7, 49, 'Unidades', 'Bolsas', 'Pastillas', 'BeoClean', 1, '2026-05-04 20:50:03', '2026-03-27 18:23:19'),
@@ -596,8 +612,8 @@ INSERT INTO `productos` (`id_producto`, `nombre`, `cantidad`, `reserva`, `total`
 (12, 'Limpiador de teclados y arranca polvo de aparatos de electrónica', 15, 4, 60, 'Unidades', 'Cajas', 'Geles', 'TABS', 1, '2026-05-04 20:50:03', '2026-03-27 18:23:19'),
 (13, 'Pastillas de tratamiento con cloro para agua', 6, 12, 312, 'Unidades', 'Bolsas', 'Pastillas', 'TABS', 1, '2026-05-04 20:50:03', '2026-03-27 18:23:19'),
 (14, 'Liquido en cloro', 6, 1, 6, 'L', 'Botellas', 'Liquido', 'Cloralex', 1, '2026-05-04 20:50:03', '2026-03-27 18:23:19'),
-(15, 'Gel de inodoro', 37, 7, 469, 'Unidades', 'Tubos', 'Pastillas', 'KILOSTEP', 1, '2026-05-04 20:50:03', '2026-03-27 18:23:19'),
-(16, 'Aromatizante para WC', 7, 950, 6650, 'ml', 'Botellas', 'Sprays', 'Scent Colors', 1, '2026-05-04 20:50:03', '2026-03-27 18:23:19'),
+(15, 'Gel de inodoro', 40, 7, 280, 'Unidades', 'Tubos', 'Pastillas', 'KILOSTEP', 1, '2026-05-06 20:45:26', '2026-03-27 18:23:19'),
+(16, 'Aromatizante para WC', 6, 950, 5700, 'ml', 'Botellas', 'Sprays', 'Scent Colors', 1, '2026-05-06 20:45:29', '2026-03-27 18:23:19'),
 (18, 'Gel antibacterial', 10, 100, 1000, 'ml', 'Botellas', 'Geles', 'Blumen', 1, '2026-05-04 20:50:03', '2026-03-27 18:23:19'),
 (19, 'Gel Antibacterial', 14, 60, 840, 'ml', 'Botellas', 'Geles', 'Walfort', 1, '2026-05-04 20:50:03', '2026-03-27 18:23:19'),
 (21, 'Jabón para Trastes', 14, 750, 10500, 'ml', 'Botellas', 'Liquido', 'Uline', 1, '2026-05-04 20:50:03', '2026-03-30 19:37:40'),
@@ -798,7 +814,7 @@ ALTER TABLE `crm`
 -- AUTO_INCREMENT de la tabla `grupo_materiales`
 --
 ALTER TABLE `grupo_materiales`
-  MODIFY `id_interno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_interno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `limitante`
@@ -810,7 +826,7 @@ ALTER TABLE `limitante`
 -- AUTO_INCREMENT de la tabla `material`
 --
 ALTER TABLE `material`
-  MODIFY `id_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `id_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT de la tabla `notas`

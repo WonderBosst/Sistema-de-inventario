@@ -249,74 +249,6 @@ ALTER TABLE RH ADD COLUMN `password` VARCHAR(150) NULL AFTER `rol`;
 UPDATE usuarios SET email = 'nuevoemail@ejemplo.com' WHERE id = 5;
 INSERT INTO rh (numero_telefonico) VALUES ('valor');
 
-
-
-26 Cajas con 12 unidades cada caja, 
-
-20 unidades de  12 cajas 
-
-69 cajas 7 pastillas tubo 
-
-34 34/7
-
-25
-75/3     34/7
-6        
-__
-15
-15
-__
-0
-
-
-
-
-
-
-
-
-
-
-
-caso mililitros o gramos
-4200 -1300 = 2900/600 = 4.8333 y 5-7 = 2
-Tabla productos y la tabla grupo_productos 
-
-cantidad, reserva y total  (kg g / L ml / Unidades)
-   7        600     4200     ml
-
-cantidad usada, consumido y medida
-    2              1300     ml
-
-cantidad, reserva y total  (kg g / L ml / Unidades)
-   5        600     2900     ml
-
-caso litros o kilogramos
-(7*1000) - 3300 = 3700/1000 = 3.7 y 4-7 = 3
-Tabla productos y la tabla grupo_productos 
-
-cantidad, reserva y total  (kg g / L ml / Unidades)
-   7        1       7         L
-
-cantidad usada, consumido y medida
-    3              3300     L
-
-cantidad, reserva y total  (kg g / L ml / Unidades)
-   4        1     3.7     ml
-
-caso unidades
-60 - 14 = 46/4 = 11.5 y 12-15 = 3
-Tabla productos y la tabla grupo_productos 
-
-cantidad, reserva y total  (kg g / L ml / Unidades)
-   15        4       60         Unidades
-
-cantidad usada, consumido y medida
-    3              14     Unidades
-
-cantidad, reserva y total  (kg g / L ml / Unidades)
-   12        4     46     ml
-
 DELIMITER $$
 
 CREATE TRIGGER `before_insert_grupo_productos` 
@@ -354,4 +286,23 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+CREATE TABLE `grupo_materiales` (
+  `id_interno` int(11) NOT NULL,
+  `id_grupo_materiales` varchar(120) NOT NULL,
+  `id_material` int(11) DEFAULT NULL,
+  `cantidad` int(11) DEFAULT NULL,
+  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
+  `ultima_actualizacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE `grupo_materiales`
+  ADD PRIMARY KEY (`id_interno`),
+  ADD KEY `idx_grupo_codigo` (`id_grupo_materiales`),
+  ADD KEY `fk_materiales_grupomateriales` (`id_material`);
+
+ALTER TABLE `grupo_materiales`
+  ADD CONSTRAINT `fk_grupomateriales_gruposmateriales` FOREIGN KEY (`id_grupo_materiales`) REFERENCES `grupos_materiales` (`id_grupo_materiales`),
+  ADD CONSTRAINT `fk_materiales_grupomateriales` FOREIGN KEY (`id_material`) REFERENCES `material` (`id_material`) ON DELETE SET NULL;
+
 

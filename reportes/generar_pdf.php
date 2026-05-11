@@ -8,6 +8,15 @@ while (ob_get_level()) {
 
 include '../includes/conexion.php';
 
+$path = '../assets/images/logo.png';
+$base64_image = "";
+
+if (file_exists($path)) {
+    $type = pathinfo($path, PATHINFO_EXTENSION);
+    $data = file_get_contents($path);
+    $base64_image = 'data:image/' . $type . ';base64,' . base64_encode($data);
+}
+
 $id_operacion = $_GET['operacion'] ?? 'Sin datos';
 $id_cliente = $_GET['cliente'] ?? 'Sin datos';
 
@@ -20,7 +29,6 @@ if (intval($id_operacion) > 0) {
                 C.apellidos,
                 C.direccion,
                 C.entre_calles,
-                C.correo, 
                 C.numero_telefonico 
               FROM crm AS C 
               INNER JOIN operacion AS O ON O.id_cliente = C.id_cliente 
@@ -36,7 +44,6 @@ if (intval($id_operacion) > 0) {
         $apellidos         = $datos_cliente['apellidos'];
         $direccion         = $datos_cliente['direccion'];
         $entre_calles      = $datos_cliente['entre_calles'];
-        $correo            = $datos_cliente['correo'];
         $numero_telefonico = $datos_cliente['numero_telefonico'];
         
     }
@@ -80,7 +87,7 @@ if (intval($id_operacion) > 0) {
         $trabajadores_html = "<ul>";
         while ($t = $result_trabajadores->fetch_assoc()) {
             $nombre_completo = $t['nombre'] . " " . $t['apellidos'];
-            $trabajadores_html .= "<li>" . htmlspecialchars($nombre_completo . $contacto) . "</li>";
+            $trabajadores_html .= "<li>" . htmlspecialchars($nombre_completo) . "</li>";
         }
         $trabajadores_html .= "</ul>";
     } else {
@@ -182,6 +189,16 @@ $html = "
 <html>
 <head>
     <style>
+        #watermark {
+        position: fixed;
+        /** Centrado en la página **/
+        top: 25%;
+        left: 10%;
+        width: 80%;
+        /** Crucial para que no bloquee el texto **/
+        z-index: -1000; 
+        opacity: 0.15; /* Ajusta la transparencia aquí */
+        }
         body { font-family: sans-serif; 
             font-size: 12px; 
             line-height: 1.4; 
@@ -211,13 +228,15 @@ $html = "
     </style>
 </head>
 <body>
+    <div id='watermark'>
+        <img src='$base64_image' style='width: 100%;' />
+    </div>
     <h1>Reporte de Trabajo</h1>
     <div class='seccion'>
         <h4 class='label' style='margin-bottom: 2px;'>Datos del cliente:</h4>
         <p><span class='label'>Cliente:</span> $nombre $apellidos<br>
         <span class='label'>Dirección:</span> $direccion<br>
         <span class='label'>Entre calles:</span> $entre_calles<br>
-        <span class='label'>Correo:</span> $correo<br>
         <span class='label'>Número telefónico:</span> $numero_telefonico
         </p>
     </div>

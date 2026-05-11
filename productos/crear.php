@@ -100,9 +100,10 @@ required>
   </i>
 </label>
 <select name="medida" class="form-select" required>
-<option value="Oz">Onza</option>
+<option value="oz">Onza</option>
 <option value="lb">Libra</option>
-<option value="G">Galon</option>
+<option value="fl oz">Onza fluida</option>
+<option value="gl">Galon</option>
 <option value="unidades">Unidades</option>
 </select>
 </div>
@@ -140,6 +141,7 @@ required>
 <option value="Liquido">Liquido</option>
 <option value="Pastillas">Pastillas</option>
 <option value="Espuma">Espuma</option>
+<option value="Polvo">Polvo</option>
 <option value="Toallitas humedas">Toallitas h&uacute;medas</option>
 <option value="Barras de jabon">Barras de jab&oacute;n</option>
 </select>
