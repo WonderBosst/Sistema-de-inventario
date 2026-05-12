@@ -8,7 +8,7 @@ while (ob_get_level()) {
 
 include '../includes/conexion.php';
 
-$path = '../assets/images/logo.png';
+$path = '../assets/images/ECO.png';
 $base64_image = "";
 
 if (file_exists($path)) {
@@ -189,15 +189,21 @@ $html = "
 <html>
 <head>
     <style>
+        #watermark2 {
+        position: fixed;
+        top: 2%;
+        left: 2%;
+        width: 15%;
+        z-index: -1000; 
+        opacity: 0.40; 
+        }
         #watermark {
         position: fixed;
-        /** Centrado en la página **/
-        top: 25%;
+        top: 20%;
         left: 10%;
-        width: 80%;
-        /** Crucial para que no bloquee el texto **/
+        width: 85%;
         z-index: -1000; 
-        opacity: 0.15; /* Ajusta la transparencia aquí */
+        opacity: 0.40; 
         }
         body { font-family: sans-serif; 
             font-size: 12px; 
@@ -228,6 +234,9 @@ $html = "
     </style>
 </head>
 <body>
+    <div id='watermark2'>
+        <img src='$base64_image' style='width: 100%;' />
+    </div>
     <div id='watermark'>
         <img src='$base64_image' style='width: 100%;' />
     </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-05-2026 a las 23:29:23
+-- Tiempo de generación: 12-05-2026 a las 23:15:45
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -170,14 +170,9 @@ INSERT INTO `grupo_materiales` (`id_interno`, `id_grupo_materiales`, `id_materia
 (6, '3XXTFT98', 3, 7, '2026-04-24 21:17:31', '2026-04-24 21:17:31'),
 (7, '3XXTFT98', 2, 5, '2026-04-24 21:17:46', '2026-04-24 21:17:46'),
 (9, '3XXTFT98', 5, 1, '2026-04-24 21:17:56', '2026-04-24 21:17:56'),
-(16, '2XXTFT78', 12, NULL, '2026-05-04 19:13:06', '2026-05-04 19:13:06'),
 (17, '2XXTFT78', 32, NULL, '2026-05-04 19:14:28', '2026-05-04 19:14:28'),
 (18, '2XXTFT78', 33, NULL, '2026-05-04 19:14:29', '2026-05-04 19:14:29'),
 (19, '2XXTFT78', 34, NULL, '2026-05-04 19:14:30', '2026-05-04 19:14:30'),
-(20, '2XXTFT78', 30, NULL, '2026-05-04 19:14:33', '2026-05-04 19:14:33'),
-(21, '2XXTFT78', 29, NULL, '2026-05-04 19:14:34', '2026-05-04 19:14:34'),
-(22, '2XXTFT78', 28, NULL, '2026-05-04 19:14:35', '2026-05-04 19:14:35'),
-(23, '2XXTFT78', 27, NULL, '2026-05-04 19:14:35', '2026-05-04 19:14:35'),
 (28, '2XXTFT78', 35, NULL, '2026-05-07 20:46:54', '2026-05-07 20:46:54'),
 (29, '2XXTFT78', 36, NULL, '2026-05-07 20:46:56', '2026-05-07 20:46:56'),
 (30, '2XXTFT78', 37, NULL, '2026-05-07 20:46:57', '2026-05-07 20:46:57'),
@@ -220,6 +215,7 @@ INSERT INTO `grupo_productos` (`id_grupo_productos`, `id_producto`, `cantidad`, 
 ('2XXTFT78', 14, 20, 20, '0', '2026-04-28 18:55:07', '2026-04-28 18:55:07'),
 ('2XXTFT78', 15, 30, 210, '0', '2026-04-28 18:55:11', '2026-04-28 18:55:11'),
 ('2XXTFT78', 16, 10, 9500, '0', '2026-04-28 18:57:39', '2026-04-28 18:57:39'),
+('2XXTFT78', 18, 9, 900, '0', '2026-05-12 18:27:22', '2026-05-12 18:27:22'),
 ('3XXTFT98', 6, 19, NULL, NULL, '2026-04-15 18:09:51', '2026-04-20 21:33:20'),
 ('3XXTFT98', 7, 2, NULL, NULL, '2026-04-15 18:09:51', '2026-04-20 21:45:46'),
 ('3XXTFT98', 8, 2, NULL, NULL, '2026-04-15 18:09:51', '2026-04-20 21:45:45'),
@@ -602,8 +598,8 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id_producto`, `nombre`, `cantidad`, `reserva`, `total`, `medida`, `conservado`, `tipo`, `marca`, `estatus`, `fecha_eliminacion`, `fecha_creacion`) VALUES
-(3, 'Blanqueador concentrado', 29, 900, 26100, 'ml', 'Botellas', 'Liquido', 'Clorox', 1, '2026-05-06 21:42:32', '2026-03-27 18:23:19'),
-(6, 'Gel desmaquillador', 5, 600, 3000, 'g', 'Frascos', 'Geles', 'Stain Cleaner', 1, '2026-05-06 21:42:35', '2026-03-27 18:23:19'),
+(3, 'Blanqueador concentrado', 30, 121, 3630, 'fl oz', 'Botellas', 'Liquido', 'Clorox', 1, '2026-05-11 19:27:51', '2026-03-27 18:23:19'),
+(6, 'Gel desmaquillador', 5, 121, 605, 'fl oz', 'Frascos', 'Geles', 'Stain Cleaner', 1, '2026-05-11 19:27:23', '2026-03-27 18:23:19'),
 (7, 'Limpiador de pisos', 7, 7, 49, 'Unidades', 'Bolsas', 'Pastillas', 'Wow! Clean', 1, '2026-05-06 20:39:15', '2026-03-27 18:23:19'),
 (8, 'Toallas desinfectantes', 7, 8, 56, 'Unidades', 'Frascos', 'Toallitas humedas', 'Lysol', 1, '2026-05-04 20:50:03', '2026-03-27 18:23:19'),
 (9, 'Pastillas activas para retrete', 9, 7, 483, 'Unidades', 'Tubos', 'Pastillas', 'Harpic', 1, '2026-05-04 20:50:03', '2026-03-27 18:23:19'),
@@ -611,16 +607,17 @@ INSERT INTO `productos` (`id_producto`, `nombre`, `cantidad`, `reserva`, `total`
 (11, 'Discos activos de aromatizante de retrete', 53, 7, 371, 'Unidades', 'Tubos', 'Pastillas', 'Pato', 1, '2026-05-04 20:50:03', '2026-03-27 18:23:19'),
 (12, 'Limpiador de teclados y arranca polvo de aparatos de electrónica', 15, 4, 60, 'Unidades', 'Cajas', 'Geles', 'TABS', 1, '2026-05-04 20:50:03', '2026-03-27 18:23:19'),
 (13, 'Pastillas de tratamiento con cloro para agua', 6, 12, 312, 'Unidades', 'Bolsas', 'Pastillas', 'TABS', 1, '2026-05-04 20:50:03', '2026-03-27 18:23:19'),
-(14, 'Liquido en cloro', 6, 1, 6, 'L', 'Botellas', 'Liquido', 'Cloralex', 1, '2026-05-04 20:50:03', '2026-03-27 18:23:19'),
+(14, 'Liquido en cloro', 6, 121, 726, 'fl oz', 'Botellas', 'Liquido', 'Cloralex', 1, '2026-05-11 19:26:46', '2026-03-27 18:23:19'),
 (15, 'Gel de inodoro', 40, 7, 280, 'Unidades', 'Tubos', 'Pastillas', 'KILOSTEP', 1, '2026-05-06 20:45:26', '2026-03-27 18:23:19'),
-(16, 'Aromatizante para WC', 6, 950, 5700, 'ml', 'Botellas', 'Sprays', 'Scent Colors', 1, '2026-05-06 20:45:29', '2026-03-27 18:23:19'),
-(18, 'Gel antibacterial', 10, 100, 1000, 'ml', 'Botellas', 'Geles', 'Blumen', 1, '2026-05-04 20:50:03', '2026-03-27 18:23:19'),
-(19, 'Gel Antibacterial', 14, 60, 840, 'ml', 'Botellas', 'Geles', 'Walfort', 1, '2026-05-04 20:50:03', '2026-03-27 18:23:19'),
-(21, 'Jabón para Trastes', 14, 750, 10500, 'ml', 'Botellas', 'Liquido', 'Uline', 1, '2026-05-04 20:50:03', '2026-03-30 19:37:40'),
-(22, 'Desinfectante de baños', 14, 950, 13300, 'ml', 'Botellas', 'Sprays', 'Jhonson', 1, '2026-05-04 20:50:03', '2026-04-22 19:21:13'),
-(23, 'Lava trastes', 30, 950, 28500, 'kg', 'Botellas', 'Liquido', 'Salvamanos', 1, '2026-05-04 20:50:03', '2026-04-23 21:34:59'),
+(16, 'Aromatizante para WC', 6, 121, 726, 'fl oz', 'Botellas', 'Sprays', 'Scent Colors', 1, '2026-05-11 19:26:32', '2026-03-27 18:23:19'),
+(18, 'Gel antibacterial', 1, 100, 100, 'fl oz', 'Botellas', 'Geles', 'Blumen', 1, '2026-05-12 18:27:22', '2026-03-27 18:23:19'),
+(19, 'Gel Antibacterial', 14, 121, 1694, 'fl oz', 'Botellas', 'Geles', 'Walfort', 1, '2026-05-11 19:24:23', '2026-03-27 18:23:19'),
+(21, 'Jabón para Trastes', 14, 32, 448, 'fl oz', 'Botellas', 'Liquido', 'Uline', 1, '2026-05-11 19:29:05', '2026-03-30 19:37:40'),
+(22, 'Desinfectante de baños', 14, 32, 448, 'fl oz', 'Botellas', 'Sprays', 'Jhonson', 1, '2026-05-11 19:17:39', '2026-04-22 19:21:13'),
+(23, 'Lava trastes', 30, 32, 960, 'fl oz', 'Botellas', 'Liquido', 'Salvamanos', 1, '2026-05-11 19:17:16', '2026-04-23 21:34:59'),
 (24, 'Blanqueador concentrado', 33, 700, 23100, 'Oz', 'Botellas', 'Liquido', 'Byozone', 0, '2026-05-04 20:50:03', '2026-05-04 20:47:45'),
-(25, 'Blanqueador concentrado', 33, 700, 23100, 'Oz', 'Botellas', 'Liquido', 'Salvo', 0, '2026-05-04 20:50:03', '2026-05-04 20:48:04');
+(25, 'Blanqueador concentrado', 33, 700, 23100, 'Oz', 'Botellas', 'Liquido', 'Salvo', 0, '2026-05-04 20:50:03', '2026-05-04 20:48:04'),
+(26, 'Liquido de cloro', 6, 121, 726, 'fl oz', 'Botellas', 'Liquido', 'Clorox', 1, '2026-05-11 19:14:47', '2026-05-11 19:14:47');
 
 --
 -- Disparadores `productos`
@@ -844,7 +841,7 @@ ALTER TABLE `operacion`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `rh`

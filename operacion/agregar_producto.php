@@ -57,9 +57,9 @@ $result_productos = $conn->query("
     SELECT P.id_producto,
 	   P.nombre, 
        P.cantidad,
-       p.reserva,
-       p.total,
-       p.medida,
+       P.reserva,
+       P.total,
+       P.medida,
        P.conservado, 
        P.tipo,
        P.marca,
@@ -77,6 +77,15 @@ $result_productos = $conn->query("
 
 <h4 class="col-12">Lista de productos disponibles</h4> 
 
+<nav class="navbar bg-body-tertiary mb-3 rounded-4 shadow-sm">
+  <div class="container-fluid">
+    <div class="col-12 col-md-6"> <form class="d-flex" role="search" onsubmit="return false;">
+        <input class="form-control" type="search" id="inputBusqueda" placeholder="Buscar productos...">
+      </form>
+    </div>
+  </div>
+</nav>
+
 <?php if($mensaje): ?>
     <div class="alert <?= (strpos($mensaje,'stock') !== false || strpos($mensaje,'Error') !== false) ? 'alert-danger' : 'alert-success' ?> alert-dismissible fade show" role="alert">
         <?= $mensaje; ?>
@@ -87,7 +96,7 @@ $result_productos = $conn->query("
 <div class="card shadow rounded-4">
 <div class="card-body table-responsive" style="max-height: 700px; overflow-y: auto;">
 
-<table class="table table-hover align-middle small">
+<table class="table table-hover align-middle small" id="tablaProductos">
 <thead class="table-light">
 <tr>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">#</th>
@@ -168,4 +177,19 @@ $result_productos = $conn->query("
     </a>
 </div>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const buscador = document.getElementById("inputBusqueda");
+    const filas = document.querySelectorAll("#tablaProductos tbody tr");
+
+    buscador.addEventListener("keyup", function() {
+        const termino = buscador.value.toLowerCase().trim();
+
+        filas.forEach(fila => {
+            const texto = fila.textContent.toLowerCase();
+            fila.style.display = texto.includes(termino) ? "" : "none";
+        });
+    });
+});
+</script>
 <?php include '../includes/footer.php'; ?>

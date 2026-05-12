@@ -62,6 +62,22 @@ $result_trabajadores = $conn->query("
 
 <h4 class="col-12">Lista de trabajadores disponibles</h4>
 
+<nav class="navbar bg-body-tertiary mb-3 rounded-4 shadow-sm">
+  <div class="container-fluid">
+    <div class="col-12 col-md-6"> <form class="d-flex" role="search" onsubmit="return false;">
+      <input 
+        class="form-control me-2" 
+        type="search" 
+        id="inputBusqueda" 
+        placeholder="¿Qué trabajador buscas?" 
+        aria-label="Search"
+        >
+        </form>
+    </div>
+  </div>
+</nav>
+
+
 <?php if($mensaje): ?>
 <div class="alert alert-success">
     <?= $mensaje; ?>
@@ -71,7 +87,7 @@ $result_trabajadores = $conn->query("
 <div class="card shadow rounded-4">
 <div class="card-body table-responsive" style="max-height: 700px; overflow-y: auto;">
 
-<table class="table table-hover align-middle small">
+<table class="table table-hover align-middle small" id="tablaTrabajadores">
 <thead class="table-light">
 <tr>
 <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">#</th>
@@ -134,6 +150,22 @@ $result_trabajadores = $conn->query("
 <?php include '../includes/footer.php'; ?>
 
 <script>
+$(document).ready(function() {
+    
+    $("#inputBusqueda").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+
+        if ($("#tablaTrabajadores tbody tr").length === 0) {
+            console.warn("No se encontraron filas en #tablaTrabajadores tbody tr");
+        }
+
+        $("#tablaTrabajadores tbody tr").filter(function() {
+            var textoFila = $(this).text().toLowerCase();
+            $(this).toggle(textoFila.indexOf(value) > -1);
+        });
+    });
+});
+
 function agregarTrabajador(event, id_trabajador){
     event.preventDefault();
 

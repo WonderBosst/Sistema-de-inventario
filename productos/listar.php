@@ -75,7 +75,7 @@ SELECT * FROM productos WHERE estatus = true
 
 <table class="table table-hover align-middle small" id="tablaProductos">
 <thead class="table-light">
-    <tr class="<?= $claseAlerta ?>">
+    <tr>
         <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">#</th>
         <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Aplicaci&oacute;n</th>
         <th style="position: sticky; top: 0; z-index: 2; background-color: #f8f9fa;">Cantidad</th>
