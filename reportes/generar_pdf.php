@@ -8,7 +8,7 @@ while (ob_get_level()) {
 
 include '../includes/conexion.php';
 
-$path = '../assets/images/ECO.png';
+$path = '../assets/images/logo.png';
 $base64_image = "";
 
 if (file_exists($path)) {
@@ -191,7 +191,7 @@ $html = "
     <style>
         #watermark2 {
         position: fixed;
-        top: 2%;
+        top: -1%;
         left: 2%;
         width: 15%;
         z-index: -1000; 

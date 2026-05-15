@@ -5,9 +5,7 @@ include '../includes/header.php';
 
 requireRole(['1']);
 
-/*
-Consultamos materiales en existencia
-*/
+
 requireRole(['1']);
 
 $nombre = trim($_GET['nombre']);
@@ -57,7 +55,7 @@ SELECT M.id_material, M.codigo, M.nombre, M.marca, M.fecha_creacion FROM materia
 <tbody>
 <?php $contador = 1; ?>
 <?php while($row = $result->fetch_assoc()): ?>
-
+<tr>
 <td><strong><?= $contador; ?></strong></td>
 
 
@@ -70,23 +68,28 @@ SELECT M.id_material, M.codigo, M.nombre, M.marca, M.fecha_creacion FROM materia
 <td><?= htmlspecialchars($row['fecha_creacion']); ?></td>
 
 <td class="text-center">
-<div class="d-flex flex-row flex-sm-row justify-content-center gap-1">
+        <div class="d-flex flex-row flex-sm-row justify-content-center gap-1">
+            <a href="generar_pdf_qr.php?codigo=<?= urlencode($row['codigo']); ?>&nombre=<?= urlencode($row['nombre']); ?>&marca=<?= urlencode($row['marca']); ?>" 
+               target="_blank" 
+               class="btn btn-sm btn-info text-white" 
+               title="Generar PDF con QR">
+                🖨️ Descargar QR
+            </a>
 
-<a href="editar.php?id=<?= $row['id_material']; ?>&nombre=<?= $row['nombre']; ?>" 
-class="btn btn-sm btn-warning">
-✏️ Editar
-</a>
+            <a href="editar.php?id=<?= $row['id_material']; ?>&nombre=<?= $row['nombre']; ?>" 
+               class="btn btn-sm btn-warning">
+                ✏️ Editar
+            </a>
 
-<a href="#" 
-   class="btn btn-sm btn-danger"
-   onclick="let motivo = prompt('¿Por qué desea eliminar este material?'); 
-            if(motivo) { window.location.href = 'procesar_eliminar.php?id=<?= $row['id_material'] ?>&razon=' + encodeURIComponent(motivo); } 
-            return false;">
-    🗑️
-</a>
-
-</div>
-</td>
+            <a href="#" 
+               class="btn btn-sm btn-danger"
+               onclick="let motivo = prompt('¿Por qué desea eliminar este material?'); 
+                        if(motivo) { window.location.href = 'procesar_eliminar.php?id=<?= $row['id_material'] ?>&razon=' + encodeURIComponent(motivo); } 
+                        return false;">
+                🗑️
+            </a>
+        </div>
+    </td>
 
 </tr>
 <?php $contador++; ?>
